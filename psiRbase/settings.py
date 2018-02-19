@@ -26,7 +26,7 @@ SECRET_KEY = 'zm(w%kspuc7@(@hq#^p#%#wsxp%v8nv*-x&_6g8b5p426r=nha'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'psiRbase-env.ppnvnbrvnp.us-west-2.elasticbeanstalk.com/',
+    'psiRbase-dev.us-west-2.elasticbeanstalk.com',
 ]
 
 
