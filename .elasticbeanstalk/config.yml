@@ -3,6 +3,9 @@ branch-defaults:
     environment: psiRbase-env
     group_suffix: null
 environment-defaults:
+  psiRbase-env:
+    branch: null
+    repository: null
   siRBase:
     branch: null
     repository: null
