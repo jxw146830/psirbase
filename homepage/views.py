@@ -1,0 +1,207 @@
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from .forms import SearchForm
+from django import forms
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+import os
+from sirbase.settings import PROJECT_ROOT
+
+from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
+
+def index(request):
+    form = SearchForm()
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            userIP = form.cleaned_data['userInput']
+            # redirect to a new URL:
+            return HttpResponseRedirect(userIP + '/')
+    return render(request, 'homepage/index.html', {'theForm': form})
+
+def search1(request):
+    theSpecVal = request.GET.get('speciesVal', None)
+    theSrchTyp = request.GET.get('srchTyp', None)
+    theSeq = request.GET.get('sqn', None)
+    data = ''
+    if theSpecVal == 'Caenorhabditis elegans':
+        try:
+            resultSet = CelegansSirna.objects.get(sequence=theSeq)
+            theSource = CelegansSource.objects.get(id=resultSet.source_id)
+            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource)
+            #data = yesResults('', theSpecVal, theSrchTyp, '')
+        except ObjectDoesNotExist:
+            data = noResults(theSpecVal, theSrchTyp, theSeq)
+        
+    elif theSpecVal == 'Sus domesticus':
+        try:
+            resultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
+            theSource = SusDomesticusSource.objects.get(id=resultSet.source_id)
+            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource) 
+        except ObjectDoesNotExist:
+            data = noResults(theSpecVal, theSrchTyp, theSeq)
+    else:
+        data = {
+            "sirSpecVal": theSpecVal,
+            "sirSrchType": theSrchTyp,
+            "sirName": "",
+            "sirSeq": "Data not available for this species yet...",
+            "sirStage": "",
+            "sirSrc": "",
+            "pubmedID": "",
+        }
+    return JsonResponse(data)
+
+def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
+    
+    if theSpecVal != 'Caenorhabditis elegans':
+        data = {
+            "sirSpecVal": theSpecVal,
+            "sirSrchType": theSrchTyp,
+            "sirName": resultSet.name,
+            "sirSeq": resultSet.sequence,
+            "sirSeqR": '',
+            "sirStage": resultSet.stage,
+            "sirSrc": theSource.author,
+            "pubmedID": theSource.pubmed_id,
+            "resultSet": '',
+        }
+        return data
+
+    myFile = open(os.path.join(PROJECT_ROOT, 'CelegansCDNA.fa'),'r')
+    rowList = ['']
+    mrnaName = ['']
+    while True:
+        #get name of current mRNA
+        charRead = myFile.read(1)
+        while charRead != ' ':
+            mrnaName.append(charRead)
+            charRead = myFile.read(1)
+        mrnaName = ''.join(mrnaName)
+
+        #skip stuff until chromosome number reached
+        while charRead != ':':
+            charRead = myFile.read(1)
+        charRead = myFile.read(1)
+        while charRead != ':':
+            charRead = myFile.read(1)
+
+        #get chromosome number of current mRNA
+        chrNum = ['']
+        charRead = myFile.read(1)
+        while charRead != ':':
+            chrNum.append(charRead)
+            charRead = myFile.read(1)
+        chrNum = ''.join(chrNum)
+
+        #get start position of current mRNA relative to the chromosome containing it
+        mrnaStart = ['']
+        charRead = myFile.read(1)
+        while charRead != ':':
+            mrnaStart.append(charRead)
+            charRead = myFile.read(1)
+        mrnaStart = ''.join(mrnaStart)
+        mrnaStart = int(mrnaStart)
+            
+        #get end position of current mRNA relative to the chromosome containing it
+        mrnaEnd = ['']
+        charRead = myFile.read(1)
+        while charRead != ':':
+            mrnaEnd.append(charRead)
+            charRead = myFile.read(1)
+        mrnaEnd = ''.join(mrnaEnd)
+        mrnaEnd = int(mrnaEnd)
+
+        #skip stuff until beginning of mRNA sequence reached (a newline char)
+        while charRead != '\n':
+            charRead = myFile.read(1)
+
+        #get mRNA sequence of current mRNA
+        mrnaSeq = ['']
+        charRead = myFile.read(1)
+        while True:
+            if charRead == '':
+                break
+            if charRead == '>':
+                break
+            if charRead == '\n':
+                charRead = myFile.read(1)
+                continue
+            if charRead == '\r':
+                charRead = myFile.read(1)
+                continue
+            mrnaSeq.append(charRead)
+            charRead = myFile.read(1)
+        mrnaSeq = ''.join(mrnaSeq)
+
+        sirnaSeq = resultSet.sequence
+
+        #get length for both sequences
+        sLength = len(sirnaSeq)
+        mLength = mrnaEnd - mrnaStart + 1
+        
+        #reverse and flip sirna sequence
+        sirnaSeq = list(sirnaSeq)
+        for x in range(0, sLength):
+            if sirnaSeq[x] == 'A':
+                sirnaSeq[x] = 'T'
+            elif sirnaSeq[x] == 'T':
+                sirnaSeq[x] = 'A'
+            elif sirnaSeq[x] == 'C':
+                sirnaSeq[x] = 'G'
+            elif sirnaSeq[x] == 'G':
+                sirnaSeq[x] = 'C'
+        sirnaSeq = ''.join(sirnaSeq)
+        str = ''
+        for i in sirnaSeq:
+            str = i + str
+        sirnaSeq = str
+        
+        # # # # # # # # BEGIN MATCHING ALGO # # # # # # #
+        if sLength <= mLength:
+            offset = 0
+            maxOffset = mLength - sLength
+            for i in range(0, maxOffset+1):
+                ss = mrnaSeq[ i : i + sLength ]
+                if sirnaSeq == ss:
+                    sirnaStart = mrnaStart + offset
+                    sirnaEnd = sirnaStart + sLength - 1
+                    newRow = (mrnaName, chrNum, sirnaStart, sirnaEnd)
+                    rowList.append(newRow)
+                offset += 1
+        
+        #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
+        mrnaName = ['']
+        mrnaName.append('>')
+
+        if charRead == '':
+            break
+
+    data = {
+        "sirSpecVal": theSpecVal,
+        "sirSrchType": theSrchTyp,
+        "sirName": resultSet.name,
+        "sirSeq": resultSet.sequence,
+        "sirSeqR": sirnaSeq,
+        "sirStage": resultSet.stage,
+        "sirSrc": theSource.author,
+        "pubmedID": theSource.pubmed_id,
+        "resultSet": rowList,
+    }
+    return data
+
+
+def noResults(theSpecVal, theSrchTyp, theSeq):
+    data = {
+        "sirSpecVal": theSpecVal,
+        "sirSrchType": theSrchTyp,
+        "sirName": "",
+        "sirSeq": theSeq,
+        "sirStage": "No such sirna sequence exists.",
+        "sirSrc": "",
+        "pubmedID": "",
+    }
+    return data

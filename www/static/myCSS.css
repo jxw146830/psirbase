@@ -1,0 +1,443 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    top: 0;
+    padding-bottom: 10px;
+}
+
+#headerBG {
+    /*background: hsl(0, 0%, 10%);*/
+    background: black;
+    opacity: 0;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+}
+
+#header_content {
+    height: inherit;
+    display: table;
+    margin: 0 auto;
+    z-index: inherit;
+    position: relative;
+}
+
+
+#headerMini {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    z-index: 20;
+    top: 0;
+    padding-bottom: 10px;
+    visibility: hidden;
+    background: hsl(0, 0%, 10%);
+}
+
+#header_content_mini {
+    height: auto;
+    min-height: 40px;
+    position:fixed;
+    top: 80px;
+    width: 100%;
+    z-index: 20;
+    background: hsl(0, 0%, 10%);
+    border-top: solid 1px gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: none;
+}
+
+#miniMenuCurrentSection {
+    text-align:right;
+    position:absolute;
+    width:inherit;
+    height:inherit;
+    font-size:14px;
+    right:70px;
+    top:25px;
+    color:lightgray;
+    text-decoration:none;
+    font-weight:bold;
+    cursor: help;
+}
+
+.menuLinksMini {
+    display: block;
+    width: inherit;
+    height: 40px;
+    text-decoration: none;
+    padding-left: 15px;
+}
+
+.menuButtonMini {
+    height: inherit;
+    width: inherit;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 14px;
+}
+
+.menuButtonULobjectMini {
+    position: relative;
+    height: 1px;
+    background: white;
+    z-index: 21;
+    display: none;
+}
+
+#logo {
+    display: inline;
+    z-index: inherit;
+    cursor: pointer;
+}
+
+.menu {
+    display: table-cell;
+    height: inherit;
+    z-index: inherit;
+    position: relative;
+}
+
+#leftMenuButtons {
+    text-align: right;
+    float: right;
+    display: table-cell;
+    height: inherit;
+    z-index: inherit;
+    position: relative;
+}
+
+#rightMenuButtons{
+    text-align: left;
+    float: left;
+    display: table-cell;
+    height: inherit;
+    z-index: inherit;
+}
+
+.menuButton {
+    display: table-cell;
+    font-size: 14px;
+    z-index: inherit;
+    width: fit-content;
+    height: inherit;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    vertical-align: middle;
+    position: relative;
+}
+
+
+.menuLinks {
+    display: table-cell;
+    z-index: inherit;
+    height: inherit;
+    width: auto;
+    min-width: 10px;
+    text-decoration: none;
+}
+
+.menuButtonULobject {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background: white;
+    z-index: 21;
+    display: none;
+    top:43px;
+}
+
+.menuTextBold {
+    text-shadow:
+    0 0 1px white,
+    0 0 1px white,
+    0 0 1px white,
+    0 0 1px white;
+    transition: 1s;
+}
+
+.menuTextUnbold {
+    text-shadow: 0 0 0 white;
+    transition: 1s;
+}
+
+#homepage {
+    /*background-color: black;*/
+    background-color: #160329;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    height: auto;
+    min-height: 100vh;
+    font-size: 18px;
+}
+
+#homepageVid {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    object-fit: fill;
+    z-index: 2;
+    opacity: 0.1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menuDock {
+    float: top;
+    position: relative;
+    height: 80px;
+    width: 100%;
+    z-index: 3;
+}
+
+#homePageContent {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    float: top;
+    text-align: center;
+}
+
+.pageSection {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+
+}
+
+#search {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    font-size: 18px;
+    display: block;
+}
+
+#searchResults {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    font-size: 18px;
+    background: hsla(280, 100%, 15%, 0.97);
+    text-align: center;
+    display: none;
+    z-index: 20;
+}
+
+#speciesSelectionContainer {
+    display: table;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-width: 100px;
+    width: auto;
+    height: auto;
+    min-height: 100px;
+    margin-top: 45px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#speciesSelections {
+    display: table-cell;
+    position: relative;
+    width: 700px;
+    height: 80px;
+}
+
+#speciesSelection1 {
+    display: table-cell;
+    position: absolute;
+    margin-top: -70px;
+}
+
+#speciesSelection2 {
+    display: table-cell;
+    position: absolute;
+    margin-top: -70px;
+}
+
+#speciesLeftArrow {
+    cursor: pointer;
+    height:40px;
+    display: table-cell;
+}
+
+#speciesRightArrow {
+    cursor: pointer;
+    height:40px;
+    display: table-cell;
+}
+
+.speciesIcon {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 40px;
+    display: table-cell;
+    position: relative;
+    cursor: pointer;
+}
+
+.searchType {
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: auto;
+    min-width: 100px;
+    display: inline-block;
+    border-radius: 20px;
+    background: hsla(240, 75%, 50%, 0.25);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#searchInputText {
+    color:#595959;
+    font-size:18px;
+    text-align:center;
+    width: 40%;
+    height:30px;
+    font-size:18px;
+}
+
+#searchGObutton {
+    background: black;
+    color: white;
+    border: solid 1px gray;
+    width: auto;
+    min-width: 50px;
+    height: auto;
+    min-height: 20px;
+    display: block;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#searchGObutton:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#returnGObutton {
+    background: white;
+    color: black;
+    border: solid 1px gray;
+    width: auto;
+    min-width: 50px;
+    height: auto;
+    min-height: 20px;
+    display: inline-block;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#returnGObutton:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#downloads {
+    background-color: hsl(200,100%,15%);
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+}
+
+#downloadsPageContent {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    float: top;
+    text-align: center;
+}
+
+#downloadsPageBG {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    object-fit: fill;
+    z-index: 1;
+    opacity: 1;
+    margin-left: auto;
+    margin-right: auto;
+    top:100px;
+}
+
+#about {
+    /*background-color: hsl(0,100%,10%);*/
+    background: black;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    z-index: 1;
+    height: auto;
+    min-height: 100vh;
+}
+
+#aboutPageBG {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    object-fit: fill;
+    z-index: 1;
+    opacity: 0.35;
+    margin-left: auto;
+    margin-right: auto;
+    top:100px;
+}
+
+#aboutPageContent {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    float: top;
+    text-align: center;
+}
+
+#background {
+    background-color: darkgoldenrod;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+    width: 100%;
+    z-index: 3;
+}

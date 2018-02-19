@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>siRBase</title>
+    <link rel="stylesheet" href="{% static 'myCSS.css' %}" type="text/css" />
+</head>
+<body>
+<div id="headerBG"></div>
+<div id="header">
+    <div id="header_content">
+        <div class="menu">
+            <div id="leftMenuButtons">
+                <a href="#homepage" class="menuLinks"><div id="homeMenuButton" class="menuButton"><p id="homeMenuButtonText">HOME</p><div id="mb1UL" class="menuButtonULobject"></div>
+                </div></a><a href="#search" class="menuLinks"><div id="searchMenuButton" class="menuButton"><p id="searchMenuButtonText">SEARCH</p><div id="mb2UL" class="menuButtonULobject"></div>
+                </div></a><a href="#downloads" class="menuLinks"><div id="downloadsMenuButton" class="menuButton" style="padding-right:30px"><p id="downloadsMenuButtonText">DOWNLOADS</p><div id="mb3UL" class="menuButtonULobject"></div></div></a>
+            </div>
+        </div>
+        <a href="#homepage"><img id="logo" src="{% static 'images/logo.png' %}" /></a>
+        <div class="menu" id="rightMenu">
+            <div id="rightMenuButtons">
+                <a href="#about" class="menuLinks"><div id="aboutMenuButton" class="menuButton" style="padding-left:30px"><p id="aboutMenuButtonText">ABOUT</p><div id="mb4UL" class="menuButtonULobject"></div>
+                </div></a><a href="#background" class="menuLinks"><div id="backgroundMenuButton" class="menuButton"><p id="backgroundMenuButtonText">BACKGROUND</p><div id="mb5UL" class="menuButtonULobject"></div></div></a></div>
+        </div>
+    </div>
+</div>
+<div id="headerMini">
+    <a href="#homepage"><img id="logoMini" src="{% static 'images/logo.png' %}" style="display:inline;position:absolute;left:10px;height:60px;"/></a>
+    <div style="display:inline;cursor: default;height:60px;"><div id="miniMenuCurrentSection" title="You are here.">CURRENT-SEC</div></div>
+    <img src="{% static 'images/menuExpand_icon.png' %}" id="menuExpandIcon" style="display:inline;float:right;height:60px;cursor:pointer;" />
+</div>
+<div id="header_content_mini">
+    <a href="#homepage" class="menuLinksMini" id="homeMenuButtonMini"><div class="menuButtonMini"><p id="homeMenuButtonTextMini">HOME</p><div id="mb1ULMini" class="menuButtonULobjectMini"></div>
+    </div></a><a href="#search" class="menuLinksMini" id="searchMenuButtonMini"><div class="menuButtonMini"><p id="searchMenuButtonTextMini">SEARCH</p><div id="mb2ULMini" class="menuButtonULobjectMini"></div>
+    </div></a><a href="#downloads" class="menuLinksMini" id="downloadsMenuButtonMini"><div class="menuButtonMini"><p id="downloadsMenuButtonTextMini">DOWNLOADS</p><div id="mb3ULMini" class="menuButtonULobjectMini"></div>
+    </div></a><a href="#about" class="menuLinksMini" id="aboutMenuButtonMini"><div class="menuButtonMini"><p id="aboutMenuButtonTextMini">ABOUT</p><div id="mb4ULMini" class="menuButtonULobjectMini"></div>
+    </div></a><a href="#background" class="menuLinksMini" id="backgroundMenuButtonMini"><div class="menuButtonMini"><p id="backgroundMenuButtonTextMini">BACKGROUND</p><div id="mb5ULMini" class="menuButtonULobjectMini"></div></div></a>
+</div>
+<div id="homepage">
+
+
+    <img id="homepageVid" src="{% static 'images/dna.gif' %}" />
+
+<!--  ~~~may have to update src link to youtube video (remember the thing in proj folder to do that)~~
+    <video id="homepageVid" autoplay loop muted>
+        <source src="https://redirector.googlevideo.com/videoplayback?clen=11980479&ei=UHp0WsWwE5u7_APZsq6QCw&ip=2600%3A3c01%3A%3Af03c%3A91ff%3Afe24%3Ab564&initcwndbps=246250&sparams=clen%2Cdur%2Cei%2Cgir%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cexpire&id=o-ALXNp4xwxkRQgT2NcpZKE5OhBrKaQHqGodgTbnUwhi_1&ratebypass=yes&mn=sn-o097znlr%2Csn-n4v7snee&source=youtube&mm=31%2C29&mv=m&mt=1517582841&ms=au%2Crdu&dur=207.725&ipbits=0&itag=18&key=yt6&mime=video%2Fmp4&signature=D45273990301FEEFBEF438E36CB7457C18801627.3FE9065705D8B7A6CC1E588897D107A49B74997B&lmt=1517509679641151&expire=1517604528&gir=yes&fvip=5&pl=64&requiressl=yes"
+                type="video/mp4"/>
+    </video>
+-->
+
+    <div class="menuDock"></div>
+    <div id="homePageContent">
+        <div class="pageSection" style="font-size:40px;margin-top:30px;font-weight:bold;">
+            WHAT IS SI<div style="font-size:48px;display:inline;">RB</div>ASE
+        </div>
+        <div class="pageSection" style="margin-bottom:20px;">
+            siRBase is a database that stores multi-species published endo-siRNA sequences.
+        </div>
+        <div id="search">
+            <div id="speciesSelectionContainer">
+                <img src="{% static 'images/arrow-left.png' %}" id="speciesLeftArrow" />
+                <div id="speciesSelections">
+                    <div id="speciesSelection1">
+                        <div class="speciesIcon" id="wormIconCont">
+                            <img src="{% static 'images/wormIcon.png' %}" id="wormIcon" class="speciesImg" />
+                            <p>Caenorhabditis<br /><i>elegans</i></p>
+                        </div>
+                        <div class="speciesIcon" id="zebrafishIconCont">
+                            <img src="{% static 'images/zebrafishIcon.png' %}" id="zebrafishIcon" class="speciesImg" />
+                            <p>Danio<br /><i>rerio</i></p>
+                        </div>
+                        <div class="speciesIcon" id="fruitflyIconCont">
+                            <img src="{% static 'images/fruitflyIcon.png' %}" id="fruitflyIcon" class="speciesImg" />
+                            <p>Drosophila<br /><i>melanogaster</i></p>
+                        </div>
+                        <div class="speciesIcon" id="chickenIconCont">
+                            <img src="{% static 'images/chickenIcon.png' %}" id="chickenIcon" class="speciesImg" />
+                            <p>Gallus<br /><i>gallus</i></p>
+                        </div>
+                    </div>
+                    <div id="speciesSelection2">
+                        <div class="speciesIcon" id="humanIconCont">
+                            <img src="{% static 'images/humanIcon.png' %}" id="humanIcon" class="speciesImg" />
+                            <p>Homo<br /><i>sapiens</i></p>
+                        </div>
+                        <div class="speciesIcon" id="mouseIconCont">
+                            <img src="{% static 'images/mouseIcon.png' %}" id="mouseIcon" class="speciesImg" />
+                            <p>Mus<br /><i>musculus</i></p>
+                        </div>
+                        <div class="speciesIcon" id="seaUrchinIconCont">
+                            <img src="{% static 'images/seaUrchin.png' %}" id="seaUrchinIcon" class="speciesImg" />
+                            <p>Paracentrotus<br /><i>lividus</i></p>
+                        </div>
+                        <div class="speciesIcon" id="pigIconCont" style="margin-bottom:0px;">
+                            <img src="{% static 'images/pigIcon.png' %}" id="pigIcon" class="speciesImg" />
+                            <p>Sus<br /><i>domesticus</i></p>
+                        </div>
+                    </div>
+                </div>
+                <img src="{% static 'images/arrow-right.png' %}" id="speciesRightArrow" />
+            </div>
+            <div class="searchType" id="bySirnaSeq">
+                Type in siRNA sequence<br />to find potential targets.
+            </div>
+            <div class="searchType" id="byMrnaName">
+                Type in mRNA name<br />to identify antisense siRNAs.
+            </div>
+			<form action="" method="post">
+				{% csrf_token %}
+				{{ theForm }}
+			</form>
+			<input type="submit" value="SEARCH" id="searchGObutton" />
+        </div>
+    </div>
+</div>
+<div id="searchResults">
+    <div class="pageSection" style="padding-top:40px;word-wrap:break-word;" id="resultsTable">
+        Here is where the retrieved data will show...
+    </div>
+    <div id="returnGObutton">
+        Return to Search
+    </div>
+</div>
+<div id="downloads">
+    <!-- <img src="images/dna_static_background2.jpg" id="downloadsBG" />
+    <div id="downloadsPageContent">
+        <div class="pageSection" style="padding-top:20px;">
+            Download stuff goes here...<br />
+            Download stuff goes here...<br />
+
+        </div>
+    </div> -->
+</div>
+
+<div id="about">
+    <!-- <img id="aboutPageBG" src="images/dna_static_background.jpg" /> -->
+    <div id="aboutPageContent">
+        <div class="pageSection" style="padding-top:20px;">
+            The <a href="#about" style="text-decoration:none"><i>About</i></a> tab references the publications from which the sequences were identified.
+            siRBase is managed by the Michael Zhang lab at University of Texas at Dallas. Contributors:<br /><br />
+            &#8226 Kelly Daescu (UTD)<br />
+            &#8226 Zhenyu Xuan (UTD)<br />
+            &#8226 Scott Robertson (UTSW)<br />
+            &#8226 Rueyling Lin (UTSW)<br />
+            &#8226 Michael Zhang (UTD)<br />
+        </div>
+        <div class="pageSection">
+            A special thank you to the Computer Science Department at UT Dallas.<br />
+            The senior design class of Aravind Ashok, Naveed Haque, Saivamshi Pasikanti, Sandeep Shahi,
+            and Jamal Whitehead led by Dr. Ovidiu Daescu created the website and database.
+        </div>
+        <div class="pageSection">
+            Please cite the following article:<br />
+            <i>siRBase article publication TBD</i><br />
+        </div>
+        <div class="pageSection">
+            For questions or comments, email <u>kellydaescu@utdallas.edu</u>
+        </div>
+    </div>
+</div>
+<div id="background">
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="{% static 'myJavaScript.js' %}" type="text/javascript"></script>
+</body>
+</html>
