@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 import os
-from sirbase.settings import PROJECT_ROOT
+from psiRbase.settings import PROJECT_ROOT
 
 from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
 
