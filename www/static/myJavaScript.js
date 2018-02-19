@@ -184,10 +184,10 @@ $(document).ready(
         //gives header logo lit-up effect when hovering above it
         $("#logo").hover(
             function () {
-                $("#logo").attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
+                $("#logo").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
             },
             function () {
-                $("#logo").attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logo.png");
+                $("#logo").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logo.png");
             }
         );
 
@@ -325,34 +325,34 @@ $(document).ready(
         $expand.click(
             function(){
                 $miniButtons.slideToggle();
-                $expand.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
-                $miniLogo.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
+                $expand.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
+                $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
             }
         );
         $expand.hover(
             function(){
-                $expand.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
+                $expand.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
             },
             function(){
                 if($miniButtons.css("display") == "none") {
-                    $expand.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon.png");
-                    $miniLogo.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logo.png");
+                    $expand.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon.png");
+                    $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logo.png");
                 }
                 else
-                    $expand.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
+                    $expand.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
             }
         );
 
         //gives MINI header logo lit-up effect when hovering above it
         $miniLogo.hover(
             function () {
-                $miniLogo.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
+                $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
             },
             function () {
                 if($miniButtons.css("display") == "none")
-                    $miniLogo.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logo.png");
+                    $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logo.png");
                 else
-                    $miniLogo.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
+                    $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
             }
         );
 
@@ -1037,18 +1037,18 @@ $(document).ready(
         var rightArrow = $("#speciesRightArrow");
         leftArrow.hover(
             function(){
-                leftArrow.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-left_hover.png");
+                leftArrow.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-left_hover.png");
             },
             function(){
-                leftArrow.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-left.png")
+                leftArrow.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-left.png")
             }
         );
         rightArrow.hover(
             function(){
-                rightArrow.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-right_hover.png");
+                rightArrow.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-right_hover.png");
             },
             function(){
-                rightArrow.attr("src", "http://srufbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-right.png")
+                rightArrow.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/arrow-right.png")
             }
         );
 
