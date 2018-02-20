@@ -76,14 +76,14 @@ WSGI_APPLICATION = 'psiRbase.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if 'sirbaseutd.c0kaj6xmcc2l.us-east-2.rds.amazonaws.com' in os.environ:
+if 'psirbasedb.c7qbkxdyibwd.us-west-2.rds.amazonaws.com' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['sirbaseDB'],
-            'USER': os.environ['sirbaseMaster'],
-            'PASSWORD': os.environ['Ant12idote21!'],
-            'HOST': os.environ['sirbaseutd.c0kaj6xmcc2l.us-east-2.rds.amazonaws.com'],
+            'NAME': os.environ['psiRbasedb'],
+            'USER': os.environ['psirbaseMaster'],
+            'PASSWORD': os.environ['antidote'],
+            'HOST': os.environ['psirbasedb.c7qbkxdyibwd.us-west-2.rds.amazonaws.com'],
             'PORT': os.environ['5432'],
         }
     }
