@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 import os
 from psiRbase.settings import PROJECT_ROOT
-import urllib2
+import urllib
 
 from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
 
@@ -72,7 +72,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
         }
         return data
 
-    myFile = urllib2.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
+    myFile = urllib.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
     rowList = ['']
     mrnaName = ['']
     while True:
