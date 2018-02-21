@@ -3,11 +3,7 @@ from django.db import models
 DEFAULT_SOURCE_ID = 1
 DEFAULT_STAGE = "N/A"
 
-class CelegansSource(models.Model):
-    author = models.CharField(max_length=100)
-    pubmed_id = models.CharField(max_length=20, blank=True, null=True)
-    def __str__(self):
-        return self.author
+
 
 class CelegansSirna(models.Model):
     sequence = models.CharField(max_length=45)
