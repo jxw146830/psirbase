@@ -58,7 +58,7 @@ def search1(request):
 
 def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
     
-    if theSpecVal != 'Caenorhabditis elegansJJJJJJJJJJJJJJJJJJJJJJ':
+    if theSpecVal != 'Caenorhabditis elegans':
         data = {
             "sirSpecVal": theSpecVal,
             "sirSrchType": theSrchTyp,
