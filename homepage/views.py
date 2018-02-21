@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 import os
 from psiRbase.settings import PROJECT_ROOT
-from urllib.request import urlopen
+import urllib.request
 
 from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
 
@@ -72,70 +72,70 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
         }
         return data
 
-    myFile = urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
+    myFile = urllib.request.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
     rowList = ['']
     mrnaName = ['']
     while True:
         #get name of current mRNA
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ' ':
             mrnaName.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaName = ''.join(mrnaName)
 
         #skip stuff until chromosome number reached
         while charRead != ':':
-            charRead = myFile.read(1)
-        charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
 
         #get chromosome number of current mRNA
         chrNum = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
             chrNum.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         chrNum = ''.join(chrNum)
 
         #get start position of current mRNA relative to the chromosome containing it
         mrnaStart = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
             mrnaStart.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaStart = ''.join(mrnaStart)
         mrnaStart = int(mrnaStart)
             
         #get end position of current mRNA relative to the chromosome containing it
         mrnaEnd = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
             mrnaEnd.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaEnd = ''.join(mrnaEnd)
         mrnaEnd = int(mrnaEnd)
 
         #skip stuff until beginning of mRNA sequence reached (a newline char)
         while charRead != '\n':
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while True:
             if charRead == '':
                 break
             if charRead == '>':
                 break
             if charRead == '\n':
-                charRead = myFile.read(1)
+                charRead = myFile.read(1).decode('utf-8')
                 continue
             if charRead == '\r':
-                charRead = myFile.read(1)
+                charRead = myFile.read(1).decode('utf-8')
                 continue
             mrnaSeq.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaSeq = ''.join(mrnaSeq)
 
         sirnaSeq = resultSet.sequence
