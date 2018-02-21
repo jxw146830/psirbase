@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import os
 from psiRbase.settings import PROJECT_ROOT
 import urllib
+import requests
 
 from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
 
@@ -72,7 +73,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
         }
         return data
 
-    myFile = urllib.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
+    myFile = urllib.request.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
     rowList = ['']
     mrnaName = ['']
     while True:
