@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import os
 from psiRbase.settings import PROJECT_ROOT
 
-from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
+from .models import CelegansSource, SusDomesticusSirna, SusDomesticusSource
 
 def index(request):
     form = SearchForm()
