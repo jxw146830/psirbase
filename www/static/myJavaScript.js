@@ -1174,6 +1174,7 @@ $(document).ready(
 						$("#resultsTable").html(data.sirSpecVal + "<br />" +  data.sirSrchType + "<br />" + data.sirName + "<br />" + data.sirSeq + "<br />" + data.sirSeqR + "<br />" + data.sirStage + "<br />" + data.sirSrc);
 						if(data.pubmedID != null)
 							$("#resultsTable").append("<br />" + data.pubmedID);
+						//only process non-empty result sets
 						if(data.resultSet != null){
 							for(i=0; i <= data.resultSet.length - 1; i++){
 								if(i==0){
