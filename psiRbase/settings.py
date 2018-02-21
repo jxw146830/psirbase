@@ -76,26 +76,17 @@ WSGI_APPLICATION = 'psiRbase.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if 'psirbasedb.c7qbkxdyibwd.us-west-2.rds.amazonaws.com' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['psiRbasedb'],
-            'USER': os.environ['psirbaseMaster'],
-            'PASSWORD': os.environ['antidote'],
-            'HOST': os.environ['psirbasedb.c7qbkxdyibwd.us-west-2.rds.amazonaws.com'],
-            'PORT': os.environ['5432'],
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['psiRbasedb'],
+        'USER': os.environ['psirbaseMaster'],
+        'PASSWORD': os.environ['antidote'],
+        'HOST': os.environ['psirbasedb.c7qbkxdyibwd.us-west-2.rds.amazonaws.com'],
+        'PORT': os.environ['5432'],
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-
-
+}
+    
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
