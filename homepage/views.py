@@ -148,7 +148,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
         sirnaSeq = list(sirnaSeq)
         for x in range(0, sLength):
             if sirnaSeq[x] == 'A':
-                sirnaSeq[x] == 'T'
+                sirnaSeq[x] = 'T'
             elif sirnaSeq[x] == 'T':
                 sirnaSeq[x] = 'A'
             elif sirnaSeq[x] == 'C':
