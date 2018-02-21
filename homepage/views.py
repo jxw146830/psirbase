@@ -75,6 +75,30 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
     myFile = urllib.request.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
     rowList = ['']
     mrnaName = ['']
+
+    sirnaSeq = resultSet.sequence
+
+    #get length for sirna sequence
+    sLength = len(sirnaSeq)
+    
+    #flip sirna sequence
+    sirnaSeq = list(sirnaSeq)
+    for x in range(0, sLength):
+        if sirnaSeq[x] == 'A':
+            sirnaSeq[x] = 'T'
+        elif sirnaSeq[x] == 'T':
+            sirnaSeq[x] = 'A'
+        elif sirnaSeq[x] == 'C':
+            sirnaSeq[x] = 'G'
+        elif sirnaSeq[x] == 'G':
+            sirnaSeq[x] = 'C'
+    sirnaSeq = ''.join(sirnaSeq)
+    #reverse sirna sequence
+    str = ''
+    for i in sirnaSeq:
+        str = i + str
+    sirnaSeq = str
+    
     while True:
         #get name of current mRNA
         charRead = myFile.read(1).decode('utf-8')
@@ -138,28 +162,8 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
             charRead = myFile.read(1).decode('utf-8')
         mrnaSeq = ''.join(mrnaSeq)
 
-        sirnaSeq = resultSet.sequence
-
-        #get length for both sequences
-        sLength = len(sirnaSeq)
+        #get current mRNA length
         mLength = mrnaEnd - mrnaStart + 1
-        
-        #reverse and flip sirna sequence
-        sirnaSeq = list(sirnaSeq)
-        for x in range(0, sLength):
-            if sirnaSeq[x] == 'A':
-                sirnaSeq[x] = 'T'
-            elif sirnaSeq[x] == 'T':
-                sirnaSeq[x] = 'A'
-            elif sirnaSeq[x] == 'C':
-                sirnaSeq[x] = 'G'
-            elif sirnaSeq[x] == 'G':
-                sirnaSeq[x] = 'C'
-        sirnaSeq = ''.join(sirnaSeq)
-        str = ''
-        for i in sirnaSeq:
-            str = i + str
-        sirnaSeq = str
         
         # # # # # # # # BEGIN MATCHING ALGO # # # # # # #
         if sLength <= mLength:
