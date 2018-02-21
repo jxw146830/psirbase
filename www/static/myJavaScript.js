@@ -1174,15 +1174,17 @@ $(document).ready(
 						$("#resultsTable").html(data.sirSpecVal + "<br />" +  data.sirSrchType + "<br />" + data.sirName + "<br />" + data.sirSeq + "<br />" + data.sirSeqR + "<br />" + data.sirStage + "<br />" + data.sirSrc);
 						if(data.pubmedID != null)
 							$("#resultsTable").append("<br />" + data.pubmedID);
-						for(i=0; i <= data.resultSet.length - 1; i++){
-							if(i==0){
-								continue;
+						if(data.resultSet != null){
+							for(i=0; i <= data.resultSet.length - 1; i++){
+								if(i==0){
+									continue;
+								}
+								$("#resultsTable").append("<br /><br />Result " + i + ":");
+								$("#resultsTable").append("<br />" + data.resultSet[i][0]);
+								$("#resultsTable").append("<br />" + data.resultSet[i][1]);
+								$("#resultsTable").append("<br />" + data.resultSet[i][2]);
+								$("#resultsTable").append("<br />" + data.resultSet[i][3]);
 							}
-							$("#resultsTable").append("<br /><br />Result " + i + ":");
-							$("#resultsTable").append("<br />" + data.resultSet[i][0]);
-							$("#resultsTable").append("<br />" + data.resultSet[i][1]);
-							$("#resultsTable").append("<br />" + data.resultSet[i][2]);
-							$("#resultsTable").append("<br />" + data.resultSet[i][3]);
 						}
 					}
 				});
