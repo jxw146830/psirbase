@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'psiRbase.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['psiRbasedb'],
+        'NAME': os.environ['psirbasedb'],
         'USER': os.environ['psirbaseMaster'],
         'PASSWORD': os.environ['antidote'],
         'HOST': os.environ['psirbasedb.c7qbkxdyibwd.us-west-2.rds.amazonaws.com'],
