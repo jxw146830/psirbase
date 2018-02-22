@@ -53,17 +53,17 @@
 
     <div class="menuDock"></div>
     <div id="homePageContent">
-        <div class="pageSection" style="margin-top:30px;">
+        <div class="pageSection" style="padding-bottom:10px;">
             <b>psiRbase</b>: A database containing putative siRNA sequences (psiRNAs) from developmental data sets.
         </div>
-        <div class="pageSection">
+        <div class="pageSection" style="padding-bottom:20px;">
 			This website is a resource for scientists interested in the endo-siRNA population in small RNA datasets.  
         </div>
         <div id="search">
-			<div class="pageSection">
+			<div class="pageSection" style="padding-bottom:10px;">
 				Searches will return any psiRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
 			</div>
-			<div class="pageSection">
+			<div class="pageSection" style="padding-bottom:10px;">
 				To query, select the species, choose one of the two search options,<br />
 				and type the name of the mRNA or a putative endo-siRNA sequence.
 			</div>
@@ -147,12 +147,11 @@
 	-->
     <div id="aboutPageContent">
 		<div class="darkHPsection" style="font-size:14px">
-			<b>miRNA, piRNA, and endogenous-small interfering RNAs (endo-siRNAs) are approximately 18-32 nucleotides long and play an important role in gene regulation.  While miRNA and piRNA are highly conserved across species and well annotated,  endo-siRNAs are challenging to identify because they are not well conserved.
+			miRNA, piRNA, and endogenous-small interfering RNAs (endo-siRNAs) are approximately 18-32 nucleotides long and play an important role in gene regulation.  While miRNA and piRNA are highly conserved across species and well annotated,  endo-siRNAs are challenging to identify because they are not well conserved.<br />
 			Small RNA libraries across various developmental stages have been collected and aligned to genomes.  Mapped reads have been  further processed to remove known rRNA, tRNA, miRNA, and piRNA sequences.  The remaining putative endo-siRNAs have been annotated, given unique identifiers, and characterized by developmental stage.  Currently, only wild-type small RNA libraries are included.
-			</b>
 		</div><br/>
 		<div class="lightHPsection">
-			<b>siRBase</b> At present, SiRBase contains endo-siRNA sequences from four Species: <br />
+			At present, psiRBase contains endo-siRNA sequences from four Species: <br />
 			<ul>
 			<li>Caenorhabdits elegans(ce11)</li>
 			<li>Drosophila melanogaster(dm6)</li>
@@ -164,13 +163,13 @@
 		<div class="darkHPsection">
 			<b> Fasta sequences from acquired datasets were first aligned to the indicated
 				genome build using bowtie -v 1 -a --best --strata parameters to get exact genome coordinates. Any fafsta sequences that also mapped to
-			a custom small RNA reference including annotated rRNA, tRNA, miRNA, and piRNA were excluded from the results</b>
-			<b> Custom RNA reference made using rRNA sequences from https://genome.ucsc.edu/cgi-bin/hgTables, miRNA sequences from http://www.targetscan.org/vert_71/, piRNA sequences from http://regulatoryrna.org/database/piRNA/download.html,
+			a custom small RNA reference including annotated rRNA, tRNA, miRNA, and piRNA were excluded from the results.
+				<br />Custom RNA reference made using rRNA sequences from https://genome.ucsc.edu/cgi-bin/hgTables, miRNA sequences from http://www.targetscan.org/vert_71/, piRNA sequences from http://regulatoryrna.org/database/piRNA/download.html,
 				and tRNA sequences from http://gtrnadb.ucsc.edu/.</b>
 		</div><br/>
 		<div class="lightHPsection">
-			<b>siRBase was created and is managed by Kelly Daescu in the Michael Zhang lab at the University of Texas at Dallas(UTD) <br />
-				<b>Collaborators Include:<br />
+			psiRbase was created and is managed by Kelly Daescu in the Michael Zhang lab at the University of Texas at Dallas(UTD) <br />
+				<b>Collaborators Include:</b><br />
 			<ul>
 				<li>Zhenyu Xuan (UTD)</li>
 				<li>Scott Robertson(UTSW)</li>
@@ -180,7 +179,7 @@
 		</div><br/>
 		<div class="darkHPsection">
 			The Computer Science Department at UTD and their senior design group led by Dr.Ovidiu Daescu created the website and database.<br />
-			<b>Senior Design Group:<br />
+			<b>Senior Design Group:</b><br />
 				<ul>
 					<li>Aravind Ashok</li>
 					<li>Jamal Whitehead</li>
@@ -193,7 +192,7 @@
 			For questions or comments, email <u>kellydaescu@utdallas.edu</u> or use the form below:
 		</div>
 		<div id="after_submit"></div>
-		<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+		<form id="contact_form" action="#" method="POST" enctype="multipart/form-data" style="padding-top:10px;">
 			<div class="row">
 				<label class="required" for="name">Your name:</label><br />
 				<input id="name" class="input" name="name" type="text" value="" size="30" /><br />
@@ -210,13 +209,15 @@
 				<span id="message_validation" class="error_message"></span>
 			</div>
 
-			<input id="submit_button" type="submit" value="Send email" />
+			<input id="submit_button" type="submit" value="Send email"  style="color:black;" />
 		</form>
     </div>
 </div>
 
-<div id="background">
-	(background stuff goes here...)
+<div id="background" style="padding-top:20px;">
+	<div id="backgroundPageContent">
+		(background stuff goes here...)
+	</div>
 </div> 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
