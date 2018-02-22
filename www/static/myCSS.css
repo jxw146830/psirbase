@@ -19,7 +19,6 @@ body {
 }
 
 #headerBG {
-    /*background: hsl(0, 0%, 10%);*/
     background: black;
     opacity: 0;
     z-index: 999;
@@ -187,7 +186,7 @@ body {
     width: 100%;
     z-index: 2;
     height: auto;
-    min-height: 100vh;
+    min-height: 50px;
     font-size: 14px;
 }
 
@@ -249,7 +248,7 @@ body {
     position: relative;
     width: 100%;
     height: auto;
-    min-height: 100vh;
+    min-height: 50px;
     font-size: 14px;
     display: block;
 }
@@ -258,7 +257,7 @@ body {
     position: absolute;
     width: 100%;
     height: auto;
-    min-height: 100vh;
+    min-height: 50px;
     font-size: 14px;
     background: hsla(280, 100%, 15%, 0.97);
     text-align: center;
@@ -408,7 +407,7 @@ body {
     text-align: center;
 }
 
-#downloadsPageBG {
+/*#downloadsPageBG {
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -418,7 +417,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     top:100px;
-}
+}*/
 
 #about {
     position: relative;
@@ -427,10 +426,10 @@ body {
     width: 100%;
     z-index: 2;
     height: auto;
-    min-height: 100vh;
+    min-height: 50px;
 }
 
-#aboutPageBG {
+/*#aboutPageBG {
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -440,7 +439,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     top:100px;
-}
+}*/
 
 #aboutPageContent {
     position: relative;
