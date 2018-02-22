@@ -72,7 +72,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
         }
         return data
 
-    myFile = urllib.request.urlopen("http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/CelegansCDNA.fa")
+    myFile = urllib.request.urlopen("https://gdurl.com/DsH2")
     rowList = ['']
     mrnaName = ['']
 
