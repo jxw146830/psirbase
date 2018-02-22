@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>siRBase</title>
+    <title>psiRbase</title>
     <link rel="stylesheet" href="{% static 'myCSS.css' %}" type="text/css" />
 </head>
 <body>
@@ -52,13 +52,18 @@
 
     <div class="menuDock"></div>
     <div id="homePageContent">
-        <div class="pageSection" style="font-size:40px;margin-top:30px;font-weight:bold;">
-            WHAT IS SI<div style="font-size:48px;display:inline;">RB</div>ASE
-        </div>
-        <div class="pageSection" style="margin-bottom:20px;">
+        <div class="pageSection" style="margin-top:30px;margin-bottom:20px;">
             psiRbase: A database containing putative siRNA sequences (psiRNAs) from developmental data sets.
         </div>
+        <div class="pageSection">
+			This website is a resource for scientists interested in the endo-siRNA population in small RNA datasets.  
+        </div>
         <div id="search">
+			<div class="pageSection">
+				Searches will return any psiRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.<br />
+				To query, select the species, choose one of the two search options,
+				and type the name of the mRNA or a putative endo-siRNA sequence.
+			</div>
             <div id="speciesSelectionContainer">
                 <img src="{% static 'images/arrow-left.png' %}" id="speciesLeftArrow" />
                 <div id="speciesSelections">
@@ -127,9 +132,7 @@
     <!-- <img src="images/dna_static_background2.jpg" id="downloadsBG" />
     <div id="downloadsPageContent">
         <div class="pageSection" style="padding-top:20px;">
-            Download stuff goes here...<br />
-            Download stuff goes here...<br />
-
+            Download stuff goes here...
         </div>
     </div> -->
 </div>
@@ -137,27 +140,72 @@
 <div id="about">
     <!-- <img id="aboutPageBG" src="images/dna_static_background.jpg" /> -->
     <div id="aboutPageContent">
-        <div class="pageSection" style="padding-top:20px;">
-            The <a href="#about" style="text-decoration:none"><i>About</i></a> tab references the publications from which the sequences were identified.
-            siRBase is managed by the Michael Zhang lab at University of Texas at Dallas. Contributors:<br /><br />
-            &#8226 Kelly Daescu (UTD)<br />
-            &#8226 Zhenyu Xuan (UTD)<br />
-            &#8226 Scott Robertson (UTSW)<br />
-            &#8226 Rueyling Lin (UTSW)<br />
-            &#8226 Michael Zhang (UTD)<br />
-        </div>
-        <div class="pageSection">
-            A special thank you to the Computer Science Department at UT Dallas.<br />
-            The senior design class of Aravind Ashok, Naveed Haque, Saivamshi Pasikanti, Sandeep Shahi,
-            and Jamal Whitehead led by Dr. Ovidiu Daescu created the website and database.
-        </div>
-        <div class="pageSection">
-            Please cite the following article:<br />
-            <i>siRBase article publication TBD</i><br />
-        </div>
-        <div class="pageSection">
-            For questions or comments, email <u>kellydaescu@utdallas.edu</u>
-        </div>
+		<div class="darkHPsection" style="font-size:14px">
+			<b>miRNA, piRNA, and endogenous-small interfering RNAs (endo-siRNAs) are approximately 18-32 nucleotides long and play an important role in gene regulation.  While miRNA and piRNA are highly conserved across species and well annotated,  endo-siRNAs are challenging to identify because they are not well conserved.
+			Small RNA libraries across various developmental stages have been collected and aligned to genomes.  Mapped reads have been  further processed to remove known rRNA, tRNA, miRNA, and piRNA sequences.  The remaining putative endo-siRNAs have been annotated, given unique identifiers, and characterized by developmental stage.  Currently, only wild-type small RNA libraries are included.
+			</b>
+		</div><br/>
+		<div class="lightHPsection">
+			<b>siRBase</b> At present, SiRBase contains endo-siRNA sequences from four Species: <br />
+			<ul>
+			<li>Caenorhabdits elegans(ce11)</li>
+			<li>Drosophila melanogaster(dm6)</li>
+			<li>Danio rerio(danRer10)</li>
+			<li>Mus Musculus(mm10)</li>
+			</ul>
+			<b>More species will be added soon, please stay tuned!!!!</b>
+		</div><br />
+		<div class="darkHPsection">
+			<b> Fasta sequences from acquired datasets were first aligned to the indicated
+				genome build using bowtie -v 1 -a --best --strata parameters to get exact genome coordinates. Any fafsta sequences that also mapped to
+			a custom small RNA reference including annotated rRNA, tRNA, miRNA, and piRNA were excluded from the results</b>
+			<b> Custom RNA reference made using rRNA sequences from https://genome.ucsc.edu/cgi-bin/hgTables, miRNA sequences from http://www.targetscan.org/vert_71/, piRNA sequences from http://regulatoryrna.org/database/piRNA/download.html,
+				and tRNA sequences from http://gtrnadb.ucsc.edu/.</b>
+		</div><br/>
+		<div class="lightHPsection">
+			<b>siRBase was created and is managed by Kelly Daescu in the Michael Zhang lab at the University of Texas at Dallas(UTD) <br />
+				<b>Collaborators Include:<br />
+			<ul>
+				<li>Zhenyu Xuan (UTD)</li>
+				<li>Scott Robertson(UTSW)</li>
+				<li>Rueyling Lin (UTSW)</li>
+				<li>Michael Zhang (UTD)</li>
+			</ul>
+		</div><br/>
+		<div class="darkHPsection">
+			The Computer Science Department at UTD and their senior design group led by Dr.Ovidiu Daescu created the website and database.<br />
+			<b>Senior Design Group:<br />
+				<ul>
+					<li>Aravind Ashok</li>
+					<li>Jamal Whitehead</li>
+					<li>Naveed Haque</li>
+					<li>Sandeep Shahi Thakuri</li>
+					<li>Saivamshi Pasinkanti</li>
+				</ul>
+		</div><br />
+		<div class="lightHPsection">
+			For questions or comments, email <u>kellydaescu@utdallas.edu</u> or use the form below:
+		</div>
+		<div id="after_submit"></div>
+		<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+			<div class="row">
+				<label class="required" for="name">Your name:</label><br />
+				<input id="name" class="input" name="name" type="text" value="" size="30" /><br />
+				<span id="name_validation" class="error_message"></span>
+			</div>
+			<div class="row">
+				<label class="required" for="email">Your email:</label><br />
+				<input id="email" class="input" name="email" type="text" value="" size="30" /><br />
+				<span id="email_validation" class="error_message"></span>
+			</div>
+			<div class="row">
+				<label class="required" for="message">Your message:</label><br />
+				<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+				<span id="message_validation" class="error_message"></span>
+			</div>
+
+			<input id="submit_button" type="submit" value="Send email" />
+		</form>
     </div>
 </div>
 <div id="background">
