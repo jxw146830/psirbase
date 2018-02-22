@@ -72,7 +72,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
         }
         return data
 
-    myFile = urllib.request.urlopen("https://gdurl.com/DsH2")
+    myFile = urllib.request.urlopen("https://gdurl.com/ZMAl")
     rowList = ['']
     mrnaName = ['']
 
