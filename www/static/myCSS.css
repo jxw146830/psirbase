@@ -218,7 +218,9 @@ body {
 }
 
 .pageSection {
-    padding: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -226,7 +228,7 @@ body {
 .darkHPsection {
 	border-radius: 20px;
     background: hsla(180, 100%, 50%, 0.25);
-    padding: 20px;
+    padding: 10px;
 	margin: 0 auto;
     max-width: 900px;
 }
@@ -234,7 +236,7 @@ body {
 .lightHPsection {
 	border-radius: 20px;
     background: hsla(210, 100%, 50%, 0.25);
-    padding: 20px;
+    padding: 10px;
 	margin: 0 auto;
     max-width: 900px;
 }
@@ -423,6 +425,8 @@ body {
     z-index: 2;
     height: auto;
     min-height: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 /*#aboutPageBG {
