@@ -557,7 +557,7 @@ $(document).ready(
             }
         );
 
-        var zFishC = $("#zebrafishIconCont");
+        /*var zFishC = $("#zebrafishIconCont");
         var zFish = $("#zebrafishIcon");
         zFishC.hover(
             function(){
@@ -747,7 +747,7 @@ $(document).ready(
                     mouseC.css("font-weight", "normal");
                 }
             }
-        );
+        );*/
 
         var pigC = $("#pigIconCont");
         var pig = $("#pigIcon");
@@ -815,7 +815,7 @@ $(document).ready(
             }
         );
 
-        zFishC.click(
+        /*zFishC.click(
             function(){
                 //first unset all icons
                 allSpecieConts.css("font-weight", "normal");
@@ -999,7 +999,7 @@ $(document).ready(
 				//changes value of hidden species input box to this species name
 				$("#speciesBox").attr("value", "Mus musculus");
             }
-        );
+        );*/
 
         pigC.click(
             function(){

@@ -54,14 +54,18 @@
     <div class="menuDock"></div>
     <div id="homePageContent">
         <div class="pageSection" style="padding-bottom:5px;padding-top:20px;">
-            <b>psiRbase</b>: A database containing putative siRNA sequences (psiRNAs) from developmental data sets.
+            <b>psiRbase</b>: putative siRNA (psiRNA)
         </div>
         <div class="pageSection" style="padding-bottom:15px;">
-			This website is a resource for scientists interested in the endo-siRNA population in small RNA datasets.  
+			A database and resource for scientists interested in endogenous-small interfering RNA sequences (endo-siRNAs).  
+        </div>
+		        <div class="pageSection" style="padding-bottom:15px;">
+			Available developmental data sets have been collected through literature<br />
+			searches and Gene accession omnibus and removed of annotated small RNAs.   
         </div>
         <div id="search">
 			<div class="pageSection" style="padding-bottom:5px;">
-				Searches will return any psiRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
+				The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
 			</div>
 			<div class="pageSection" style="padding-bottom:0px;">
 				To query, select the species, choose one of the two search options,<br />
@@ -73,37 +77,37 @@
                     <div id="speciesSelection1">
                         <div class="speciesIcon" id="wormIconCont">
                             <img src="{% static 'images/wormIcon.png' %}" id="wormIcon" class="speciesImg" />
-                            <p>Caenorhabditis<br /><i>elegans</i></p>
+                            <p><i>Caenorhabditis<br />elegans</i></p><p style="font-size:10px"><br />Roundworm</p>
                         </div>
-                        <div class="speciesIcon" id="zebrafishIconCont">
-                            <img src="{% static 'images/zebrafishIcon.png' %}" id="zebrafishIcon" class="speciesImg" />
-                            <p>Danio<br /><i>rerio</i></p>
+                        <div class="speciesIcon inDev" id="zebrafishIconCont">
+                            <img src="{% static 'images/zebrafishIcon_inDev.png' %}" id="zebrafishIcon" class="speciesImg" />
+                            <p><i>Danio<br />rerio</i></p><p style="font-size:10px"><br />Zebrafish</p>
                         </div>
-                        <div class="speciesIcon" id="fruitflyIconCont">
-                            <img src="{% static 'images/fruitflyIcon.png' %}" id="fruitflyIcon" class="speciesImg" />
-                            <p>Drosophila<br /><i>melanogaster</i></p>
+                        <div class="speciesIcon inDev" id="fruitflyIconCont">
+                            <img src="{% static 'images/fruitflyIcon_inDev.png' %}" id="fruitflyIcon" class="speciesImg" />
+                            <p><i>Drosophila<br />melanogaster</i></p><p style="font-size:10px"><br />Fruit Fly</p>
                         </div>
-                        <div class="speciesIcon" id="chickenIconCont">
-                            <img src="{% static 'images/chickenIcon.png' %}" id="chickenIcon" class="speciesImg" />
-                            <p>Gallus<br /><i>gallus</i></p>
+                        <div class="speciesIcon inDev" id="chickenIconCont">
+                            <img src="{% static 'images/chickenIcon_inDev.png' %}" id="chickenIcon" class="speciesImg" />
+                            <p><i>Gallus<br />gallus</i></p><p style="font-size:10px"><br />Chicken</p>
                         </div>
                     </div>
                     <div id="speciesSelection2">
-                        <div class="speciesIcon" id="humanIconCont">
-                            <img src="{% static 'images/humanIcon.png' %}" id="humanIcon" class="speciesImg" />
-                            <p>Homo<br /><i>sapiens</i></p>
+                        <div class="speciesIcon inDev" id="humanIconCont">
+                            <img src="{% static 'images/humanIcon_inDev.png' %}" id="humanIcon" class="speciesImg" />
+                            <p><i>Homo<br />sapiens</i></p><p style="font-size:10px"><br />Human</p>
                         </div>
-                        <div class="speciesIcon" id="mouseIconCont">
-                            <img src="{% static 'images/mouseIcon.png' %}" id="mouseIcon" class="speciesImg" />
-                            <p>Mus<br /><i>musculus</i></p>
+                        <div class="speciesIcon inDev" id="mouseIconCont">
+                            <img src="{% static 'images/mouseIcon_inDev.png' %}" id="mouseIcon" class="speciesImg" />
+                            <p><i>Mus<br />musculus</i></p><p style="font-size:10px"><br />Mouse</p>
                         </div>
-                        <div class="speciesIcon" id="seaUrchinIconCont">
-                            <img src="{% static 'images/seaUrchin.png' %}" id="seaUrchinIcon" class="speciesImg" />
-                            <p>Paracentrotus<br /><i>lividus</i></p>
+                        <div class="speciesIcon inDev" id="seaUrchinIconCont">
+                            <img src="{% static 'images/seaUrchin_inDev.png' %}" id="seaUrchinIcon" class="speciesImg" />
+                            <p><i>Paracentrotus<br />lividus</i></p><p style="font-size:10px"><br />Sea Urchin</p>
                         </div>
                         <div class="speciesIcon" id="pigIconCont" style="margin-bottom:0px;">
                             <img src="{% static 'images/pigIcon.png' %}" id="pigIcon" class="speciesImg" />
-                            <p>Sus<br /><i>domesticus</i></p>
+                            <p><i>Sus<br />domesticus</i></p><p style="font-size:10px"><br />Pig</p>
                         </div>
                     </div>
                 </div>

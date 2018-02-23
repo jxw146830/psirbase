@@ -328,6 +328,10 @@ body {
     cursor: pointer;
 }
 
+.inDev {
+	font-color: gray;
+}
+
 .searchType {
     padding: 10px;
     margin-left: 20px;
