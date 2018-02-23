@@ -329,7 +329,7 @@ body {
 }
 
 .inDev {
-	font-color: gray;
+	font-color: hsl(0, 0%, 50%);
 }
 
 .searchType {
