@@ -293,13 +293,13 @@ body {
 }
 
 #speciesSelection1 {
-    display: table-cell;
+    display: inline;
     position: relative;
     /*margin-top: -70px;*/
 }
 
 #speciesSelection2 {
-    display: table-cell;
+    display: inline;
     position: relative;
     /*margin-top: -70px;*/
 }
