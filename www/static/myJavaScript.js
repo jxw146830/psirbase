@@ -1061,7 +1061,7 @@ $(document).ready(
             function(){
                 if(currentFour == 2){
                     species2.hide("slide", { direction: "right" }, 1000);
-                    species1.show("slide", { direction: "left" }, 1000);
+                    species1.delay(3000).show("slide", { direction: "left" }, 1000);
                     currentFour = 1;
                 }
             }
@@ -1070,7 +1070,7 @@ $(document).ready(
             function(){
                 if(currentFour == 1){
                     species1.hide("slide", { direction: "left" }, 1000);
-                    species2.show("slide", { direction: "right" }, 1000);
+                    species2.delay(3000).show("slide", { direction: "right" }, 1000);
                     currentFour = 2;
                 }
             }
