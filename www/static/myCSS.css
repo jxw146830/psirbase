@@ -225,6 +225,7 @@ body {
 }
 
 .darkHPsection {
+	display: inline;
 	border-radius: 20px;
     background: hsla(180, 100%, 50%, 0.25);
     padding: 10px;
@@ -236,6 +237,7 @@ body {
 }
 
 .lightHPsection {
+	display: inline;
 	border-radius: 20px;
     background: hsla(210, 100%, 50%, 0.25);
     padding: 10px;
