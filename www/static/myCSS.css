@@ -225,7 +225,7 @@ body {
 }
 
 .darkHPsection {
-	display: inline;
+	display: table-cell;
 	border-radius: 20px;
     background: hsla(180, 100%, 50%, 0.25);
     padding: 10px;
@@ -237,7 +237,7 @@ body {
 }
 
 .lightHPsection {
-	display: inline;
+	display: table-cell;
 	border-radius: 20px;
     background: hsla(210, 100%, 50%, 0.25);
     padding: 10px;
@@ -396,8 +396,6 @@ body {
 
 #downloads {
     position: relative;
-    overflow-x: hidden;
-    overflow-y: hidden;
     width: 100%;
     z-index: 2;
     height: auto;
@@ -407,6 +405,24 @@ body {
 }
 
 #downloadsPageContent {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    float: top;
+    text-align: center;
+}
+
+#background {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+    height: auto;
+    min-height: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#backgroundPageContent {
     position: relative;
     width: 100%;
     z-index: 3;
@@ -428,8 +444,6 @@ body {
 
 #about {
     position: relative;
-    overflow-x: hidden;
-    overflow-y: hidden;
     width: 100%;
     z-index: 2;
     height: auto;
@@ -458,22 +472,3 @@ body {
     text-align: center;
 }
 
-#background {
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    width: 100%;
-    z-index: 2;
-    height: auto;
-    min-height: 50px;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-#backgroundPageContent {
-    position: relative;
-    width: 100%;
-    z-index: 3;
-    float: top;
-    text-align: center;
-}
