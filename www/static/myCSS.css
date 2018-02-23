@@ -294,13 +294,13 @@ body {
 
 #speciesSelection1 {
     display: table-cell;
-    position: absolute;
+    position: relative;
     /*margin-top: -70px;*/
 }
 
 #speciesSelection2 {
     display: table-cell;
-    position: absolute;
+    position: relative;
     /*margin-top: -70px;*/
 }
 
