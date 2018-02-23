@@ -231,6 +231,8 @@ body {
 	margin: 0 auto;
 	min-width: 50px;
 	width: auto;
+	min-height: 10px;
+	height: auto;
 }
 
 .lightHPsection {
@@ -240,6 +242,8 @@ body {
 	margin: 0 auto;
 	min-width: 50px;
 	width: auto;
+	min-height: 10px;
+	height: auto;
 }
 
 #search {
@@ -272,7 +276,7 @@ body {
     width: auto;
     height: auto;
     min-height: 100px;
-    margin-top: 60px;
+    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -311,7 +315,7 @@ body {
 .speciesIcon {
     padding-left: 30px;
     padding-right: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     display: table-cell;
     position: relative;
     cursor: pointer;
