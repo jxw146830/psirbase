@@ -188,6 +188,7 @@ body {
     height: auto;
     min-height: 50px;
     font-size: 14px;
+	margin: 0 auto;
 }
 
 #homepageVid {
@@ -213,7 +214,6 @@ body {
     position: relative;
     width: 914px;
     z-index: 3;
-    margin: 0 auto;
     text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
