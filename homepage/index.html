@@ -59,17 +59,15 @@
         <div class="pageSection" style="padding-bottom:15px;">
 			A database and resource for scientists interested in endogenous-small interfering RNA sequences (endo-siRNAs).  
         </div>
-		        <div class="pageSection" style="padding-bottom:15px;">
-			Available developmental data sets have been collected through literature<br />
-			searches and Gene accession omnibus and removed of annotated small RNAs.   
+		<div class="pageSection" style="padding-bottom:15px;">
+			Available developmental data sets have been collected through literature searches and Gene accession omnibus and removed of annotated small RNAs.   
         </div>
         <div id="search">
-			<div class="pageSection" style="padding-bottom:5px;">
+			<div class="pageSection" style="padding-bottom:15px;">
 				The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
 			</div>
 			<div class="pageSection" style="padding-bottom:10px;">
-				To query, select the species, choose one of the two search options,<br />
-				and type a putative endo-siRNA sequence or the name of the mRNA.
+				To query, select the species, choose one of the two search options, and type a putative endo-siRNA sequence or the name of the mRNA.
 			</div>
             <div id="speciesSelectionContainer">
                 <img src="{% static 'images/arrow-left.png' %}" id="speciesLeftArrow" />
@@ -113,12 +111,14 @@
                 </div>
                 <img src="{% static 'images/arrow-right.png' %}" id="speciesRightArrow" />
             </div>
-            <div class="searchType" id="bySirnaSeq">
-                Type in siRNA sequence<br />to find potential targets.
-            </div>
-            <div class="searchType" id="byMrnaName">
-                Type in mRNA name<br />to identify antisense siRNAs.
-            </div>
+			<div style="margin-left:auto;margin-right:auto;">
+				<div class="searchType" id="bySirnaSeq" style="margin-right:20px;">
+					Type in siRNA sequence<br />to find potential targets.
+				</div>
+				<div class="searchType" id="byMrnaName">
+					Type in mRNA name<br />to identify antisense siRNAs.
+				</div>
+			</div>
 			<form action="" method="post">
 				{% csrf_token %}
 				{{ theForm }}
