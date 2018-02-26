@@ -103,6 +103,8 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     mrnaName = ['']
     rowList = ['']
     eofReached = 1
+
+    mrnaSeq = ['']
     
     while True:
         #get name of current mRNA
@@ -196,7 +198,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             break
 
     data = {
-        "sirSpecVal": theSpecVal,
+        "sirSpecVal": mrnaSeq,
         "sirSrchType": theSrchTyp,
         "mismatchesAllowed": theMismatchCount,
         "sirName": resultSet.name,
