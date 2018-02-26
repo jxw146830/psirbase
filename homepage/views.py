@@ -152,7 +152,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         charRead = myFile.read(1).decode('utf-8')
         while True:
             #if EOF reached...
-            if charRead == 03 or charRead == 04 or charRead == 00:
+            if charRead == 0x03 or charRead == 0x04 or charRead == 0x00:
                 break
             if charRead == '>':
                 break
@@ -187,7 +187,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaName = ['']
         mrnaName.append('>')
 
-        if charRead == 03 or charRead == 04 or charRead == 0:
+        if charRead == 0x03 or charRead == 0x04 or charRead == 0x00:
             break
 
     data = {
