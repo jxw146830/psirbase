@@ -152,21 +152,20 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while True:
             #if EOF reached...
-            '''
-            if not charRead or charRead < 0 or charRead == 0x03 or charRead == 0x04:
+            if not charRead:
                 eofReached = 2
                 break
-            '''
+            charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
             if charRead.isalnum() == False:
-                charRead = myFile.read(1).decode('utf-8')
+                charRead = myFile.read(1)
                 continue
             mrnaSeq.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         mrnaSeq = ''.join(mrnaSeq)
 
         #get current mRNA length
@@ -188,8 +187,6 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         '''
         
         KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
-
-        break
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
         mrnaName = ['']
