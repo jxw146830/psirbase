@@ -110,7 +110,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         
         count = count + 1
 
-        if count == 100:
+        if count == 1000:
             break
         
         #get name of current mRNA
