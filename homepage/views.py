@@ -145,7 +145,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaEnd = int(mrnaEnd)
 
         #skip stuff until beginning of mRNA sequence reached (a newline char)
-        while charRead == ' ' or charRead.isalnum():
+        while charRead == ' ' or charRead.whitespace == False:
             charRead = myFile.read(1).decode('utf-8')
         
 
@@ -162,7 +162,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
-            if charRead.isalnum() == False:
+            if charRead.whitespace:
                 charRead = myFile.read(1)
                 continue
             mrnaSeq.append(charRead)
