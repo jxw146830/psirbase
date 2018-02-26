@@ -154,12 +154,10 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaSeq = ['']
         charRead = myFile.read(1)
         while True:
-            '''
             #if EOF reached...
-            if charRead < 0:
+            if not charRead or charRead < 0 or charRead == 0x03 or charRead == 0x04:
                 eofReached = 2
                 break
-            '''
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
@@ -189,9 +187,6 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         '''
         
         KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
-
-        if mrnaName == '>Y110A7A.10.2':
-            break
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
         mrnaName = ['']

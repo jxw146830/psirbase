@@ -1393,10 +1393,10 @@ $(document).ready(
                                     continue;
                                 }
                                 $("#resultsTable").append("<br /><br />Result " + i + ":");
-                                $("#resultsTable").append("<br />" + data.resultSet[i][0]);
-                                $("#resultsTable").append("<br />" + data.resultSet[i][1]);
-                                $("#resultsTable").append("<br />" + data.resultSet[i][2]);
-                                $("#resultsTable").append("<br />" + data.resultSet[i][3]);
+                                $("#resultsTable").append("<br />mRNA name: " + data.resultSet[i][0]);
+                                $("#resultsTable").append("<br />Chromosome #: " + data.resultSet[i][1]);
+                                $("#resultsTable").append("<br />Start position: " + data.resultSet[i][2]);
+                                $("#resultsTable").append("<br />End position: " + data.resultSet[i][3]);
                             }
                         }
                     }
