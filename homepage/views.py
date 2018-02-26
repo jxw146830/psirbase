@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import os
 from psiRbase.settings import PROJECT_ROOT
 import urllib.request
+import string
 
 from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
 
@@ -145,7 +146,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaEnd = int(mrnaEnd)
 
         #skip stuff until beginning of mRNA sequence reached (a newline char)
-        while charRead == ' ' or charRead.whitespace == False:
+        while charRead == ' ' or all(c in string.whitespace for c in charRead) == False:
             charRead = myFile.read(1).decode('utf-8')
         
 
@@ -162,7 +163,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
-            if charRead.whitespace:
+            if charRead.isalnum():
                 charRead = myFile.read(1)
                 continue
             mrnaSeq.append(charRead)
