@@ -148,6 +148,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         while charRead == ' ' or charRead.isalnum():
             charRead = myFile.read(1).decode('utf-8')
 
+        '''
         data = {
             "sirSpecVal": theSpecVal,
             "sirSrchType": theSrchTyp,
@@ -161,13 +162,14 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             "resultSet": '',
         }
         return data
+        '''
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
         charRead = myFile.read(1)
         while True:
             #if EOF reached...
-            if charRead < 0 or charRead == 0x03 or charRead == 0x04 or charRead == 0x00:
+            if not charRead:
                 eofReached = 2
                 break
             charRead = charRead.decode('utf-8')
