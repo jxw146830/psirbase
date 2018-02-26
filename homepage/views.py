@@ -153,10 +153,12 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaSeq = ['']
         charRead = myFile.read(1)
         while True:
+            '''
             #if EOF reached...
-            if charRead < 0 or not charRead:
+            if charRead < 0:
                 eofReached = 2
                 break
+            '''
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
