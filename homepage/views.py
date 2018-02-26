@@ -75,7 +75,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         }
         return data
 
-    myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
+    myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegansShorter.txt")
 
     sirnaSeq = resultSet.sequence
 
