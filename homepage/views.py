@@ -155,9 +155,11 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         charRead = myFile.read(1).decode('utf-8')
         while True:
             #if EOF reached...
+            '''
             if not charRead or charRead < 0 or charRead == 0x03 or charRead == 0x04:
                 eofReached = 2
                 break
+            '''
             if charRead == '>':
                 break
             if charRead.isalnum() == False:
