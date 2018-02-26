@@ -147,22 +147,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         #skip stuff until beginning of mRNA sequence reached (a newline char)
         while charRead == ' ' or charRead.isalnum():
             charRead = myFile.read(1).decode('utf-8')
-
-        '''
-        data = {
-            "sirSpecVal": theSpecVal,
-            "sirSrchType": theSrchTyp,
-            "mismatchesAllowed": theMismatchCount,
-            "sirName": resultSet.name,
-            "sirSeq": resultSet.sequence,
-            "sirSeqR": sirnaSeq,
-            "sirStage": resultSet.stage,
-            "sirSrc": theSource.author,
-            "pubmedID": mrnaEnd,
-            "resultSet": '',
-        }
-        return data
-        '''
+        
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
@@ -181,6 +166,20 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             mrnaSeq.append(charRead)
             charRead = myFile.read(1)
         mrnaSeq = ''.join(mrnaSeq)
+
+        data = {
+            "sirSpecVal": theSpecVal,
+            "sirSrchType": theSrchTyp,
+            "mismatchesAllowed": theMismatchCount,
+            "sirName": resultSet.name,
+            "sirSeq": resultSet.sequence,
+            "sirSeqR": sirnaSeq,
+            "sirStage": resultSet.stage,
+            "sirSrc": theSource.author,
+            "pubmedID": mrnaSeq,
+            "resultSet": '',
+        }
+        return data
 
         #get current mRNA length
         mLength = mrnaEnd - mrnaStart + 1
