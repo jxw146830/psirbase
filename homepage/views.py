@@ -163,7 +163,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
-            if charRead.isalnum():
+            if charRead.isalnum() == False:
                 charRead = myFile.read(1)
                 continue
             mrnaSeq.append(charRead)
