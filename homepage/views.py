@@ -76,10 +76,6 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         return data
 
     myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
-    
-    rowList = ['']
-    mrnaName = ['']
-    eofReached = 1
 
     sirnaSeq = resultSet.sequence
 
@@ -103,6 +99,10 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     for i in sirnaSeq:
         str = i + str
     sirnaSeq = str
+
+    mrnaName = ['']
+    rowList = ['']
+    eofReached = 1
     
     while True:
         #get name of current mRNA
@@ -170,20 +170,6 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             charRead = myFile.read(1)
         mrnaSeq = ''.join(mrnaSeq)
 
-        data = {
-            "sirSpecVal": theSpecVal,
-            "sirSrchType": theSrchTyp,
-            "mismatchesAllowed": theMismatchCount,
-            "sirName": resultSet.name,
-            "sirSeq": resultSet.sequence,
-            "sirSeqR": sirnaSeq,
-            "sirStage": resultSet.stage,
-            "sirSrc": theSource.author,
-            "pubmedID": mrnaSeq,
-            "resultSet": '',
-        }
-        return data
-
         #get current mRNA length
         mLength = mrnaEnd - mrnaStart + 1
         
@@ -203,6 +189,9 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         '''
         
         KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
+
+        if mrnaName == '>Y110A7A.10.2':
+            break
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
         mrnaName = ['']
