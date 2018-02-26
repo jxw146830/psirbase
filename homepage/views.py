@@ -76,7 +76,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
 
     myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
 
-    charRead = myFile.read(1)
+    charRead = myFile.read(1).decode('utf-8')
     data = {
         "sirSpecVal": theSpecVal,
         "sirSrchType": theSrchTyp,
