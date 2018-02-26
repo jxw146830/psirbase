@@ -1366,9 +1366,9 @@ $(document).ready(
                 var searchT = $("#searchTypeBox").val();
                 var specVal = $("#speciesBox").val();
                 var mismatchVal;
-                if($("#mismatch0").attr("checked") == true)
+                if($("#mismatch0").is(':checked'))
                     mismatchVal = 0;
-                else if($("#mismatch1").attr("checked") == true)
+                else if($("#mismatch1").is(':checked'))
                     mismatchVal = 1;
                 else
                     mismatchVal = 2;
