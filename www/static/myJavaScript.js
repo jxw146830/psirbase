@@ -1,6 +1,7 @@
 $(document).ready(
     function() {
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
         //provides "website movement from section to section" mechanic for menu buttons
         $(document).on('click', 'a[href^="#"]', function(e) {
@@ -140,7 +141,7 @@ $(document).ready(
                     $("#searchMenuButtonText").css("textDecoration", "none");
                 }
                 if($scrollTop >= ($downloadsPageOffset - 80)){
-                    if($scrollTop < ($aboutPageOffset - 80)){
+                    if($scrollTop < ($backgroundPageOffset - 80)){
                         $("#downloadsMenuButtonText").css("fontWeight", "bold");
                         $("#downloadsMenuButtonText").css("textDecoration", "underline");
                         $("#miniMenuCurrentSection").text("DOWNLOADS");
@@ -154,29 +155,29 @@ $(document).ready(
                     $("#downloadsMenuButtonText").css("fontWeight", "normal");
                     $("#downloadsMenuButtonText").css("textDecoration", "none");
                 }
-                if($scrollTop >= ($aboutPageOffset - 80)){
-                    if($scrollTop < ($backgroundPageOffset - 80)){
-                        $("#aboutMenuButtonText").css("fontWeight", "bold");
-                        $("#aboutMenuButtonText").css("textDecoration", "underline");
-                        $("#miniMenuCurrentSection").text("ABOUT");
+                if($scrollTop >= ($backgroundPageOffset - 80)){
+                    if($scrollTop < ($aboutPageOffset - 80)){
+                        $("#backgroundMenuButtonText").css("fontWeight", "bold");
+                        $("#backgroundMenuButtonText").css("textDecoration", "underline");
+                        $("#miniMenuCurrentSection").text("BACKGROUND");
                     }
                     else{
-                        $("#aboutMenuButtonText").css("fontWeight", "normal");
-                        $("#aboutMenuButtonText").css("textDecoration", "none");
+                        $("#backgroundMenuButtonText").css("fontWeight", "normal");
+                        $("#backgroundMenuButtonText").css("textDecoration", "none");
                     }
-                }
-                else{
-                    $("#aboutMenuButtonText").css("fontWeight", "normal");
-                    $("#aboutMenuButtonText").css("textDecoration", "none");
-                }
-                if($scrollTop >= ($backgroundPageOffset - 80)){
-                    $("#backgroundMenuButtonText").css("fontWeight", "bold");
-                    $("#backgroundMenuButtonText").css("textDecoration", "underline");
-                    $("#miniMenuCurrentSection").text("BACKGROUND");
                 }
                 else{
                     $("#backgroundMenuButtonText").css("fontWeight", "normal");
                     $("#backgroundMenuButtonText").css("textDecoration", "none");
+                }
+                if($scrollTop >= ($aboutPageOffset - 80)){
+                    $("#aboutMenuButtonText").css("fontWeight", "bold");
+                    $("#aboutMenuButtonText").css("textDecoration", "underline");
+                    $("#miniMenuCurrentSection").text("ABOUT");
+                }
+                else{
+                    $("#aboutMenuButtonText").css("fontWeight", "normal");
+                    $("#aboutMenuButtonText").css("textDecoration", "none");
                 }
             }
         );
@@ -191,17 +192,7 @@ $(document).ready(
             }
         );
 
-        //provides bold/underline animation effects when hovering over menu buttons
-        $(".menuButton").hover(
-            function(){
-                $(this).stop().removeClass("menuTextUnbold");
-                $(this).stop().addClass("menuTextBold");
-            },
-            function(){
-                $(this).stop().removeClass("menuTextBold");
-                $(this).stop().addClass("menuTextUnbold");
-            }
-        );
+
         var $mbWidth1 = $("#homeMenuButtonText").css("width");
         var $mbWidth2 = $("#searchMenuButtonText").css("width");
         var $mbWidth3 = $("#downloadsMenuButtonText").css("width");
@@ -269,22 +260,21 @@ $(document).ready(
         menuWidth = menuWidth / 2;
         menu.css("width", menuWidth + "px");
 
-        //shows mini-menu instead if window width is too small to show all menu options horizontally
+        //adjusts search "go" button "1-pixel-too-short" height issue
+        if(isIE)
+            $("#searchGObutton").css("paddingBottom", "7px");
+
+
         var $window = $(window);
         var windowsize;
         function checkWidth() {
             windowsize = $window.width();
-            if (windowsize < 500) {
+
+            //shows mini-menu instead if window width is too small to show all menu options horizontally
+            if (windowsize < 984) {
                 $("#header").css("visibility", "hidden");
                 $("#headerBG").css("visibility", "hidden");
                 $("#headerMini").css("visibility", "visible");
-                $("#logoMini").css("clip", "rect(0px, 100px, 60px, 0px");
-            }
-            else if (windowsize < 900) {
-                $("#header").css("visibility", "hidden");
-                $("#headerBG").css("visibility", "hidden");
-                $("#headerMini").css("visibility", "visible");
-                $("#logoMini").css("clip", "auto");
             }
             else{
                 $("#header").css("visibility", "visible");
@@ -293,25 +283,256 @@ $(document).ready(
                 $("#header_content_mini").css("display", "none");
             }
 
-            //tile species circles vertically if species selection bar width too low
-            if(windowsize < 800){
-                $("#speciesSelection1").css("left", "50%");
-                $("#speciesSelection1").css("margin-left", "-100px");
-                $("#speciesSelection2").css("left", "50%");
-                $("#speciesSelection2").css("margin-left", "-100px");
-                $("#speciesSelections").css("padding-bottom", "575px");
-                $(".speciesIcon").css("display", "block");
+            //adjusts mini-menu width when window resizes
+            if (windowsize < 735) {
+                $("#headerMiniCenteringDiv").css("width", "100%");
             }
             else{
-                $("#speciesSelection1").css("left", "0");
-                $("#speciesSelection1").css("margin-left", "0");
-                $("#speciesSelection2").css("left", "0");
-                $("#speciesSelection2").css("margin-left", "0");
-                $("#speciesSelections").css("padding-bottom", "0");
-                $(".speciesIcon").css("display", "table-cell");
+                $("#headerMiniCenteringDiv").css("width", "735px");
             }
 
-            //add space between search type buttons if width too low
+
+
+            //clips mini-menu logo if width gets too small to show entire logo
+            if (windowsize < 550) {
+                $("#logoMini").css("clip", "rect(0px, 150px, 60px, 0px");
+            }
+            else{
+                $("#logoMini").css("clip", "auto");
+            }
+
+            //hides mini-menu current section if window width gets too small
+            if (windowsize < 340) {
+                $("#miniMenuCurrentSection").css("display", "none");
+            }
+            else{
+                $("#miniMenuCurrentSection").css("display", "inline");
+            }
+
+            //decreases home/search page content width if window width gets too small
+            if (windowsize < 735) {
+                $("#searchTool").css("margin", "0");
+                $("#searchTool").css("width", "100%");
+                $("#contactForm").css("width", "100%");
+            }
+            else if (windowsize < 984) {
+                $("#searchTool").css("margin", "0 auto");
+                $("#searchTool").css("width", "695px");
+                $(".pageSection").css("max-width", "695px");
+                $("#contactForm").css("width", "695px");
+            }
+            else{
+                $("#searchTool").css("margin", "0");
+                $("#searchTool").css("width", "100%");
+                $(".pageSection").css("max-width", "944px");
+                $("#contactForm").css("width", "944px");
+            }
+
+            //tile species circles vertically if species selection bar width too low
+            if(windowsize < 735){
+                $("#speciesSelectionContainer").css("width", "220px");
+                $("#speciesSelectionContainer").css("height", "685px");
+                if(isFirefox)
+                    $("#speciesSelectionContainer").css("margin-bottom", "15px");
+
+                $("#speciesSelections").css("width", "140px");
+                $("#speciesSelections").css("height", "685px");
+                $("#speciesSelections").css("left", "30px");
+
+                $("#speciesSelection1").css("width", "140px");
+                $("#speciesSelection1").css("height", "685px");
+
+                $("#speciesSelection2").css("width", "140px");
+                $("#speciesSelection2").css("height", "685px");
+
+                $(".speciesIcon").css("display", "block");
+                $(".speciesIcon").css("padding", "0");
+                $(".speciesIcon").css("margin-top", "25px");
+
+                $("#wormIconCont").css("margin-top", "0px");
+
+                $("#humanIconCont").css("margin-top", "0px");
+
+                $("#speciesLeftArrow").css("position", "absolute");
+                $("#speciesLeftArrow").css("top", "305px");
+                $("#speciesLeftArrow").css("margin-top", "0");
+
+                $("#speciesRightArrow").css("right", "15px");
+                $("#speciesRightArrow").css("top", "305px");
+            }
+            else{
+                $("#speciesSelectionContainer").css("width", "944px");
+                $("#speciesSelectionContainer").css("height", "160px");
+                $("#speciesSelectionContainer").css("margin-bottom", "0px");
+
+                $("#speciesSelections").css("width", "auto");
+                $("#speciesSelections").css("height", "inherit");
+                $("#speciesSelections").css("left", "0px");
+
+                $("#speciesSelection1").css("width", "inherit");
+                $("#speciesSelection1").css("height", "inherit");
+
+                $("#speciesSelection2").css("width", "inherit");
+                $("#speciesSelection2").css("height", "inherit");
+
+                $(".speciesIcon").css("display", "table-cell");
+                $(".speciesIcon").css("padding-left", "30px");
+                $(".speciesIcon").css("padding-right", "30px");
+                $(".speciesIcon").css("margin-top", "0px");
+
+                $("#wormIconCont").css("padding-left", "0px");
+
+                $("#humanIconCont").css("padding-left", "0px");
+
+                $("#chickenIconCont").css("padding-right", "0px");
+
+                $("#pigIconCont").css("padding-right", "0px");
+
+                $("#speciesLeftArrow").css("position", "relative");
+                $("#speciesLeftArrow").css("top", "0px");
+                $("#speciesLeftArrow").css("margin-top", "40px");
+
+                $("#speciesRightArrow").css("right", "245px");
+                $("#speciesRightArrow").css("top", "40px");
+            }
+
+            //move search type buttons to their own line if width gets too small
+            //...buttons on same line
+            if (windowsize < 984) {
+                $("#bySirnaSeq").insertAfter($("#speciesSelectionContainer"));
+                $("#byMrnaName").insertAfter($("#bySirnaSeq"));
+                $(".searchType").css("display", "inline-block");
+                $(".searchType").css("position", "relative");
+                $(".searchType").css("top", "0");
+                $(".searchType").css("width", "323px");
+                $(".searchType").css("text-align", "center");
+            }
+            else{
+                $("#bySirnaSeq").insertAfter($("#speciesRightArrow"));
+                $("#byMrnaName").insertAfter($("#bySirnaSeq"));
+                $(".searchType").css("display", "table-cell");
+                $(".searchType").css("position", "absolute");
+                $("#bySirnaSeq").css("top", "15px");
+                $("#byMrnaName").css("top", "85px");
+                $(".searchType").css("width", "200px");
+                $(".searchType").css("text-align", "right");
+            }
+
+            //make search type buttons width scalable when width gets even smaller
+            //...buttons NOT on same line
+            if (windowsize < 735) {
+                $(".searchType").css("display", "block");
+                $(".searchType").css("width", "auto");
+                $(".searchType").css("max-width", "323px");
+                $(".searchType").css("margin", "0 auto");
+                $("#byMrnaName").css("margin-top", "20px");
+            }
+            else{
+                if(windowsize < 984) {
+                    $(".searchType").css("display", "inline-block");
+                    $(".searchType").css("width", "323px");
+                    $(".searchType").css("max-width", "323px");
+                }
+                else {
+                    $(".searchType").css("display", "table-cell");
+                    $(".searchType").css("width", "200px");
+                    $(".searchType").css("max-width", "200px");
+                }
+                $(".searchType").css("margin", "0");
+            }
+
+            //adjust search input text box / mismatch options / submit button if window width gets too small
+            if (windowsize < 735) {
+                $("#searchInputText").css("width", "50%");
+                $("#searchInputText").css("display", "block");
+                $("#searchInputText").css("margin", "0 auto");
+
+                $("#searchForm").css("display", "inline-block");
+                $("#searchForm").css("width", "100%");
+                $("#searchForm").css("background", "none");
+
+                $("#mismatchesLabel").css("color", "white");
+                $("#mismatchesLabel").css("display", "block");
+                $("#mismatchesLabel").css("text-align", "center");
+                $("#mismatchesLabel").css("font-size", "14px");
+                $("#mismatchesLabel").css("margin-top", "10px");
+
+                $("#mismatchBox").css("margin", "0 auto");
+                $("#mismatchBox").css("display", "block");
+                $("#mismatchBox").css("width", "95px");
+
+                $("#mismatch0Label").css("color", "white");
+                $("#mismatch0Label").css("font-size", "14px");
+                $("#mismatch1Label").css("color", "white");
+                $("#mismatch1Label").css("font-size", "14px");
+                $("#mismatch2Label").css("color", "white");
+                $("#mismatch2Label").css("font-size", "14px");
+                $("#mismatch2Label").css("padding-right", "0px");
+
+                $("#searchGObutton").css("display", "block");
+                $("#searchGObutton").css("margin", "0 auto");
+                $("#searchGObutton").css("margin-top", "10px");
+            }
+            else if (windowsize < 984) {
+                $("#searchInputText").css("width", "270px");
+                $("#searchInputText").css("display", "inline-block");
+                $("#searchInputText").css("margin", "0");
+
+                $("#searchForm").css("display", "inline-block");
+                $("#searchForm").css("width", "695px");
+                $("#searchForm").css("background", "white");
+
+                $("#mismatchesLabel").css("color", "purple");
+                $("#mismatchesLabel").css("display", "inline");
+                $("#mismatchesLabel").css("text-align", "left");
+                $("#mismatchesLabel").css("font-size", "18px");
+                $("#mismatchesLabel").css("margin-top", "0px");
+
+                $("#mismatchBox").css("margin", "0");
+                $("#mismatchBox").css("display", "inline");
+                $("#mismatchBox").css("width", "auto");
+
+                $("#mismatch0Label").css("color", "purple");
+                $("#mismatch0Label").css("font-size", "18px");
+                $("#mismatch1Label").css("color", "purple");
+                $("#mismatch1Label").css("font-size", "18px");
+                $("#mismatch2Label").css("color", "purple");
+                $("#mismatch2Label").css("font-size", "18px");
+                $("#mismatch2Label").css("padding-right", "10px");
+
+                $("#searchGObutton").css("display", "inline-block");
+                $("#searchGObutton").css("margin", "0");
+            }
+            else{
+                $("#searchInputText").css("width", "519px");
+                $("#searchInputText").css("display", "inline-block");
+                $("#searchInputText").css("margin", "0");
+
+                $("#searchForm").css("display", "block");
+                $("#searchForm").css("width", "944px");
+                $("#searchForm").css("background", "white");
+
+                $("#mismatchesLabel").css("color", "purple");
+                $("#mismatchesLabel").css("display", "inline");
+                $("#mismatchesLabel").css("text-align", "left");
+                $("#mismatchesLabel").css("font-size", "18px");
+                $("#mismatchesLabel").css("margin-top", "0px");
+
+                $("#mismatchBox").css("margin", "0");
+                $("#mismatchBox").css("display", "inline");
+                $("#mismatchBox").css("width", "auto");
+
+                $("#mismatch0Label").css("color", "purple");
+                $("#mismatch0Label").css("font-size", "18px");
+                $("#mismatch1Label").css("color", "purple");
+                $("#mismatch1Label").css("font-size", "18px");
+                $("#mismatch2Label").css("color", "purple");
+                $("#mismatch2Label").css("font-size", "18px");
+                $("#mismatch2Label").css("padding-right", "10px");
+
+                $("#searchGObutton").css("display", "inline-block");
+                $("#searchGObutton").css("margin", "0");
+            }
         }
         // Execute on load
         checkWidth();
@@ -369,17 +590,7 @@ $(document).ready(
 
 
 
-        //provides bold/underline animation effects when hovering over MINI menu buttons
-        $(".menuLinksMini").hover(
-            function(){
-                $(this).stop().removeClass("menuTextUnbold");
-                $(this).stop().addClass("menuTextBold");
-            },
-            function(){
-                $(this).stop().removeClass("menuTextBold");
-                $(this).stop().addClass("menuTextUnbold");
-            }
-        );
+
         $("#mb1ULMini").css("width", $mbWidth1);
         $("#mb2ULMini").css("width", $mbWidth2);
         $("#mb3ULMini").css("width", $mbWidth3);
@@ -456,13 +667,8 @@ $(document).ready(
 
 
 
-        //centers homepage content
         var $vid = $('#homepageVid');
         var $home = $('#homepage');
-        var $msg = $('#homePageContent');
-        $msg.css({
-             left: ($home.width() / 2) - ($msg.width() / 2)
-        });
 
         var $resizedWidth = screen.availWidth; //$vid.css("width");
         var $resizedHeight = screen.availHeight - 100; //$vid.css("height");
@@ -479,12 +685,6 @@ $(document).ready(
             });
         });
 
-        //keeps homepage content centered when window resizes
-        $msg.css({
-            //top: ($home.height() / 2) - ($msg.height() / 2)
-            left: ($home.width() / 2) - ($msg.width() / 2)
-        });
-
 
         //window resize behavior
         $(window).resize(
@@ -499,12 +699,6 @@ $(document).ready(
                         left: ($(img).parent().width() - $(img).width()) / 2
                         ,top: (window.innerHeight - $(img).height()) / 2
                     });
-                });
-
-                //keeps homepage content centered when window resizes
-                $msg.css({
-                    //top: ($home.height() / 2) - ($msg.height() / 2)
-                     left: ($home.width() / 2) - ($msg.width() / 2)
                 });
 
                 if($(window).scrollTop() === 0){
@@ -810,8 +1004,8 @@ $(document).ready(
                     worm.css("-o-filter", "drop-shadow(0 0 8px rgba(255,255,255,1))");
                     worm.css("filter", "drop-shadow(0 0 8px rgba(255,255,255,1))");
                 }
-				//changes value of hidden species input box to this species name
-				$("#speciesBox").attr("value", "Caenorhabditis elegans");
+                //changes value of hidden species input box to this species name
+                $("#speciesBox").attr("value", "Caenorhabditis elegans");
             }
         );
 
@@ -1027,8 +1221,8 @@ $(document).ready(
                     pig.css("-o-filter", "drop-shadow(0 0 8px rgba(255,255,255,1))");
                     pig.css("filter", "drop-shadow(0 0 8px rgba(255,255,255,1))");
                 }
-				//changes value of hidden species input box to this species name
-				$("#speciesBox").attr("value", "Sus domesticus");
+                //changes value of hidden species input box to this species name
+                $("#speciesBox").attr("value", "Sus domesticus");
             }
         );
 
@@ -1059,9 +1253,14 @@ $(document).ready(
         species2.hide();
         leftArrow.click(
             function(){
-                if(currentFour == 2){
+                if(currentFour == 1){
+                    species1.hide("slide", { direction: "left" }, 1000);
+                    species2.delay(85).show("slide", { direction: "right" }, 1000);
+                    currentFour = 2;
+                }
+                else if(currentFour == 2){
                     species2.hide("slide", { direction: "right" }, 1000);
-                    species1.delay(3000).show("slide", { direction: "left" }, 1000);
+                    species1.delay(85).show("slide", { direction: "left" }, 1000);
                     currentFour = 1;
                 }
             }
@@ -1070,15 +1269,18 @@ $(document).ready(
             function(){
                 if(currentFour == 1){
                     species1.hide("slide", { direction: "left" }, 1000);
-                    species2.delay(3000).show("slide", { direction: "right" }, 1000);
+                    species2.delay(85).show("slide", { direction: "right" }, 1000);
                     currentFour = 2;
+                }
+                else if(currentFour == 2){
+                    species2.hide("slide", { direction: "right" }, 1000);
+                    species1.delay(85).show("slide", { direction: "left" }, 1000);
+                    currentFour = 1;
                 }
             }
         );
 
-        //adds gap for IE browser between species icons and "Step 2..."
-        if(isIE)
-            $("#speciesSelectionContainer").css("paddingBottom", "20px");
+
 
 
 
@@ -1120,8 +1322,8 @@ $(document).ready(
                 //then set for this one
                 bySIR.css("font-weight", "bold");
                 searchInput.attr("placeholder", "Enter siRNA sequence here...");
-				//changes value of hidden search type input box to this type
-				$("#searchTypeBox").attr("value", "by siRNA sequence");	
+                //changes value of hidden search type input box to this type
+                $("#searchTypeBox").attr("value", "by siRNA sequence");
             }
         );
 
@@ -1134,9 +1336,9 @@ $(document).ready(
                 //then set for this one
                 byMRNA.css("font-weight", "bold");
                 searchInput.attr("placeholder", "Enter mRNA name here...");
-				
-				//changes value of hidden search type input box to this type
-				$("#searchTypeBox").attr("value", "by MRNA name");				
+
+                //changes value of hidden search type input box to this type
+                $("#searchTypeBox").attr("value", "by MRNA name");
             }
         );
 
@@ -1153,47 +1355,59 @@ $(document).ready(
             function(){
                 $("#searchResults").hide("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: resultsTopOffset - 80});
+                $("#resultGhost").css("display", "none");
             }
         );
-		
-		//returns search result
-		$("#searchGObutton").click(
-			function(){
-				var seq = $("#searchInputText").val();
-				var searchT = $("#searchTypeBox").val();
-				var specVal = $("#speciesBox").val();
-				$.ajax({
-					url: 'ajax/search1/',
-					data: {
-					  'sqn': seq,
-					  'srchTyp': searchT,
-					  'speciesVal': specVal
-					},
-					dataType: 'json',
-					success: function (data) {
-						$("#resultsTable").html(data.sirSpecVal + "<br />" +  data.sirSrchType + "<br />" + data.sirName + "<br />" + data.sirSeq + "<br />" + data.sirSeqR + "<br />" + data.sirStage + "<br />" + data.sirSrc);
-						if(data.pubmedID != null)
-							$("#resultsTable").append("<br />" + data.pubmedID);
-						//only process non-empty result sets
-						if(data.resultSet != null){
-							for(i=0; i <= data.resultSet.length - 1; i++){
-								if(i==0){
-									continue;
-								}
-								$("#resultsTable").append("<br /><br />Result " + i + ":");
-								$("#resultsTable").append("<br />" + data.resultSet[i][0]);
-								$("#resultsTable").append("<br />" + data.resultSet[i][1]);
-								$("#resultsTable").append("<br />" + data.resultSet[i][2]);
-								$("#resultsTable").append("<br />" + data.resultSet[i][3]);
-							}
-						}
-					}
-				});
-				
-				//slides in search result screen after clicking "SEARCH" button
-				$("#searchResults").show("slide", { direction: "right" }, 1000);
+
+        //returns search result
+        $("#searchGObutton").click(
+            function(){
+                var seq = $("#searchInputText").val();
+                var searchT = $("#searchTypeBox").val();
+                var specVal = $("#speciesBox").val();
+                var mismatchVal;
+                if($("#mismatch0").attr("checked") == true)
+                    mismatchVal = 0;
+                else if($("#mismatch1").attr("checked") == true)
+                    mismatchVal = 1;
+                else
+                    mismatchVal = 2;
+                $.ajax({
+                    url: 'ajax/search1/',
+                    data: {
+                        'mmVal': mismatchVal,
+                        'sqn': seq,
+                        'srchTyp': searchT,
+                        'speciesVal': specVal
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#resultsTable").html(data.sirSpecVal + "<br />" +  data.sirSrchType + "<br />" + data.sirName + "<br />" + data.sirSeq + "<br />" + data.sirSeqR + "<br />" + data.sirStage + "<br />" + data.sirSrc);
+                        if(data.pubmedID != null)
+                            $("#resultsTable").append("<br />" + data.pubmedID);
+                        //only process non-empty result sets
+                        if(data.resultSet != null){
+                            for(i=0; i <= data.resultSet.length - 1; i++){
+                                if(i==0){
+                                    continue;
+                                }
+                                $("#resultsTable").append("<br /><br />Result " + i + ":");
+                                $("#resultsTable").append("<br />" + data.resultSet[i][0]);
+                                $("#resultsTable").append("<br />" + data.resultSet[i][1]);
+                                $("#resultsTable").append("<br />" + data.resultSet[i][2]);
+                                $("#resultsTable").append("<br />" + data.resultSet[i][3]);
+                            }
+                        }
+                    }
+                });
+
+                //slides in search result screen after clicking "SEARCH" button
+                $("#searchResults").show("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: resultsTopOffset - 80});
-			}
-		);
+
+                //makes rest of webpage darker
+                $("#resultGhost").css("display", "block");
+            }
+        );
     }
 );

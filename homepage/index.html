@@ -13,120 +13,133 @@
     <div id="header_content">
         <div class="menu">
             <div id="leftMenuButtons">
-                <a href="#homepage" class="menuLinks"><div id="homeMenuButton" class="menuButton"><p id="homeMenuButtonText">HOME</p><div id="mb1UL" class="menuButtonULobject"></div>
+                <a href="#homepage" class="menuLinks" style="padding-left:0px;"><div id="homeMenuButton" class="menuButton" style="padding-left:0px;"><p id="homeMenuButtonText" style="text-align:left;">HOME</p><div id="mb1UL" class="menuButtonULobject"></div>
                 </div></a><a href="#search" class="menuLinks"><div id="searchMenuButton" class="menuButton"><p id="searchMenuButtonText">SEARCH</p><div id="mb2UL" class="menuButtonULobject"></div>
-                </div></a><a href="#downloads" class="menuLinks"><div id="downloadsMenuButton" class="menuButton" style="padding-right:30px"><p id="downloadsMenuButtonText">DOWNLOADS</p><div id="mb3UL" class="menuButtonULobject"></div></div></a>
+            </div></a><a href="#downloads" class="menuLinks"><div id="downloadsMenuButton" class="menuButton" style="padding-right:30px"><p id="downloadsMenuButtonText">DOWNLOADS</p><div id="mb3UL" class="menuButtonULobject"></div></div></a>
             </div>
         </div>
         <a href="#homepage"><img id="logo" src="{% static 'images/logo.png' %}" /></a>
         <div class="menu" id="rightMenu">
             <div id="rightMenuButtons">
-                <a href="#about" class="menuLinks"><div id="aboutMenuButton" class="menuButton" style="padding-left:30px"><p id="aboutMenuButtonText">ABOUT</p><div id="mb4UL" class="menuButtonULobject"></div>
-                </div></a><a href="#background" class="menuLinks"><div id="backgroundMenuButton" class="menuButton"><p id="backgroundMenuButtonText">BACKGROUND</p><div id="mb5UL" class="menuButtonULobject"></div></div></a></div>
+                <a href="#background" class="menuLinks"><div id="backgroundMenuButton" class="menuButton" style="padding-left:30px"><p id="backgroundMenuButtonText">BACKGROUND</p><div id="mb5UL" class="menuButtonULobject"></div>
+                </div></a><a href="#about" class="menuLinks" style="padding-right:0px;"><div id="aboutMenuButton" class="menuButton" style="padding-right:0px;"><p id="aboutMenuButtonText">ABOUT</p><div id="mb4UL" class="menuButtonULobject"></div></div></a></div>
         </div>
     </div>
 </div>
 <div id="headerMini">
-    <a href="#homepage"><img id="logoMini" src="{% static 'images/logo.png' %}" style="display:inline;position:absolute;left:10px;height:60px;"/></a>
-    <div style="display:inline;cursor: default;height:60px;"><div id="miniMenuCurrentSection" title="You are here.">CURRENT-SEC</div></div>
-    <img src="{% static 'images/menuExpand_icon.png' %}" id="menuExpandIcon" style="display:inline;float:right;height:60px;cursor:pointer;" />
+    <div id="headerMiniCenteringDiv">
+        <a href="#homepage"><img id="logoMini" src="{% static 'images/logo.png' %}" style="display:inline;position:absolute;height:60px;padding-left:20px"/></a>
+        <div style="display:inline;cursor: default;height:60px;"><div id="miniMenuCurrentSection" title="You are here.">CURRENT-SEC</div></div>
+        <img src="{% static 'images/menuExpand_icon.png' %}" id="menuExpandIcon" style="display:inline;float:right;height:60px;cursor:pointer;padding-right:15px" />
+    </div>
 </div>
 <div id="header_content_mini">
     <a href="#homepage" class="menuLinksMini" id="homeMenuButtonMini"><div class="menuButtonMini"><p id="homeMenuButtonTextMini">HOME</p><div id="mb1ULMini" class="menuButtonULobjectMini"></div>
     </div></a><a href="#search" class="menuLinksMini" id="searchMenuButtonMini"><div class="menuButtonMini"><p id="searchMenuButtonTextMini">SEARCH</p><div id="mb2ULMini" class="menuButtonULobjectMini"></div>
-    </div></a><a href="#downloads" class="menuLinksMini" id="downloadsMenuButtonMini"><div class="menuButtonMini"><p id="downloadsMenuButtonTextMini">DOWNLOADS</p><div id="mb3ULMini" class="menuButtonULobjectMini"></div>
-    </div></a><a href="#about" class="menuLinksMini" id="aboutMenuButtonMini"><div class="menuButtonMini"><p id="aboutMenuButtonTextMini">ABOUT</p><div id="mb4ULMini" class="menuButtonULobjectMini"></div>
-    </div></a><a href="#background" class="menuLinksMini" id="backgroundMenuButtonMini"><div class="menuButtonMini"><p id="backgroundMenuButtonTextMini">BACKGROUND</p><div id="mb5ULMini" class="menuButtonULobjectMini"></div></div></a>
+</div></a><a href="#downloads" class="menuLinksMini" id="downloadsMenuButtonMini"><div class="menuButtonMini"><p id="downloadsMenuButtonTextMini">DOWNLOADS</p><div id="mb3ULMini" class="menuButtonULobjectMini"></div>
+</div></a><a href="#background" class="menuLinksMini" id="backgroundMenuButtonMini"><div class="menuButtonMini"><p id="backgroundMenuButtonTextMini">BACKGROUND</p><div id="mb5ULMini" class="menuButtonULobjectMini"></div>
+</div></a><a href="#about" class="menuLinksMini" id="aboutMenuButtonMini"><div class="menuButtonMini"><p id="aboutMenuButtonTextMini">ABOUT</p><div id="mb4ULMini" class="menuButtonULobjectMini"></div></div></a>
 </div>
 
 <img id="homepageVid" src="{% static 'images/dna.gif' %}" />
 
 <div id="homepage">
 
-<!--
-  ~~~may have to update src link to youtube video (remember the thing in proj folder to do that)~~
-    <video id="homepageVid" autoplay loop muted>
-        <source src="https://redirector.googlevideo.com/videoplayback?clen=11980479&ei=UHp0WsWwE5u7_APZsq6QCw&ip=2600%3A3c01%3A%3Af03c%3A91ff%3Afe24%3Ab564&initcwndbps=246250&sparams=clen%2Cdur%2Cei%2Cgir%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cexpire&id=o-ALXNp4xwxkRQgT2NcpZKE5OhBrKaQHqGodgTbnUwhi_1&ratebypass=yes&mn=sn-o097znlr%2Csn-n4v7snee&source=youtube&mm=31%2C29&mv=m&mt=1517582841&ms=au%2Crdu&dur=207.725&ipbits=0&itag=18&key=yt6&mime=video%2Fmp4&signature=D45273990301FEEFBEF438E36CB7457C18801627.3FE9065705D8B7A6CC1E588897D107A49B74997B&lmt=1517509679641151&expire=1517604528&gir=yes&fvip=5&pl=64&requiressl=yes"
-                type="video/mp4"/>
-    </video>
--->
+    <!--
+      ~~~may have to update src link to youtube video (remember the thing in proj folder to do that)~~
+        <video id="homepageVid" autoplay loop muted>
+            <source src="{% static '" type="video/mp4"/>
+        </video>
+    -->
 
     <div class="menuDock"></div>
     <div id="homePageContent">
-        <div class="pageSection" style="padding-bottom:5px;padding-top:20px;">
+        <div class="pageSection" style="padding-bottom:5px;padding-top:30px;font-size:14px;">
             <b>psiRbase</b>: putative siRNA (psiRNA)
         </div>
-        <div class="pageSection" style="padding-bottom:15px;">
-			A database and resource for scientists interested in endogenous-small interfering RNA sequences (endo-siRNAs).  
+        <div class="pageSection" style="padding-bottom:20px;">
+            A database and resource for scientists interested in endogenous-small interfering RNA sequences (endo-siRNAs).
         </div>
-		<div class="pageSection" style="padding-bottom:15px;">
-			Available developmental data sets have been collected through literature searches and Gene accession omnibus and removed of annotated small RNAs.   
+        <div class="pageSection">
+            <p>Available developmental data sets have been collected through literature searches and Gene accession omnibus and removed of annotated small RNAs.</p>
         </div>
         <div id="search">
-			<div class="pageSection" style="padding-bottom:15px;">
-				The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
-			</div>
-			<div class="pageSection" style="padding-bottom:10px;">
-				To query, select the species, choose one of the two search options, and type a putative endo-siRNA sequence or the name of the mRNA.
-			</div>
-            <div id="speciesSelectionContainer">
-                <img src="{% static 'images/arrow-left.png' %}" id="speciesLeftArrow" />
-                <div id="speciesSelections">
-                    <div id="speciesSelection1">
-                        <div class="speciesIcon" id="wormIconCont">
-                            <img src="{% static 'images/wormIcon.png' %}" id="wormIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Caenorhabditis<br />elegans</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Roundworm</p>
+            <div class="pageSection" style="padding-top:20px;padding-bottom:20px;">
+                The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
+            </div>
+            <div class="pageSection" style="padding-bottom:20px;">
+                To query, select the species, choose one of the two search options, and type a putative endo-siRNA sequence or the name of the mRNA.
+            </div>
+            <div id="searchTool">
+                <div id="speciesSelectionContainer">
+                    <img src="{% static 'images/arrow-left.png' %}" id="speciesLeftArrow" />
+                    <div id="speciesSelections">
+                        <div id="speciesSelection1">
+                            <div class="speciesIcon" id="wormIconCont" style="padding-left:0px;">
+                                <img src="{% static 'images/wormIcon.png' %}" id="wormIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Caenorhabditis<br />elegans</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Roundworm</p>
+                            </div>
+                            <div class="speciesIcon inDev" id="zebrafishIconCont">
+                                <img src="{% static 'images/zebrafishIcon_inDev.png' %}" id="zebrafishIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Danio<br />rerio</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Zebrafish</p>
+                            </div>
+                            <div class="speciesIcon inDev" id="fruitflyIconCont">
+                                <img src="{% static 'images/fruitflyIcon_inDev.png' %}" id="fruitflyIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Drosophila<br />melanogaster</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Fruit Fly</p>
+                            </div>
+                            <div class="speciesIcon inDev" id="chickenIconCont" style="padding-right:0px;">
+                                <img src="{% static 'images/chickenIcon_inDev.png' %}" id="chickenIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Gallus<br />gallus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Chicken</p>
+                            </div>
                         </div>
-                        <div class="speciesIcon inDev" id="zebrafishIconCont">
-                            <img src="{% static 'images/zebrafishIcon_inDev.png' %}" id="zebrafishIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Danio<br />rerio</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Zebrafish</p>
-                        </div>
-                        <div class="speciesIcon inDev" id="fruitflyIconCont">
-                            <img src="{% static 'images/fruitflyIcon_inDev.png' %}" id="fruitflyIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Drosophila<br />melanogaster</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Fruit Fly</p>
-                        </div>
-                        <div class="speciesIcon inDev" id="chickenIconCont">
-                            <img src="{% static 'images/chickenIcon_inDev.png' %}" id="chickenIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Gallus<br />gallus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Chicken</p>
+                        <div id="speciesSelection2">
+                            <div class="speciesIcon inDev" id="humanIconCont" style="padding-left:0px;">
+                                <img src="{% static 'images/humanIcon_inDev.png' %}" id="humanIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Homo<br />sapiens</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Human</p>
+                            </div>
+                            <div class="speciesIcon inDev" id="mouseIconCont">
+                                <img src="{% static 'images/mouseIcon_inDev.png' %}" id="mouseIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Mus<br />musculus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Mouse</p>
+                            </div>
+                            <div class="speciesIcon inDev" id="seaUrchinIconCont">
+                                <img src="{% static 'images/seaUrchin_inDev.png' %}" id="seaUrchinIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Paracentrotus<br />lividus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Sea Urchin</p>
+                            </div>
+                            <div class="speciesIcon" id="pigIconCont" style="margin-bottom:0px;padding-right:0px">
+                                <img src="{% static 'images/pigIcon.png' %}" id="pigIcon" class="speciesImg" />
+                                <p style="padding-bottom:0px;margin-bottom:0px;"><i>Sus<br />domesticus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Pig</p>
+                            </div>
                         </div>
                     </div>
-                    <div id="speciesSelection2">
-                        <div class="speciesIcon inDev" id="humanIconCont">
-                            <img src="{% static 'images/humanIcon_inDev.png' %}" id="humanIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Homo<br />sapiens</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Human</p>
-                        </div>
-                        <div class="speciesIcon inDev" id="mouseIconCont">
-                            <img src="{% static 'images/mouseIcon_inDev.png' %}" id="mouseIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Mus<br />musculus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Mouse</p>
-                        </div>
-                        <div class="speciesIcon inDev" id="seaUrchinIconCont">
-                            <img src="{% static 'images/seaUrchin_inDev.png' %}" id="seaUrchinIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Paracentrotus<br />lividus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Sea Urchin</p>
-                        </div>
-                        <div class="speciesIcon" id="pigIconCont" style="margin-bottom:0px;">
-                            <img src="{% static 'images/pigIcon.png' %}" id="pigIcon" class="speciesImg" />
-                            <p style="padding-bottom:0px;margin-bottom:0px;"><i>Sus<br />domesticus</i></p><p style="padding-top:0px;margin-top:0px;font-size:10px">Pig</p>
-                        </div>
+                    <img src="{% static 'images/arrow-right.png' %}" id="speciesRightArrow" />
+                    <div class="searchType" id="bySirnaSeq" style="top:15px;">
+                        Type in siRNA sequence to find potential targets.
+                    </div>
+                    <div class="searchType" id="byMrnaName" style="top: 85px;">
+                        Type in mRNA name to identify antisense siRNAs.
                     </div>
                 </div>
-                <img src="{% static 'images/arrow-right.png' %}" id="speciesRightArrow" />
+                <div id="searchForm" style="width:944px;margin:0 auto;display:block;margin-top:20px;background:white;">
+                    <form style="display:inline;font-size:18px;height:40px;"><!--
+                --><input id="searchInputText" type="text" placeholder="Choose search option first..." autocomplete="off" /><!--
+                --><label id="mismatchesLabel" style="cursor:default;display:inline;color:purple;padding-left:5px;">Mismatches Allowed: </label><!--
+                --><div id="mismatchBox" style="display:inline;min-width:20px;"><!--
+                    --><input type="radio" id="mismatch0" value="0" name="mismatches" autocomplete="off" checked /><!--
+                    --><label id="mismatch0Label" style="cursor:default;padding-right:10px;padding-left:3px;display:inline;color:purple;" >0</label><!--
+                    --><input type="radio" id="mismatch1" value="1" name="mismatches" autocomplete="off" /><!--
+                    --><label id="mismatch1Label" style="cursor:default;padding-right:10px;padding-left:3px;display:inline;color:purple;" >1</label><!--
+                    --><input type="radio" id="mismatch2" value="2" name="mismatches" autocomplete="off" /><!--
+                    --><label id="mismatch2Label" style="cursor:default;padding-right:10px;padding-left:3px;display:inline;color:purple;" >2</label><!--
+                --></div><!--
+                --></form><input type="submit" value="SEARCH" id="searchGObutton" />
+                    <input type="hidden" id="speciesBox" value="no species selected" />
+                    <input type="hidden" id="searchTypeBox" value="no search type selected" />
+                </div>
             </div>
-			<div style="margin-left:auto;margin-right:auto;position:relative;width:auto;min-width:100px;height:auto;min-height:40px;">
-				<div class="searchType" id="bySirnaSeq" style="margin-right:20px;">
-					Type in siRNA sequence<br />to find potential targets.
-				</div>
-				<div class="searchType" id="byMrnaName">
-					Type in mRNA name<br />to identify antisense siRNAs.
-				</div>
-			</div>
-			<form action="" method="post">
-				{% csrf_token %}
-				{{ theForm }}
-			</form>
-			<input type="submit" value="SEARCH" id="searchGObutton" />
         </div>
     </div>
 </div>
+<div id="resultGhost"></div>
 <div id="searchResults">
     <div class="pageSection" style="padding-top:40px;word-wrap:break-word;" id="resultsTable">
         Here is where the retrieved data will show...
@@ -136,84 +149,128 @@
     </div>
 </div>
 
-<div id="downloads"><div id="downloadsPageContent"><div class="pageSection">(bulk download stuff goes here...)</div></div></div> 
-
-
-<div id="about">
-    <!-- 
-	<img id="aboutPageBG" src="images/dna_static_background.jpg" /> 
-	-->
-    <div id="aboutPageContent">
-		<div class="darkHPsection" style="font-size:14px">
-			miRNA, piRNA, and endogenous-small interfering RNAs (endo-siRNAs) are approximately 18-32 nucleotides long and play an important role in gene regulation.  While miRNA and piRNA are highly conserved across species and well annotated,  endo-siRNAs are challenging to identify because they are not well conserved.<br />
-			Small RNA libraries across various developmental stages have been collected and aligned to genomes.  Mapped reads have been  further processed to remove known rRNA, tRNA, miRNA, and piRNA sequences.  The remaining putative endo-siRNAs have been annotated, given unique identifiers, and characterized by developmental stage.  Currently, only wild-type small RNA libraries are included.
-		</div><br/>
-		<div class="lightHPsection">
-			At present, psiRBase contains endo-siRNA sequences from four Species: <br />
-			&#8226 Caenorhabdits elegans (ce11) <br />
-			&#8226 Drosophila melanogaster (dm6) <br />
-			&#8226 Danio rerio (danRer10) <br />
-			&#8226 Mus Musculus (mm10) <br />
-			<b>More species will be added soon, please stay tuned!!!!</b>
-		</div><br />
-		<div class="darkHPsection">
-			<b> Fasta sequences from acquired datasets were first aligned to the indicated
-				genome build using bowtie -v 1 -a --best --strata parameters to get exact genome coordinates. Any fafsta sequences that also mapped to
-			a custom small RNA reference including annotated rRNA, tRNA, miRNA, and piRNA were excluded from the results.
-				<br />Custom RNA reference made using rRNA sequences from https://genome.ucsc.edu/cgi-bin/hgTables, miRNA sequences from http://www.targetscan.org/vert_71/, piRNA sequences from http://regulatoryrna.org/database/piRNA/download.html,
-				and tRNA sequences from http://gtrnadb.ucsc.edu/.</b>
-		</div><br/>
-		<div class="lightHPsection">
-			psiRbase was created and is managed by Kelly Daescu in the Michael Zhang lab at the University of Texas at Dallas (UTD) <br />
-				<b>Collaborators Include:</b><br />
-				&#8226 Zhenyu Xuan (UTD) <br />
-				&#8226 Scott Robertson(UTSW) <br />
-				&#8226 Rueyling Lin (UTSW) <br />
-				&#8226 Michael Zhang (UTD)
-		</div><br/>
-		<div class="darkHPsection">
-			The Computer Science Department at UTD and their senior design group led by Dr.Ovidiu Daescu created the website and database.<br />
-			<b>Senior Design Group:</b><br />
-				&#8226 Aravind Ashok <br />
-				&#8226 Jamal Whitehead <br />
-				&#8226 Naveed Haque <br />
-				&#8226 Sandeep Shahi Thakuri <br />
-				&#8226 Saivamshi Pasinkanti
-		</div><br />
-		<div class="lightHPsection">
-			For questions or comments, email <u>kellydaescu@utdallas.edu</u> or use the form below:
-		</div>
-		<div id="after_submit"></div>
-		<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
-			<div class="row">
-				<label class="required" for="name">Your name:</label><br />
-				<input id="name" class="input" name="name" type="text" value="" size="30" /><br />
-				<span id="name_validation" class="error_message"></span>
-			</div>
-			<div class="row">
-				<label class="required" for="email">Your email:</label><br />
-				<input id="email" class="input" name="email" type="text" value="" size="30" /><br />
-				<span id="email_validation" class="error_message"></span>
-			</div>
-			<div class="row">
-				<label class="required" for="message">Your message:</label><br />
-				<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
-				<span id="message_validation" class="error_message"></span>
-			</div>
-
-			<input id="submit_button" type="submit" value="Send email"  style="color:black;" />
-		</form>
+<div id="downloads">
+    <div id="downloadsPageContent">
+        <div class="pageSection" style="font-size:14px;font-weight:bold;margin-bottom:10px;">
+            Downloads
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            Bulk files available for download will go here...
+        </div>
     </div>
 </div>
 
 <div id="background" style="padding-top:20px;">
-	<div id="backgroundPageContent">
-		<div class="pageSection">(background stuff goes here...)</div>
-	</div>
-</div> 
+    <div id="backgroundPageContent">
+        <div class="pageSection" style="font-size:14px;font-weight:bold;margin-bottom:10px;">
+            Background
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            miRNA, piRNA, and endo-siRNAs are generally 18-32
+             nucleotide sequences that play an important role
+             in gene regulation.
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            While miRNA and piRNA are highly
+            conserved across species and well annotated, endo-siRNAs
+            are challenging to identify because they are not well conserved.
+        </div>
+    </div>
+</div>
+<div id="about">
+    <!--
+	<img id="aboutPageBG" src="{% static 'images/dna_static_background.jpg" />
+	-->
+    <div id="aboutPageContent">
+        <div class="pageSection" style="font-size:14px;font-weight:bold;margin-bottom:10px;">
+            About psiRbase
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            To identify putative endo-siRNAs, sequences and small RNA libraries were collected and rigorously processed using the following procedure.
+        </div>
+        <div class="pageSection" style="margin-bottom:5px;">
+            Sequences were aligned to genomes using bowtie allowing one mismatch (-v 1 -a --best --strata parameters).
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            Sequences were then aligned to a custom RNA reference to exclude currently annotated rRNA, tRNA, miRNA and piRNA sequences.
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            Information for the custom RNA references were found using the following resources:
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;word-wrap:break-word;">
+            &#8226  &nbsp&nbsp UCSC: http://genome.ucsc.edu/cgi-bin/hgTables<br />
+            &#8226  &nbsp&nbsp GrTNAdb: http://gtrnadb.ucsc.edu/<br />
+            &#8226  &nbsp&nbsp Targetscan: http://www.targetscan.org/<br />
+            &#8226  &nbsp&nbsp miRBase:http://www.mirbase.org/ftp.shtml<br />
+            &#8226  &nbsp&nbsp piRbase: http://regulatoryrna.org/database/piRNA/download.html<br />
+            &#8226  &nbsp&nbsp microRNA: http://www.microrna.org/microrna/home.do<br />
+            &#8226  &nbsp&nbsp mirDB: http://mirdb.org/miRDB/<br />
+            &#8226  &nbsp&nbsp miRTar: http://mirtar.mbc.nctu.edu.tw/human/download.php<br />
+            &#8226  &nbsp&nbsp PITA Catalog: https://genie.weizmann.ac.il/pubs/mir07/mir07_data.html<br />
+            &#8226  &nbsp&nbsp piRNA Bank: http://pirnabank.ibab.ac.in/request.html
+        </div>
+        <div class="pageSection" style="margin-bottom:5px;">
+            Unmappable RNA reference sequences were then aligned to transcriptomes to identify exclusively antisense-siRNAs using same bowtie parameters.
+        </div>
+        <div class="pageSection">
+            Only sequences with four or fewer alignments were considered "putative endo-siRNA".
+        </div>
+        <div class="pageSection" style="font-size:14px;font-weight:bold;margin-top:30px;margin-bottom:10px;">
+            Contact
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            For questions or comments, email Kelly Daescu at <u>kellydaescu@utdallas.edu</u> or use the form below:
+        </div>
+        <div id="after_submit"></div>
+        <div id="contactForm" style="width:944px;text-align:left;margin:0 auto;">
+            <form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <label class="required" for="name">Your name:</label><br />
+                    <input id="name" class="input" name="name" type="text" value="" style="width:100%;" /><br />
+                    <span id="name_validation" class="error_message"></span>
+                </div>
+                <div class="row" style="margin-top:5px;">
+                    <label class="required" for="email">Your email:</label><br />
+                    <input id="email" class="input" name="email" type="text" value="" style="width:100%;" /><br />
+                    <span id="email_validation" class="error_message"></span>
+                </div>
+                <div class="row" style="margin-top:5px;">
+                    <label class="required" for="message">Your message:</label><br />
+                    <textarea id="message" class="input" name="message" rows="7" style="width:100%;"></textarea><br />
+                    <span id="message_validation" class="error_message"></span>
+                </div>
+                <input id="submit_button" type="submit" value="Send email" style="color:black;padding:5px;margin-top:5px;float:right;" />
+            </form>
+        </div>
+        <div class="pageSection" style="font-size:14px;font-weight:bold;margin-bottom:10px;margin-top:30px;">
+            Acknowledgments
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            endo-siRNA research, library construction, and analysis:
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            Michael Q Zhang Lab
+        </div>
+        <div class="pageSection" style="margin-bottom:10px;">
+            Contributors: Kelly Daescu &#8226 Zhenyu Xuan &#8226 Scott Robertson &#8226 Rueyling Lin
+        </div>
+        <div class="pageSection" style="margin-bottom:30px;">
+            psiRbase is copyrighted &#169 2018 The University of Texas at Dallas.
+        </div>
+        <div class="pageSection" style="font-size:14px;font-weight:bold;margin-bottom:10px;">
+            Database and Website Construction
+        </div>
+        <div class="pageSection" style="margin-bottom:5px;">
+            Created by the Ovidiu Daescu Lab
+        </div>
+        <div class="pageSection" style="margin-bottom:5px;">
+            Team Members: Ashok, Aravaind  &#8226  Haque, Naveed  &#8226  Pasinkanti, Saivamshi  &#8226  Shahi, Sandeep  &#8226  Whitehead, Jamal
+        </div>
+    </div>
+</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="{% static 'myJavaScript.js' %}" type="text/javascript"></script>
 </body>
 </html>

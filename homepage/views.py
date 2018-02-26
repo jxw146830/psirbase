@@ -27,23 +27,24 @@ def search1(request):
     theSpecVal = request.GET.get('speciesVal', None)
     theSrchTyp = request.GET.get('srchTyp', None)
     theSeq = request.GET.get('sqn', None)
+    theMismatchCount = request.GET.get('mmVal', None)
     data = ''
     if theSpecVal == 'Caenorhabditis elegans':
         try:
             resultSet = CelegansSirna.objects.get(sequence=theSeq)
             theSource = CelegansSource.objects.get(id=resultSet.source_id)
-            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource)
+            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount)
             #data = yesResults('', theSpecVal, theSrchTyp, '')
         except ObjectDoesNotExist:
-            data = noResults(theSpecVal, theSrchTyp, theSeq)
+            data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
         
     elif theSpecVal == 'Sus domesticus':
         try:
             resultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
             theSource = SusDomesticusSource.objects.get(id=resultSet.source_id)
-            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource) 
+            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount) 
         except ObjectDoesNotExist:
-            data = noResults(theSpecVal, theSrchTyp, theSeq)
+            data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
     else:
         data = {
             "sirSpecVal": theSpecVal,
@@ -56,12 +57,13 @@ def search1(request):
         }
     return JsonResponse(data)
 
-def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
+def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     
     if theSpecVal != 'Caenorhabditis elegans':
         data = {
             "sirSpecVal": theSpecVal,
             "sirSrchType": theSrchTyp,
+            "mismatchesAllowed": theMismatchCount,
             "sirName": resultSet.name,
             "sirSeq": resultSet.sequence,
             "sirSeqR": '',
@@ -101,65 +103,65 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
     
     while True:
         #get name of current mRNA
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while charRead != ' ':
             mrnaName.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         mrnaName = ''.join(mrnaName)
 
         #skip stuff until chromosome number reached
         while charRead != ':':
-            charRead = myFile.read(1).decode('utf-8')
-        charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
+        charRead = myFile.read(1)
         while charRead != ':':
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
 
         #get chromosome number of current mRNA
         chrNum = ['']
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while charRead != ':':
             chrNum.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         chrNum = ''.join(chrNum)
 
         #get start position of current mRNA relative to the chromosome containing it
         mrnaStart = ['']
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while charRead != ':':
             mrnaStart.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         mrnaStart = ''.join(mrnaStart)
         mrnaStart = int(mrnaStart)
             
         #get end position of current mRNA relative to the chromosome containing it
         mrnaEnd = ['']
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while charRead != ':':
             mrnaEnd.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         mrnaEnd = ''.join(mrnaEnd)
         mrnaEnd = int(mrnaEnd)
 
         #skip stuff until beginning of mRNA sequence reached (a newline char)
         while charRead != '\n':
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while True:
             if charRead == '':
                 break
             if charRead == '>':
                 break
             if charRead == '\n':
-                charRead = myFile.read(1).decode('utf-8')
+                charRead = myFile.read(1)
                 continue
             if charRead == '\r':
-                charRead = myFile.read(1).decode('utf-8')
+                charRead = myFile.read(1)
                 continue
             mrnaSeq.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         mrnaSeq = ''.join(mrnaSeq)
 
         #get current mRNA length
@@ -192,6 +194,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
     data = {
         "sirSpecVal": theSpecVal,
         "sirSrchType": theSrchTyp,
+        "mismatchesAllowed": theMismatchCount,
         "sirName": resultSet.name,
         "sirSeq": resultSet.sequence,
         "sirSeqR": sirnaSeq,
@@ -203,12 +206,14 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource):
     return data
 
 
-def noResults(theSpecVal, theSrchTyp, theSeq):
+def noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount):
     data = {
         "sirSpecVal": theSpecVal,
         "sirSrchType": theSrchTyp,
+        "mismatchesAllowed": theMismatchCount,
         "sirName": "",
         "sirSeq": theSeq,
+        "sirSeqR": "",
         "sirStage": "No such sirna sequence exists.",
         "sirSrc": "",
         "pubmedID": "",
