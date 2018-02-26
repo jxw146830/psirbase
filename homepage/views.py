@@ -186,6 +186,8 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         '''
         
         KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
+
+        break
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
         mrnaName = ['']
