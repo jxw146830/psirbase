@@ -174,7 +174,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mLength = mrnaEnd - mrnaStart + 1
         
         # # # # # # # # BEGIN MATCHING ALGO # # # # # # #
-        '''
+        
         if sLength <= mLength:
             offset = 0
             maxOffset = mLength - sLength
@@ -186,9 +186,9 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
                     newRow = (mrnaName, chrNum, sirnaStart, sirnaEnd)
                     rowList.append(newRow)
                 offset += 1
-        '''
         
-        KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
+        
+        #KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
         mrnaName = ['']
@@ -198,7 +198,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
             break
 
     data = {
-        "sirSpecVal": mrnaSeq,
+        "sirSpecVal": theSpecVal,
         "sirSrchType": theSrchTyp,
         "mismatchesAllowed": theMismatchCount,
         "sirName": resultSet.name,
