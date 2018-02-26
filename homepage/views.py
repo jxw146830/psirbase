@@ -74,7 +74,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         }
         return data
 
-    myFile = urllib.request.urlopen("https://gdurl.com/ZMAl")
+    myFile = urlopen("https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-005235178065/cdna+files/cElegans.txt")
 
     charRead = myFile.read(1)
     data = {
