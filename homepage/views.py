@@ -75,21 +75,6 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         return data
 
     myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
-
-    charRead = myFile.read(1).decode('utf-8')
-    data = {
-        "sirSpecVal": theSpecVal,
-        "sirSrchType": theSrchTyp,
-        "mismatchesAllowed": theMismatchCount,
-        "sirName": resultSet.name,
-        "sirSeq": resultSet.sequence,
-        "sirSeqR": charRead,
-        "sirStage": resultSet.stage,
-        "sirSrc": theSource.author,
-        "pubmedID": theSource.pubmed_id,
-        "resultSet": '',
-    }
-    return data
     
     rowList = ['']
     mrnaName = ['']
@@ -119,65 +104,63 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     
     while True:
         #get name of current mRNA
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ' ':
             mrnaName.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaName = ''.join(mrnaName)
 
         #skip stuff until chromosome number reached
         while charRead != ':':
-            charRead = myFile.read(1)
-        charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
 
         #get chromosome number of current mRNA
         chrNum = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
             chrNum.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         chrNum = ''.join(chrNum)
 
         #get start position of current mRNA relative to the chromosome containing it
         mrnaStart = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
             mrnaStart.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaStart = ''.join(mrnaStart)
         mrnaStart = int(mrnaStart)
             
         #get end position of current mRNA relative to the chromosome containing it
         mrnaEnd = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while charRead != ':':
             mrnaEnd.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaEnd = ''.join(mrnaEnd)
         mrnaEnd = int(mrnaEnd)
 
         #skip stuff until beginning of mRNA sequence reached (a newline char)
-        while charRead != '\n':
-            charRead = myFile.read(1)
+        while charRead == ' ' or charRead.isalnum():
+            charRead = myFile.read(1).decode('utf-8')
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while True:
-            if charRead == '':
+            #if EOF reached...
+            if charRead == 03 or charRead == 04 or charRead == 00:
                 break
             if charRead == '>':
                 break
-            if charRead == '\n':
-                charRead = myFile.read(1)
-                continue
-            if charRead == '\r':
-                charRead = myFile.read(1)
+            if !charRead.isalnum():
+                charRead = myFile.read(1).decode('utf-8')
                 continue
             mrnaSeq.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaSeq = ''.join(mrnaSeq)
 
         #get current mRNA length
@@ -204,7 +187,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaName = ['']
         mrnaName.append('>')
 
-        if charRead == '':
+        if charRead == 03 or charRead == 04 or charRead == 0:
             break
 
     data = {

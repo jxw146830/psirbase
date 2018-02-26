@@ -1385,7 +1385,7 @@ $(document).ready(
                     success: function (data) {
                         $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
                         if(data.pubmedID != null)
-                            $("#resultsTable").append("<br />" + data.pubmedID);
+                            $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
                         //only process non-empty result sets
                         if(data.resultSet != null){
                             for(i=0; i <= data.resultSet.length - 1; i++){
