@@ -75,7 +75,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         }
         return data
 
-    myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
+    myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegansShorter.txt")
 
     sirnaSeq = resultSet.sequence
 
@@ -103,16 +103,8 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     mrnaName = ['']
     rowList = ['']
     eofReached = 1
-
-    count = 0
     
     while True:
-        
-        count = count + 1
-
-        if count == 1000:
-            break
-        
         #get name of current mRNA
         charRead = myFile.read(1).decode('utf-8')
         while charRead != ' ':
@@ -160,22 +152,19 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
-        charRead = myFile.read(1)
+        charRead = myFile.read(1).decode('utf-8')
         while True:
             #if EOF reached...
-            '''
             if not charRead or charRead < 0 or charRead == 0x03 or charRead == 0x04:
                 eofReached = 2
                 break
-            '''
-            charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
             if charRead.isalnum() == False:
-                charRead = myFile.read(1)
+                charRead = myFile.read(1).decode('utf-8')
                 continue
             mrnaSeq.append(charRead)
-            charRead = myFile.read(1)
+            charRead = myFile.read(1).decode('utf-8')
         mrnaSeq = ''.join(mrnaSeq)
 
         #get current mRNA length
