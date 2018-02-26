@@ -1353,7 +1353,7 @@ $(document).ready(
         //slides out search result screen after clicking "RETURN" button
         $("#returnGObutton").click(
             function(){
-				$("#resultsTable").html("<img src=\"{% static \'images/loading.gif\' %}\" style=\"width:200px;height200px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take up to 5 minutes.</div>");
+				$("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:200px;height200px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take up to 5 minutes.</div>");
                 $("#searchResults").hide("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: resultsTopOffset - 80});
                 $("#resultGhost").css("display", "none");
