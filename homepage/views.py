@@ -59,7 +59,7 @@ def search1(request):
 
 def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     
-    if theSpecVal != 'Caenorhabditis elegansjjjjjjj':
+    if theSpecVal != 'Caenorhabditis elegans':
         data = {
             "sirSpecVal": theSpecVal,
             "sirSrchType": theSrchTyp,
@@ -75,6 +75,22 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         return data
 
     myFile = urllib.request.urlopen("https://gdurl.com/ZMAl")
+
+    charRead = myFile.read(1)
+    data = {
+        "sirSpecVal": theSpecVal,
+        "sirSrchType": theSrchTyp,
+        "mismatchesAllowed": theMismatchCount,
+        "sirName": resultSet.name,
+        "sirSeq": resultSet.sequence,
+        "sirSeqR": charRead,
+        "sirStage": resultSet.stage,
+        "sirSrc": theSource.author,
+        "pubmedID": theSource.pubmed_id,
+        "resultSet": '',
+    }
+    return data
+    
     rowList = ['']
     mrnaName = ['']
 
