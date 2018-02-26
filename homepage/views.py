@@ -148,6 +148,20 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         while charRead == ' ' or charRead.isalnum():
             charRead = myFile.read(1).decode('utf-8')
 
+        data = {
+            "sirSpecVal": theSpecVal,
+            "sirSrchType": theSrchTyp,
+            "mismatchesAllowed": theMismatchCount,
+            "sirName": resultSet.name,
+            "sirSeq": resultSet.sequence,
+            "sirSeqR": sirnaSeq,
+            "sirStage": resultSet.stage,
+            "sirSrc": theSource.author,
+            "pubmedID": mrnaEnd,
+            "resultSet": '',
+        }
+        return data
+
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
         charRead = myFile.read(1)
