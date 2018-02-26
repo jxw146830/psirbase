@@ -103,8 +103,16 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     mrnaName = ['']
     rowList = ['']
     eofReached = 1
+
+    count = 0
     
     while True:
+        
+        count = count + 1
+
+        if count == 100:
+            break
+        
         #get name of current mRNA
         charRead = myFile.read(1).decode('utf-8')
         while charRead != ' ':
@@ -155,9 +163,11 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         charRead = myFile.read(1)
         while True:
             #if EOF reached...
+            '''
             if not charRead or charRead < 0 or charRead == 0x03 or charRead == 0x04:
                 eofReached = 2
                 break
+            '''
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
