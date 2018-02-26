@@ -1383,7 +1383,7 @@ $(document).ready(
                     },
                     dataType: 'json',
                     success: function (data) {
-                        $("#resultsTable").html(data.sirSpecVal + "<br />" +  data.sirSrchType + "<br />" + data.sirName + "<br />" + data.sirSeq + "<br />" + data.sirSeqR + "<br />" + data.sirStage + "<br />" + data.sirSrc);
+                        $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
                         if(data.pubmedID != null)
                             $("#resultsTable").append("<br />" + data.pubmedID);
                         //only process non-empty result sets
