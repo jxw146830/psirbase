@@ -78,6 +78,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     
     rowList = ['']
     mrnaName = ['']
+    eofReached = 1
 
     sirnaSeq = resultSet.sequence
 
@@ -149,18 +150,20 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
 
         #get mRNA sequence of current mRNA
         mrnaSeq = ['']
-        charRead = myFile.read(1).decode('utf-8')
+        charRead = myFile.read(1)
         while True:
             #if EOF reached...
             if charRead < 0 or charRead == 0x03 or charRead == 0x04 or charRead == 0x00:
+                eofReached = 2
                 break
+            charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
             if charRead.isalnum() == False:
                 charRead = myFile.read(1).decode('utf-8')
                 continue
             mrnaSeq.append(charRead)
-            charRead = myFile.read(1).decode('utf-8')
+            charRead = myFile.read(1)
         mrnaSeq = ''.join(mrnaSeq)
 
         #get current mRNA length
@@ -187,7 +190,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mrnaName = ['']
         mrnaName.append('>')
 
-        if charRead < 0 or charRead == 0x03 or charRead == 0x04 or charRead == 0x00:
+        if eofReached == 2:
             break
 
     data = {
