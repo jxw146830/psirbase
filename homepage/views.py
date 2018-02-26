@@ -154,14 +154,14 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         charRead = myFile.read(1)
         while True:
             #if EOF reached...
-            if charRead < 0:
+            if charRead < 0 or not charRead:
                 eofReached = 2
                 break
             charRead = charRead.decode('utf-8')
             if charRead == '>':
                 break
             if charRead.isalnum() == False:
-                charRead = myFile.read(1).decode('utf-8')
+                charRead = myFile.read(1)
                 continue
             mrnaSeq.append(charRead)
             charRead = myFile.read(1)
