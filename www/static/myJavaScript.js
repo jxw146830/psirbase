@@ -1405,5 +1405,14 @@ $(document).ready(
                 $("#resultGhost").css("display", "block");
             }
         );
+		
+		//slides results screen away when the resultGhost is clicked
+		$("#resultGhost").click(
+            function(){
+                $("#searchResults").hide("slide", { direction: "right" }, 1000);
+                $('body, html').animate({scrollTop: 0});
+                $("#resultGhost").css("display", "none");
+            }
+        );
     }
 );
