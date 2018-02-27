@@ -712,8 +712,6 @@ $(document).ready(
                 $downloadsPageOffset = $('#downloads').offset().top;
                 $aboutPageOffset = $('#about').offset().top;
                 $backgroundPageOffset = $('#background').offset().top;
-                resultsTopOffset = $searchPageOffset;
-                $("#searchResults").css("top", resultsTopOffset);
             }
         );
 
@@ -1345,16 +1343,12 @@ $(document).ready(
         //makes sure search text input field is empty when reloading page
         searchInput.val("");
 
-        //calculates offset from top of page for beginning of search results section
-        var resultsTopOffset = $("#search").offset().top;
-        $("#searchResults").css("top", resultsTopOffset);
-
 
         //slides out search result screen after clicking "RETURN" button
         $("#returnGObutton").click(
             function(){
                 $("#searchResults").hide("slide", { direction: "right" }, 1000);
-                $('body, html').animate({scrollTop: resultsTopOffset - 80});
+                $('body, html').animate({scrollTop: 0});
                 $("#resultGhost").css("display", "none");
             }
         );
@@ -1405,7 +1399,7 @@ $(document).ready(
 				
                 //slides in search result screen after clicking "SEARCH" button
                 $("#searchResults").show("slide", { direction: "right" }, 1000);
-                $('body, html').animate({scrollTop: resultsTopOffset - 80});
+                $('body, html').animate({scrollTop: 0});
 
                 //makes rest of webpage darker
                 $("#resultGhost").css("display", "block");
