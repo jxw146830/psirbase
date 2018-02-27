@@ -1378,11 +1378,19 @@ $(document).ready(
                     },
                     dataType: 'json',
                     success: function (data) {
-                        $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
-                        if(data.pubmedID != null)
-                            $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
+						//if species not available yet
+						if(data.sirSpecVal == "NOT READY"){
+							$("#resultsTable").html("Data for this species is not available yet.");
+						}
+						//if sirna sequence doesn't exist for the species
+						else if(data.sirStage == "EXISTS NOT"){
+							$("#resultsTable").html("The siRNA sequence " + data.sirSeq + " does not exist for " + data.sirSpecVal);
+						}
                         //only process non-empty result sets
-                        if(data.resultSet != null){
+                        else if(data.resultSet != null){
+							$("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
+							if(data.pubmedID != null)
+								$("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
                             for(i=0; i <= data.resultSet.length - 1; i++){
                                 if(i==0){
                                     continue;
@@ -1394,6 +1402,9 @@ $(document).ready(
                                 $("#resultsTable").append("<br />End position: " + data.resultSet[i][3]);
                             }
                         }
+						else {
+							$("#resultsTable").html("The siRNA sequence " + data.sirSeq + " exists for " + data.sirSpecVal + " but no match was found.");
+						}
                     }
                 });
 				

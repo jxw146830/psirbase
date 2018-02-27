@@ -39,6 +39,7 @@ def search1(request):
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
         
+    '''
     elif theSpecVal == 'Sus domesticus':
         try:
             resultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
@@ -46,12 +47,15 @@ def search1(request):
             data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount) 
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
+    '''
+    
     else:
         data = {
-            "sirSpecVal": theSpecVal,
-            "sirSrchType": theSrchTyp,
+            "sirSpecVal": "NOT READY",
+            "sirSrchType": "",
             "sirName": "",
-            "sirSeq": "Data not available for this species yet...",
+            "sirSeq": "",
+            "sirSeqR", "",
             "sirStage": "",
             "sirSrc": "",
             "pubmedID": "",
@@ -220,7 +224,7 @@ def noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount):
         "sirName": "",
         "sirSeq": theSeq,
         "sirSeqR": "",
-        "sirStage": "No such sirna sequence exists.",
+        "sirStage": "EXISTS NOT",
         "sirSrc": "",
         "pubmedID": "",
     }
