@@ -495,9 +495,13 @@ body {
 }
 
 .aboutLinks:hover {
-	color: yellow;
+	color: Chartreuse;
 }
 
 .aboutLinks:visited {
 	color: white;
+}
+
+.aboutLinks:visited:hover {
+	color: Chartreuse;
 }
