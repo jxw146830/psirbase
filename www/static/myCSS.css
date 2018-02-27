@@ -490,3 +490,14 @@ body {
     padding-right: 20px;
 }
 
+.aboutLinks {
+	color: white;
+}
+
+.aboutLinks:hover {
+	color: yellow;
+}
+
+.aboutLinks:visited {
+	color: white;
+}
