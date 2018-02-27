@@ -1387,7 +1387,7 @@ $(document).ready(
 							$("#resultsTable").html("The siRNA sequence " + data.sirSeq + " does not exist for " + data.sirSpecVal);
 						}
                         //only process non-empty result sets
-                        else if(data.resultSet != null){
+                        else if(data.matchExists == 2){
 							$("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
 							if(data.pubmedID != null)
 								$("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
@@ -1404,6 +1404,7 @@ $(document).ready(
                         }
 						else {
 							$("#resultsTable").html("The siRNA sequence " + data.sirSeq + " exists for " + data.sirSpecVal + " but no match was found.");
+							$("#resultsTable").append("<br /><br />Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
 						}
                     }
                 });

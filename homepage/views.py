@@ -60,24 +60,10 @@ def search1(request):
             "sirSrc": "",
             "pubmedID": "",
         }
+        
     return JsonResponse(data)
 
 def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
-    
-    if theSpecVal != 'Caenorhabditis elegans':
-        data = {
-            "sirSpecVal": theSpecVal,
-            "sirSrchType": theSrchTyp,
-            "mismatchesAllowed": theMismatchCount,
-            "sirName": resultSet.name,
-            "sirSeq": resultSet.sequence,
-            "sirSeqR": '',
-            "sirStage": resultSet.stage,
-            "sirSrc": theSource.author,
-            "pubmedID": theSource.pubmed_id,
-            "resultSet": '',
-        }
-        return data
 
     myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
 
@@ -107,6 +93,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
     mrnaName = ['']
     rowList = ['']
     eofReached = 1
+    matchFound = 1
 
     mrnaSeq = ['']
     
@@ -189,6 +176,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
                     sirnaEnd = sirnaStart + sLength - 1
                     newRow = (mrnaName, chrNum, sirnaStart, sirnaEnd)
                     rowList.append(newRow)
+                    matchFound = 2
                 offset += 1
         
         
@@ -212,6 +200,7 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         "sirSrc": theSource.author,
         "pubmedID": theSource.pubmed_id,
         "resultSet": rowList,
+        "matchExists": matchFound,
     }
     return data
 
