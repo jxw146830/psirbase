@@ -44,7 +44,7 @@ def search1(request):
             "sirSrchType": "",
             "sirName": "",
             "sirSeq": "",
-            "sirSeqR", "",
+            "sirSeqR": "",
             "sirStage": "",
             "sirSrc": "",
             "pubmedID": "",
