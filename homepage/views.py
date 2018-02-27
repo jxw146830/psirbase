@@ -49,7 +49,7 @@ def search1(request):
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
     '''
     
-    else:
+    else :
         data = {
             "sirSpecVal": "NOT READY",
             "sirSrchType": "",
