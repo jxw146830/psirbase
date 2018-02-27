@@ -22,4 +22,5 @@ urlpatterns = [
     path('homepage/', include('homepage.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', include('homepage.urls')),
+    url(r'^ajax/search1/$', homepage.views.search1, name='search1'),
 ]
