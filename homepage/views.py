@@ -38,18 +38,7 @@ def search1(request):
             #data = yesResults('', theSpecVal, theSrchTyp, '')
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
-        
-    '''
-    elif theSpecVal == 'Sus domesticus':
-        try:
-            resultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
-            theSource = SusDomesticusSource.objects.get(id=resultSet.source_id)
-            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount) 
-        except ObjectDoesNotExist:
-            data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
-    '''
-    
-    else :
+    else:
         data = {
             "sirSpecVal": "NOT READY",
             "sirSrchType": "",
@@ -62,6 +51,16 @@ def search1(request):
         }
         
     return JsonResponse(data)
+
+    '''
+    elif theSpecVal == 'Sus domesticus':
+        try:
+            resultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
+            theSource = SusDomesticusSource.objects.get(id=resultSet.source_id)
+            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount) 
+        except ObjectDoesNotExist:
+            data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
+    '''
 
 def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
 
