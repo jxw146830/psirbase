@@ -20,4 +20,5 @@ from django.urls import include, path
 urlpatterns = [
     path('homepage/', include('homepage.urls')),
     url(r'^admin/', admin.site.urls),
+    path('', (r'^$', lambda r: HttpResponseRedirect('homepage/')),),
 ]
