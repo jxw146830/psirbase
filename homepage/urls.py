@@ -9,5 +9,5 @@ app_name = 'homepage'
 urlpatterns = [
     path('', views.index, name='index'),
     url(r'^ajax/search1/$', views.search1, name='search1'),
-    url(r'^$', 'homepage.views.index', name='index'),
+    url(r'^$', views.IndexPageView.as_view(), name='index'),
 ]
