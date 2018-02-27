@@ -403,6 +403,7 @@ body {
     display: none;
     z-index: 998;
     color: white;
+	top: 80px;
 }
 
 #returnGObutton {

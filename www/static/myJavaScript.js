@@ -1362,6 +1362,8 @@ $(document).ready(
         //returns search result
         $("#searchGObutton").click(
             function(){
+				$("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take up to 5 minutes.</div>");
+				
                 var seq = $("#searchInputText").val();
                 var searchT = $("#searchTypeBox").val();
                 var specVal = $("#speciesBox").val();
@@ -1400,8 +1402,6 @@ $(document).ready(
                         }
                     }
                 });
-				
-				$("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take up to 5 minutes.</div>");
 				
                 //slides in search result screen after clicking "SEARCH" button
                 $("#searchResults").show("slide", { direction: "right" }, 1000);

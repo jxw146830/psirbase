@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="{% static 'myCSS.css' %}" type="text/css" />
 </head>
 <body>
+<div id="resultGhost"></div>
+<div id="searchResults">
+    <div class="pageSection" style="padding-top:40px;word-wrap:break-word;" id="resultsTable">
+        <img src="{% static 'images/loading.gif' %}" style="width:100px;height:100px;margin:0 auto;" />
+		<div style="display:block;color:white;">
+			Now loading. Search may take up to 5 minutes.
+		</div>
+    </div>
+    <div id="returnGObutton">
+        Return to Search
+    </div>
+</div>
 <div id="headerBG"></div>
 <div id="header">
     <div id="header_content">
@@ -137,18 +149,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div id="resultGhost"></div>
-<div id="searchResults">
-    <div class="pageSection" style="padding-top:40px;word-wrap:break-word;" id="resultsTable">
-        <img src="{% static 'images/loading.gif' %}" style="width:100px;height:100px;margin:0 auto;" />
-		<div style="display:block;color:white;">
-			Now loading. Search may take up to 5 minutes.
-		</div>
-    </div>
-    <div id="returnGObutton">
-        Return to Search
     </div>
 </div>
 
