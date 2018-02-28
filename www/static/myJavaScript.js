@@ -521,7 +521,7 @@ $(document).ready(
 
                 $("#mismatchBox").css("margin", "0 auto");
                 $("#mismatchBox").css("display", "block");
-                $("#mismatchBox").css("width", "115px");
+                $("#mismatchBox").css("width", "105px");
 
                 $("#mismatch0Label").css("color", "white");
                 $("#mismatch0Label").css("font-size", "14px");
@@ -1448,7 +1448,7 @@ $(document).ready(
             $("#searchGObutton").css("paddingBottom", "7px");
 
         //adjusts search "go" button background color issue for Safari
-        if(isSafari)
+        if(isSafari && !isMobileDevice)
             $("#searchGObutton").css("background", "purple");
 
         //returns search result
