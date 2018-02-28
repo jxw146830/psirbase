@@ -15,9 +15,6 @@ $(document).ready(
 			){
 			isMobileDevice = true;				
 		}
-		else {
-			return false;
-		}
 
         var justMadeWindowWider = false;
         var justMadeWindowWider2 = false;
