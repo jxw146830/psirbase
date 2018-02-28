@@ -2,6 +2,11 @@ $(document).ready(
     function() {
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
         var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        var isSafari = (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1);
+        //if(isSafari){alert('Its Safari');}
+
+        var justMadeWindowWider = false;
+        var justMadeWindowWider2 = false;
 
         //provides "website movement from section to section" mechanic for menu buttons
         $(document).on('click', 'a[href^="#"]', function(e) {
@@ -260,10 +265,9 @@ $(document).ready(
         menuWidth = menuWidth / 2;
         menu.css("width", menuWidth + "px");
 
-        //adjusts search "go" button "1-pixel-too-short" height issue
-        if(isIE)
-            $("#searchGObutton").css("paddingBottom", "7px");
-
+        //don't remove this: needed for its display property persistence
+        $("#header_content_mini").hide(0);
+        $("#resultGhost").hide(0);
 
         var $window = $(window);
         var windowsize;
@@ -320,12 +324,46 @@ $(document).ready(
                 $("#searchTool").css("width", "695px");
                 $(".pageSection").css("max-width", "695px");
                 $("#contactForm").css("width", "695px");
+
+                //for home+search text version A
+                $(".pageSectionA").css("max-width", "675px");
+                $("#searchDescriptionA1").html("The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired. To query, select the species, choose one of the two search options, and type a putative endo-siRNA sequence or the name of the mRNA.");
+                $("#searchDescriptionA1").css("padding-bottom", "20px");
+                $("#searchDescriptionA2").css("display", "none");
+
+                //for home+search text version B
+                $(".pageSectionB").css("max-width", "675px");
+                $("#searchDescriptionB1").html("The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired. To query, select the species, choose one of the two search options, and type a putative endo-siRNA sequence or the name of the mRNA.");
+                $("#searchDescriptionB1").css("padding-bottom", "10px");
+                $("#searchDescriptionB2").css("display", "none");
+
+                //for home+search text version C
+                $(".pageSectionC").css("max-width", "673px");
+                $("#homeContainer").css("margin-top", "20px");
+                $("#psirbaseSummary").css("font-size", "12px");
             }
             else{
                 $("#searchTool").css("margin", "0");
                 $("#searchTool").css("width", "100%");
                 $(".pageSection").css("max-width", "944px");
                 $("#contactForm").css("width", "944px");
+
+                //for home+search text version A
+                $(".pageSectionA").css("max-width", "924px");
+                $("#searchDescriptionA1").html("The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.");
+                $("#searchDescriptionA1").css("padding-bottom", "5px");
+                $("#searchDescriptionA2").css("display", "block");
+
+                //for home+search text version B
+                $(".pageSectionB").css("max-width", "924px");
+                $("#searchDescriptionB1").html("The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.");
+                $("#searchDescriptionB1").css("padding-bottom", "10px");
+                $("#searchDescriptionB2").css("display", "block");
+
+                //for home+search text version C
+                $(".pageSectionC").css("max-width", "922px");
+                $("#homeContainer").css("margin-top", "10px");
+                $("#psirbaseSummary").css("font-size", "14px");
             }
 
             //tile species circles vertically if species selection bar width too low
@@ -359,21 +397,29 @@ $(document).ready(
 
                 $("#speciesRightArrow").css("right", "15px");
                 $("#speciesRightArrow").css("top", "305px");
+
+                justMadeWindowWider = true;
             }
             else{
                 $("#speciesSelectionContainer").css("width", "944px");
                 $("#speciesSelectionContainer").css("height", "160px");
                 $("#speciesSelectionContainer").css("margin-bottom", "0px");
 
-                $("#speciesSelections").css("width", "auto");
-                $("#speciesSelections").css("height", "inherit");
+                //$("#speciesSelections").css("width", "auto");
+                $("#speciesSelections").css("width", "595px");
+                //$("#speciesSelections").css("height", "inherit");
+                $("#speciesSelections").css("height", "160px");
                 $("#speciesSelections").css("left", "0px");
 
-                $("#speciesSelection1").css("width", "inherit");
-                $("#speciesSelection1").css("height", "inherit");
+                //$("#speciesSelection1").css("width", "inherit");
+                //$("#speciesSelection1").css("height", "inherit");
+                $("#speciesSelection1").css("width", "595px");
+                $("#speciesSelection1").css("height", "160px");
 
-                $("#speciesSelection2").css("width", "inherit");
-                $("#speciesSelection2").css("height", "inherit");
+                //$("#speciesSelection2").css("width", "inherit");
+                //$("#speciesSelection2").css("height", "inherit");
+                $("#speciesSelection2").css("width", "595px");
+                $("#speciesSelection2").css("height", "160px");
 
                 $(".speciesIcon").css("display", "table-cell");
                 $(".speciesIcon").css("padding-left", "30px");
@@ -394,6 +440,11 @@ $(document).ready(
 
                 $("#speciesRightArrow").css("right", "245px");
                 $("#speciesRightArrow").css("top", "40px");
+
+                if(justMadeWindowWider) {
+                    refreshSpeciesSelectionSet(species1, species2, currentFour);
+                    justMadeWindowWider = false;
+                }
             }
 
             //move search type buttons to their own line if width gets too small
@@ -472,6 +523,9 @@ $(document).ready(
                 $("#searchGObutton").css("display", "block");
                 $("#searchGObutton").css("margin", "0 auto");
                 $("#searchGObutton").css("margin-top", "10px");
+                $("#searchGObutton").css("border", "solid 2px white");
+
+                justMadeWindowWider2 = true;
             }
             else if (windowsize < 984) {
                 $("#searchInputText").css("width", "270px");
@@ -502,6 +556,12 @@ $(document).ready(
 
                 $("#searchGObutton").css("display", "inline-block");
                 $("#searchGObutton").css("margin", "0");
+                $("#searchGObutton").css("border", "none");
+
+                if(justMadeWindowWider2){
+                    refreshSearchInput();
+                    justMadeWindowWider2 = false;
+                }
             }
             else{
                 $("#searchInputText").css("width", "519px");
@@ -532,6 +592,12 @@ $(document).ready(
 
                 $("#searchGObutton").css("display", "inline-block");
                 $("#searchGObutton").css("margin", "0");
+                $("#searchGObutton").css("border", "none");
+
+                if(justMadeWindowWider2){
+                    refreshSearchInput();
+                    justMadeWindowWider2 = false;
+                }
             }
         }
         // Execute on load
@@ -733,7 +799,7 @@ $(document).ready(
                 }
             },
             function() {
-                if(wormC.css("font-weight") != "700") {
+                if(wormC.css("font-weight") != "bold" && wormC.css("font-weight") != "700") {
                     if (isIE) {
                         wormC.css("background", "none");
                     }
@@ -957,7 +1023,7 @@ $(document).ready(
                 }
             },
             function() {
-                if(pigC.css("font-weight") != "700") {
+                if(pigC.css("font-weight") != "bold" && pigC.css("font-weight") != "700") {
                     if (isIE) {
                         pigC.css("background", "none");
                     }
@@ -1251,30 +1317,12 @@ $(document).ready(
         species2.hide();
         leftArrow.click(
             function(){
-                if(currentFour == 1){
-                    species1.hide("slide", { direction: "left" }, 1000);
-                    species2.delay(85).show("slide", { direction: "right" }, 1000);
-                    currentFour = 2;
-                }
-                else if(currentFour == 2){
-                    species2.hide("slide", { direction: "right" }, 1000);
-                    species1.delay(85).show("slide", { direction: "left" }, 1000);
-                    currentFour = 1;
-                }
+                currentFour = moveSpeciesSelectionSetLeft(species1, species2, currentFour, 1000, 85);
             }
         );
         rightArrow.click(
             function(){
-                if(currentFour == 1){
-                    species1.hide("slide", { direction: "left" }, 1000);
-                    species2.delay(85).show("slide", { direction: "right" }, 1000);
-                    currentFour = 2;
-                }
-                else if(currentFour == 2){
-                    species2.hide("slide", { direction: "right" }, 1000);
-                    species1.delay(85).show("slide", { direction: "left" }, 1000);
-                    currentFour = 1;
-                }
+                currentFour = moveSpeciesSelectionSetRight(species1, species2, currentFour, 1000, 85);
             }
         );
 
@@ -1289,7 +1337,7 @@ $(document).ready(
                 bySIR.css("background", "hsla(240, 75%, 50%, 1)");
             },
             function() {
-                if(bySIR.css("font-weight") != "700") {
+                if(bySIR.css("font-weight") != "bold" && bySIR.css("font-weight") != "700") {
                     bySIR.css("background", "hsla(240, 75%, 50%, 0.25)");
                     bySIR.css("font-weight", "normal");
                 }
@@ -1302,7 +1350,7 @@ $(document).ready(
                 byMRNA.css("background", "hsla(240, 75%, 50%, 1)");
             },
             function() {
-                if(byMRNA.css("font-weight") != "700") {
+                if(byMRNA.css("font-weight") != "bold" && byMRNA.css("font-weight") != "700") {
                     byMRNA.css("background", "hsla(240, 75%, 50%, 0.25)");
                     byMRNA.css("font-weight", "normal");
                 }
@@ -1343,21 +1391,25 @@ $(document).ready(
         //makes sure search text input field is empty when reloading page
         searchInput.val("");
 
+        //adjusts search "go" button browser-dependent padding issue
+        if(isFirefox)
+            $("#searchGObutton").css("paddingBottom", "6px");
+        else if(isSafari) {
+            $("#searchGObutton").css("paddingBottom", "5px");
+            $('head').append('<style>#searchGObutton:hover {padding-top : 1px;}</style>');
+        }
+        else
+            $("#searchGObutton").css("paddingBottom", "7px");
 
-        //slides out search result screen after clicking "RETURN" button
-        $("#returnGObutton").click(
-            function(){
-                $("#searchResults").hide("slide", { direction: "right" }, 1000);
-                $('body, html').animate({scrollTop: 0});
-                $("#resultGhost").css("display", "none");
-            }
-        );
+        //adjusts search "go" button background color issue for Safari
+        if(isSafari)
+            $("#searchGObutton").css("background", "purple");
 
         //returns search result
         $("#searchGObutton").click(
             function(){
-				$("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take up to 5 minutes.</div>");
-				
+                $("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take up to 5 minutes.</div>");
+
                 var seq = $("#searchInputText").val();
                 var searchT = $("#searchTypeBox").val();
                 var specVal = $("#speciesBox").val();
@@ -1378,19 +1430,19 @@ $(document).ready(
                     },
                     dataType: 'json',
                     success: function (data) {
-						//if species not available yet
-						if(data.sirSpecVal == "NOT READY"){
-							$("#resultsTable").html("Data for this species is not available yet.");
-						}
-						//if sirna sequence doesn't exist for the species
-						else if(data.sirStage == "EXISTS NOT"){
-							$("#resultsTable").html("The siRNA sequence " + data.sirSeq + " does not exist for " + data.sirSpecVal);
-						}
+                        //if species not available yet
+                        if(data.sirSpecVal == "NOT READY"){
+                            $("#resultsTable").html("Data for this species is not available yet.");
+                        }
+                        //if sirna sequence doesn't exist for the species
+                        else if(data.sirStage == "EXISTS NOT"){
+                            $("#resultsTable").html("The siRNA sequence " + data.sirSeq + " does not exist for " + data.sirSpecVal);
+                        }
                         //only process non-empty result sets
                         else if(data.matchExists == 2){
-							$("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
-							if(data.pubmedID != null)
-								$("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
+                            if(data.pubmedID != null)
+                                $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
                             for(i=0; i <= data.resultSet.length - 1; i++){
                                 if(i==0){
                                     continue;
@@ -1402,29 +1454,82 @@ $(document).ready(
                                 $("#resultsTable").append("<br />End position: " + data.resultSet[i][3]);
                             }
                         }
-						else {
-							$("#resultsTable").html("The siRNA sequence " + data.sirSeq + " exists for " + data.sirSpecVal + " but no match was found.");
-							$("#resultsTable").append("<br /><br />Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
-						}
+                        else {
+                            $("#resultsTable").html("The siRNA sequence " + data.sirSeq + " exists for " + data.sirSpecVal + " but no match was found.");
+                            $("#resultsTable").append("<br /><br />Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
+                        }
                     }
                 });
-				
+
                 //slides in search result screen after clicking "SEARCH" button
                 $("#searchResults").show("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: 0});
 
                 //makes rest of webpage darker
-                $("#resultGhost").css("display", "block");
+                $("#resultGhost").show(0);
             }
         );
-		
-		//slides results screen away when the resultGhost is clicked
-		$("#resultGhost").click(
+
+        //slides out search result screen after clicking "RETURN" button
+        $("#returnGObutton").click(
             function(){
                 $("#searchResults").hide("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: 0});
-                $("#resultGhost").css("display", "none");
+                $("#resultGhost").hide(0);
+            }
+        );
+
+        //slides results screen away when the resultGhost is clicked
+        $("#resultGhost").click(
+            function(){
+                $("#searchResults").hide("slide", { direction: "right" }, 1000);
+                $('body, html').animate({scrollTop: 0});
+                $("#resultGhost").hide(0);
             }
         );
     }
 );
+
+function moveSpeciesSelectionSetLeft(species1, species2, currentFour, movementDuration, delayValue){
+    if(currentFour == 1){
+        species1.hide("slide", { direction: "left" }, movementDuration);
+        species2.delay(delayValue).show("slide", { direction: "right" }, movementDuration);
+        currentFour = 2;
+    }
+    else if(currentFour == 2){
+        species2.hide("slide", { direction: "right" }, movementDuration);
+        species1.delay(delayValue).show("slide", { direction: "left" }, movementDuration);
+        currentFour = 1;
+    }
+    return currentFour;
+}
+
+function moveSpeciesSelectionSetRight(species1, species2, currentFour, movementDuration, delayValue){
+    if(currentFour == 1){
+        species1.hide("slide", { direction: "left" }, movementDuration);
+        species2.delay(delayValue).show("slide", { direction: "right" }, movementDuration);
+        currentFour = 2;
+    }
+    else if(currentFour == 2){
+        species2.hide("slide", { direction: "right" }, movementDuration);
+        species1.delay(delayValue).show("slide", { direction: "left" }, movementDuration);
+        currentFour = 1;
+    }
+    return currentFour;
+}
+
+function refreshSpeciesSelectionSet(species1, species2, currentFour){
+    if(currentFour == 1){
+        species1.hide(0);
+        species1.show(0);
+    }
+    if(currentFour == 2){
+        species2.hide(0);
+        species2.show(0);
+    }
+}
+
+function refreshSearchInput(){
+    $("#searchForm").hide(0);
+    $("#searchForm").show(0);
+}

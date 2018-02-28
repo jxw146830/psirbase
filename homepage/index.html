@@ -5,16 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <title>psiRbase</title>
-    <link rel="stylesheet" href="{% static 'myCSS.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'myCSS.css" type="text/css' %}" />
 </head>
 <body>
 <div id="resultGhost"></div>
 <div id="searchResults">
     <div class="pageSection" style="padding-top:40px;word-wrap:break-word;" id="resultsTable">
         <img src="{% static 'images/loading.gif' %}" style="width:100px;height:100px;margin:0 auto;" />
-		<div style="display:block;color:white;">
-			Now loading. Search may take up to 5 minutes.
-		</div>
+        <div style="display:block;color:white;">
+            Now loading. Search may take up to 5 minutes.
+        </div>
     </div>
     <div id="returnGObutton">
         Return to Search
@@ -48,9 +48,9 @@
 <div id="header_content_mini">
     <a href="#homepage" class="menuLinksMini" id="homeMenuButtonMini"><div class="menuButtonMini"><p id="homeMenuButtonTextMini">HOME</p><div id="mb1ULMini" class="menuButtonULobjectMini"></div>
     </div></a><a href="#search" class="menuLinksMini" id="searchMenuButtonMini"><div class="menuButtonMini"><p id="searchMenuButtonTextMini">SEARCH</p><div id="mb2ULMini" class="menuButtonULobjectMini"></div>
-</div></a><a href="#downloads" class="menuLinksMini" id="downloadsMenuButtonMini"><div class="menuButtonMini"><p id="downloadsMenuButtonTextMini">DOWNLOADS</p><div id="mb3ULMini" class="menuButtonULobjectMini"></div>
-</div></a><a href="#background" class="menuLinksMini" id="backgroundMenuButtonMini"><div class="menuButtonMini"><p id="backgroundMenuButtonTextMini">BACKGROUND</p><div id="mb5ULMini" class="menuButtonULobjectMini"></div>
-</div></a><a href="#about" class="menuLinksMini" id="aboutMenuButtonMini"><div class="menuButtonMini"><p id="aboutMenuButtonTextMini">ABOUT</p><div id="mb4ULMini" class="menuButtonULobjectMini"></div></div></a>
+    </div></a><a href="#downloads" class="menuLinksMini" id="downloadsMenuButtonMini"><div class="menuButtonMini"><p id="downloadsMenuButtonTextMini">DOWNLOADS</p><div id="mb3ULMini" class="menuButtonULobjectMini"></div>
+    </div></a><a href="#background" class="menuLinksMini" id="backgroundMenuButtonMini"><div class="menuButtonMini"><p id="backgroundMenuButtonTextMini">BACKGROUND</p><div id="mb5ULMini" class="menuButtonULobjectMini"></div>
+    </div></a><a href="#about" class="menuLinksMini" id="aboutMenuButtonMini"><div class="menuButtonMini"><p id="aboutMenuButtonTextMini">ABOUT</p><div id="mb4ULMini" class="menuButtonULobjectMini"></div></div></a>
 </div>
 
 <img id="homepageVid" src="{% static 'images/dna.gif' %}" />
@@ -66,24 +66,26 @@
 
     <div class="menuDock"></div>
     <div id="homePageContent">
-        <div class="pageSection" style="padding-bottom:5px;padding-top:30px;font-size:14px;">
-            <b>psiRbase</b>: putative siRNA (psiRNA)
+        <div id="homeContainer" class="pageSectionC" style="border: solid 1px deepskyblue;margin-top:10px;margin-bottom:20px;padding-left:10px;padding-right:10px;">
+            <div class="pageSectionC" style="padding-bottom:5px;padding-top:10px;font-size:16px;">
+                <b>psiRbase</b>: putative siRNA (psiRNA)
+            </div>
+            <div id="psirbaseSummary" class="pageSectionC" style="padding-bottom:10px;color:deepskyblue;font-size:14px;">
+                A database and resource for scientists interested in endogenous-small interfering RNA sequences (endo-siRNAs).
+            </div>
         </div>
-        <div class="pageSection" style="padding-bottom:20px;">
-            A database and resource for scientists interested in endogenous-small interfering RNA sequences (endo-siRNAs).
-        </div>
-        <div class="pageSection">
+        <div class="pageSection" style="text-align:left;">
             <p>Available developmental data sets have been collected through literature searches and Gene accession omnibus and removed of annotated small RNAs.</p>
         </div>
         <div id="search">
-            <div class="pageSection" style="padding-top:20px;padding-bottom:20px;">
+            <div class="pageSection" style="padding-top:20px;padding-bottom:10px;font-size:14px;">
                 The search tool below will return putative endo-siRNA/mRNA reverse complementary pairs with up to two mismatches, if desired.
             </div>
-            <div class="pageSection" style="padding-bottom:20px;">
+            <div class="pageSection" style="padding-bottom:10px;">
                 To query, select the species, choose one of the two search options, and type a putative endo-siRNA sequence or the name of the mRNA.
             </div>
             <div id="searchTool">
-                <div id="speciesSelectionContainer">
+                <div id="speciesSelectionContainer" style="margin-top:10px;">
                     <img src="{% static 'images/arrow-left.png' %}" id="speciesLeftArrow" />
                     <div id="speciesSelections">
                         <div id="speciesSelection1">
@@ -143,7 +145,7 @@
                     --><input type="radio" id="mismatch2" value="2" name="mismatches" autocomplete="off" /><!--
                     --><label id="mismatch2Label" style="cursor:default;padding-right:10px;padding-left:3px;display:inline;color:purple;" >2</label><!--
                 --></div><!--
-                --></form><input type="submit" value="SEARCH" id="searchGObutton" />
+                --></form><div id="searchGObutton" />SEARCH</div>
                     <input type="hidden" id="speciesBox" value="no species selected" />
                     <input type="hidden" id="searchTypeBox" value="no search type selected" />
                 </div>
@@ -170,8 +172,8 @@
         </div>
         <div class="pageSection" style="margin-bottom:10px;">
             miRNA, piRNA, and endo-siRNAs are generally 18-32
-             nucleotide sequences that play an important role
-             in gene regulation.
+            nucleotide sequences that play an important role
+            in gene regulation.
         </div>
         <div class="pageSection" style="margin-bottom:10px;">
             While miRNA and piRNA are highly
@@ -192,28 +194,28 @@
             To identify putative endo-siRNAs, sequences and small RNA libraries were collected and rigorously processed using the following procedure.
         </div>
         <div class="pageSection" style="margin-bottom:5px;">
-            Sequences were aligned to genomes using bowtie allowing one mismatch (-v 1 -a --best --strata parameters).
+            Sequences were aligned to transcriptomes using bowtie allowing one mismatch (-v 1 -a --best --strata parameters).
         </div>
         <div class="pageSection" style="margin-bottom:10px;">
-            Sequences were then aligned to a custom RNA reference to exclude currently annotated rRNA, tRNA, miRNA and piRNA sequences.
+            Sequences that exclusively mapped antisense to the transcriptome were then aligned to a custom RNA reference to exclude currently annotated rRNA, tRNA, miRNA and piRNA sequences.
         </div>
         <div class="pageSection" style="margin-bottom:10px;">
             Information for the custom RNA references were found using the following resources:
         </div>
         <div class="pageSection" style="margin-bottom:10px;word-wrap:break-word;">
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://gtrnadb.ucsc.edu">GrTNAdb</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://www.targetscan.org">Targetscan</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://www.mirbase.org/ftp.shtml">miRBase</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://regulatoryrna.org/database/piRNA/download.html">piRbase</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://www.microrna.org/microrna/home.do">microRNA</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://mirdb.org/miRDB">mirDB</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://mirtar.mbc.nctu.edu.tw/human/download.php">miRTar</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="https://genie.weizmann.ac.il/pubs/mir07/mir07_data.html">PITA Catalog</a><br /><br />
-            &#8226  &nbsp&nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://pirnabank.ibab.ac.in/request.html">piRNA Bank</a>
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://gtrnadb.ucsc.edu">GrTNAdb</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://www.targetscan.org">Targetscan</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://www.mirbase.org/ftp.shtml">miRBase</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://regulatoryrna.org/database/piRNA/download.html">piRbase</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://www.microrna.org/microrna/home.do">microRNA</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://mirdb.org/miRDB">mirDB</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://mirtar.mbc.nctu.edu.tw/human/download.php">miRTar</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="https://genie.weizmann.ac.il/pubs/mir07/mir07_data.html">PITA Catalog</a><br /><br />
+            &nbsp&nbsp&nbsp&nbsp &#8226 &nbsp <a target="_blank" class="aboutLinks" style="text-decoration:none;" href="http://pirnabank.ibab.ac.in/request.html">piRNA Bank</a>
         </div>
         <div class="pageSection" style="margin-bottom:5px;">
-            Unmappable RNA reference sequences were then aligned to transcriptomes to identify exclusively antisense-siRNAs using same bowtie parameters.
+            Unmappable RNA reference sequences were then aligned to genomes using same bowtie parameters.
         </div>
         <div class="pageSection">
             Only sequences with four or fewer alignments were considered "putative endo-siRNA".
@@ -222,7 +224,7 @@
             Contact
         </div>
         <div class="pageSection" style="margin-bottom:10px;">
-            For questions or comments, email Kelly Daescu at <u>kellydaescu@utdallas.edu</u> or use the form below:
+            For questions or comments, fill out and submit the form below:
         </div>
         <div id="after_submit"></div>
         <div id="contactForm" style="width:944px;text-align:left;margin:0 auto;">

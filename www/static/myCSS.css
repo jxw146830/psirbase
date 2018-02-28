@@ -19,7 +19,7 @@ body {
 }
 
 #headerBG {
-    background: hsl(0, 0%, 25%);
+    background: hsl(0, 0%, 20%);
     opacity: 0;
     z-index: 999;
     position: fixed;
@@ -39,6 +39,13 @@ body {
     padding-right: 20px;
 }
 
+#headerMiniCenteringDiv {
+    width: 735px;
+    height: inherit;
+    margin: 0 auto;
+    position: relative;
+}
+
 #headerMini {
     position: fixed;
     width: 100%;
@@ -47,28 +54,7 @@ body {
     top: 0;
     padding-bottom: 10px;
     visibility: hidden;
-    background: hsl(0, 0%, 25%);
-}
-
-#headerMiniCenteringDiv {
-    width: 735px;
-    height: inherit;
-    margin: 0 auto;
-    position: relative;
-}
-
-#header_content_mini {
-    height: auto;
-    min-height: 40px;
-    position:fixed;
-    top: 80px;
-    width: 100%;
-    z-index: 20;
-    background: hsl(0, 0%, 25%);
-    border-top: solid 1px gray;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: none;
+    background: hsl(0, 0%, 20%);
 }
 
 #miniMenuCurrentSection {
@@ -87,21 +73,41 @@ body {
 
 .menuLinksMini {
     display: block;
-    width: inherit;
+    width: 695px;
     height: 40px;
     text-decoration: none;
-    padding-left: 15px;
     color: white;
+    position: relative;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.menuLinksMini:hover {
+    font-weight: bold;
+}
+
+#header_content_mini {
+    height: auto;
+    min-height: 40px;
+    position:fixed;
+    top: 80px;
+    width: 100%;
+    z-index: 20;
+    background: hsl(0, 0%, 20%);
+    border-top: solid 1px gray;
+    padding-top: 10px;
+    display: block;
 }
 
 .menuButtonMini {
     height: inherit;
-    width: inherit;
+    text-align: left;
     cursor: pointer;
     border: none;
     position: relative;
     vertical-align: middle;
-    display: table-cell;
+    display: block;
     font-size: 14px;
 }
 
@@ -212,7 +218,7 @@ body {
 #homePageContent {
     position: relative;
     z-index: 3;
-    text-align: left;
+    text-align: center;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -221,6 +227,34 @@ body {
     min-width: 10px;
     width: auto;
     max-width: 944px;
+    height: auto;
+    min-height: 10px;
+    margin: 0 auto;
+}
+
+.pageSectionA {
+    min-width: 10px;
+    width: auto;
+    max-width: 924px;
+    height: auto;
+    min-height: 10px;
+    margin: 0 auto;
+}
+
+.pageSectionB {
+    min-width: 10px;
+    width: auto;
+    max-width: 924px;
+    height: auto;
+    min-height: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pageSectionC {
+    min-width: 10px;
+    width: auto;
+    max-width: 922px;
     height: auto;
     min-height: 10px;
     margin: 0 auto;
@@ -258,6 +292,7 @@ body {
     font-size: 12px;
     overflow-x: hidden;
     color: white;
+    text-align: left;
 }
 
 #speciesSelectionContainer {
@@ -276,9 +311,6 @@ body {
     min-width: 400px;
     width: auto;
     float: left;
-    /*width: 700px;
-    height: 80px;
-	margin-left: 30px;*/
 }
 
 #speciesSelection1 {
@@ -286,9 +318,9 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: inherit;
+    /*width: inherit;
     height: inherit;
-    /*margin-top: -70px;*/
+    margin-top: -70px;*/
 }
 
 #speciesSelection2 {
@@ -296,9 +328,9 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: inherit;
+    /*width: inherit;
     height: inherit;
-    /*margin-top: -70px;*/
+    margin-top: -70px;*/
 }
 
 #speciesLeftArrow {
@@ -364,17 +396,18 @@ body {
 #searchGObutton {
     background: rebeccapurple;
     color: white;
-    border: solid 1px white;
+    border: solid 0px white;
     width: 125px;
     height: auto;
     min-height: 24px;
     display: inline-block;
-    padding: 10px;
     padding-top: 3px;
     padding-bottom: 6px;
+    text-align: center;
     font-size: 24px;
     cursor: pointer;
     position: relative;
+
 }
 
 #searchGObutton:hover {
@@ -389,7 +422,6 @@ body {
     width: 100%;
     height: 100vh;
     background: hsla(0, 0%, 0%, 0.75);
-    display: none;
 }
 
 #searchResults {
@@ -403,7 +435,7 @@ body {
     display: none;
     z-index: 998;
     color: white;
-	top: 80px;
+    top: 80px;
 }
 
 #returnGObutton {
@@ -491,17 +523,17 @@ body {
 }
 
 .aboutLinks {
-	color: white;
+    color: white;
 }
 
 .aboutLinks:hover {
-	color: Chartreuse;
+    color: Chartreuse;
 }
 
 .aboutLinks:visited {
-	color: white;
+    color: white;
 }
 
 .aboutLinks:visited:hover {
-	color: Chartreuse;
+    color: Chartreuse;
 }
