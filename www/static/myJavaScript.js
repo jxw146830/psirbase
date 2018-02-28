@@ -524,7 +524,7 @@ $(document).ready(
 
                 $("#mismatchBox").css("margin", "0 auto");
                 $("#mismatchBox").css("display", "block");
-                $("#mismatchBox").css("width", "95px");
+                $("#mismatchBox").css("width", "115px");
 
                 $("#mismatch0Label").css("color", "white");
                 $("#mismatch0Label").css("font-size", "14px");
