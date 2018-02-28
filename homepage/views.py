@@ -96,7 +96,9 @@ def search1(request):
     for x in range(0, theSeqLength):
         if seqChars[x] == 'U':
             seqChars[x] = 'T'
-        
+
+    theSeq = ''.join(seqChars)
+    
     if theSpecVal == 'Caenorhabditis elegans':
         try:
             resultSet = CelegansSirna.objects.get(sequence=theSeq)
