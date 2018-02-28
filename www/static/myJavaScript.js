@@ -1434,6 +1434,10 @@ $(document).ready(
                         if(data.sirSpecVal == "NOT READY"){
                             $("#resultsTable").html("Data for this species is not available yet.");
                         }
+                        //if user input is invalid
+                        else if(data.sirSpecVal == "INVALID INPUT"){
+                            $("#resultsTable").html("The siRNA sequence " + data.sirSeq + " may consist of the following characters only: a, c, g, t, u, A, C, G, T, U <br /><br />(No spaces or special characters)");
+                        }
                         //if sirna sequence doesn't exist for the species
                         else if(data.sirStage == "EXISTS NOT"){
                             $("#resultsTable").html("The siRNA sequence " + data.sirSeq + " does not exist for " + data.sirSpecVal);

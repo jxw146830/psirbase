@@ -30,6 +30,73 @@ def search1(request):
     theSeq = request.GET.get('sqn', None)
     theMismatchCount = request.GET.get('mmVal', None)
     data = ''
+
+    #THE FOLLOWING CHECKS IF USER INPUT IS VALID (string only consists of A, C, G, T, U, a, c, g, t, u)
+    
+    #get length for user input
+    theSeqLength = len(theSeq)
+
+    inputOkay = 1
+    
+    #check each character
+    seqChars = list(theSeq)
+    for x in range(0, theSeqLength):
+        if seqChars[x] == 'A':
+            continue
+        if seqChars[x] == 'C':
+            continue        
+        if seqChars[x] == 'G':
+            continue
+        if seqChars[x] == 'T':
+            continue
+        if seqChars[x] == 'U':
+            continue
+        if seqChars[x] == 'a':
+            continue
+        if seqChars[x] == 'c':
+            continue        
+        if seqChars[x] == 'g':
+            continue
+        if seqChars[x] == 't':
+            continue
+        if seqChars[x] == 'u':
+            continue
+        #invalid char detected
+        inputOkay = 2
+        break
+
+    #notify user of invalid input if invalid char detected
+    if inputOkay == 2:
+        data = {
+            "sirSpecVal": "INVALID INPUT",
+            "sirSrchType": "",
+            "sirName": "",
+            "sirSeq": "",
+            "sirSeqR": "",
+            "sirStage": "",
+            "sirSrc": "",
+            "pubmedID": "",
+        }
+        return JsonResponse(data)
+
+    #otherwise, first convert any lower case letters to upper case
+    for x in range(0, theSeqLength):
+        if seqChars[x] == 'a':
+            seqChars[x] = 'A'
+        elif seqChars[x] == 'c':
+            seqChars[x] = 'C'        
+        elif seqChars[x] == 'g':
+            seqChars[x] = 'G'
+        elif seqChars[x] == 't':
+            seqChars[x] = 'T'
+        elif seqChars[x] == 'u':
+            seqChars[x] = 'U'
+
+    #next, convert all U to T
+    for x in range(0, theSeqLength):
+        if seqChars[x] == 'U':
+            seqChars[x] = 'T'
+        
     if theSpecVal == 'Caenorhabditis elegans':
         try:
             resultSet = CelegansSirna.objects.get(sequence=theSeq)
