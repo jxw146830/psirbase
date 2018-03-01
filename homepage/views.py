@@ -232,22 +232,8 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         #get current mRNA length
         mLength = mrnaEnd - mrnaStart + 1
         
-        # # # # # # # # BEGIN MATCHING ALGO # # # # # # #
-        
-        if sLength <= mLength:
-            offset = 0
-            maxOffset = mLength - sLength
-            for i in range(0, maxOffset+1):
-                ss = mrnaSeq[ i : i + sLength ]
-                if sirnaSeq == ss:
-                    sirnaStart = mrnaStart + offset
-                    sirnaEnd = sirnaStart + sLength - 1
-                    newRow = (mrnaName, chrNum, sirnaStart, sirnaEnd)
-                    rowList.append(newRow)
-                    matchFound = 2
-                offset += 1
-        
-        
+        #do matching algo on current mRNA
+        matchFound = NaiveSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, sLength, mLength, matchFound)
         #KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
@@ -287,6 +273,21 @@ def noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount):
     }
     return data
 
+def NaiveSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, sLength, mLength, matchFound):
+    if sLength <= mLength:
+        offset = 0
+        maxOffset = mLength - sLength
+        for i in range(0, maxOffset+1):
+            ss = mrnaSeq[ i : i + sLength ]
+            if sirnaSeq == ss:
+                sirnaStart = mrnaStart + offset
+                sirnaEnd = sirnaStart + sLength - 1
+                newRow = (mrnaName, chrNum, sirnaStart, sirnaEnd)
+                rowList.append(newRow)
+                matchFound = 2
+            offset += 1
+    return matchFound
+    
 def KMPSearch(pat, txt, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList):
     M = len(pat)
     N = len(txt)
