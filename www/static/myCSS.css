@@ -98,6 +98,7 @@ body {
     border-top: solid 1px gray;
     padding-top: 10px;
     display: block;
+	visibility: hidden;
 }
 
 .menuButtonMini {
