@@ -657,7 +657,8 @@ $(document).ready(
         var $miniLogo = $("#logoMini");
         $expand.click(
             function(){
-                $miniButtons.slideToggle();
+				$miniButtons.css("visibility", "visible");
+                $miniButtons.delay(100).slideToggle();
                 $expand.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
                 $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
             }
