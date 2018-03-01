@@ -233,8 +233,8 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         mLength = mrnaEnd - mrnaStart + 1
         
         #do matching algo on current mRNA
-        matchFound = NaiveSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, sLength, mLength, matchFound)
-        #KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList)
+        #matchFound = NaiveSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, sLength, mLength, matchFound)
+        matchFound = KMPSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, matchFound)
         
         #FOR DEBUGGING ONLY: append > symbol for next mRNA name after having processed current mRNA
         mrnaName = ['']
@@ -288,7 +288,7 @@ def NaiveSearch(sirnaSeq, mrnaSeq, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList
             offset += 1
     return matchFound
     
-def KMPSearch(pat, txt, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList):
+def KMPSearch(pat, txt, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, matchFound):
     M = len(pat)
     N = len(txt)
  
@@ -311,6 +311,7 @@ def KMPSearch(pat, txt, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList):
             sirnaEnd = sirnaStart + M - 1
             newRow = (mrnaName, chrNum, sirnaStart, sirnaEnd)
             rowList.append(newRow)
+            matchFound = 2
             j = lps[j-1]
  
         # mismatch after j matches
