@@ -321,6 +321,7 @@ def KMPSearch(pat, txt, mrnaName, chrNum, mrnaStart, mrnaEnd, rowList, matchFoun
                 j = lps[j-1]
             else:
                 i += 1
+    return matchFound
  
 def computeLPSArray(pat, M, lps):
     len = 0 # length of the previous longest prefix suffix
