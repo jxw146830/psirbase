@@ -10,10 +10,10 @@ class CelegansSirna(models.Model):
         return self.name
 
 class CelegansBed(models.Model):
-    chrNum = models.CharField(max_length=50, default=DEFAULT_PLACEHOLDER)
+    chr_num = models.CharField(max_length=50, default=DEFAULT_PLACEHOLDER)
     startPos = models.CharField(max_length=20, default=DEFAULT_PLACEHOLDER)
     endPos = models.CharField(max_length=20, default=DEFAULT_PLACEHOLDER)
-    sirName = models.CharField(max_length=50, default=DEFAULT_PLACEHOLDER)
+    sirname = models.CharField(max_length=50, default=DEFAULT_PLACEHOLDER)
     sign = models.CharField(max_length=1, default="?")
     author = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
     stage = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
