@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from .models import CelegansSirna, CelegansSource
+from .models import CelegansSirna
 
 admin.site.register(CelegansSirna)
-admin.site.register(CelegansSource)

@@ -11,7 +11,7 @@ from psiRbase.settings import PROJECT_ROOT
 import urllib.request
 import string
 
-from .models import CelegansSirna, CelegansSource, SusDomesticusSirna, SusDomesticusSource
+from .models import CelegansSirna, CelegansBed
 
 def index(request):
     form = SearchForm()
@@ -102,9 +102,8 @@ def search1(request):
     if theSpecVal == 'Caenorhabditis elegans':
         try:
             resultSet = CelegansSirna.objects.get(sequence=theSeq)
-            theSource = CelegansSource.objects.get(id=resultSet.source_id)
-            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount)
-            #data = yesResults('', theSpecVal, theSrchTyp, '')
+            theBed = CelegansBed.objects.get(sirName=resultSet.name)
+            data = yesResults(resultSet, theSpecVal, theSrchTyp, theBed, theMismatchCount)
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
     else:
@@ -131,7 +130,7 @@ def search1(request):
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
     '''
 
-def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
+def yesResults(resultSet, theSpecVal, theSrchTyp, theBed, theMismatchCount):
 
     myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
 
@@ -250,9 +249,9 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount):
         "sirName": resultSet.name,
         "sirSeq": resultSet.sequence,
         "sirSeqR": sirnaSeq,
-        "sirStage": resultSet.stage,
-        "sirSrc": theSource.author,
-        "pubmedID": theSource.pubmed_id,
+        "sirStage": theBed.stage,
+        "sirSrc": theBed.author,
+        "pubmedID": theBed.pubmed_id,
         "resultSet": rowList,
         "matchExists": matchFound,
     }
