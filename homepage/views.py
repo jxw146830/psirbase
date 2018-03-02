@@ -102,7 +102,7 @@ def search1(request):
     if theSpecVal == 'Caenorhabditis elegans':
         try:
             resultSet = CelegansSirna.objects.get(sequence=theSeq)
-            theBed = CelegansBed.objects.get(sirName=resultSet.name)
+            theBed = CelegansBed.objects.get(sirname=resultSet.name)
             data = yesResults(resultSet, theSpecVal, theSrchTyp, theBed, theMismatchCount)
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
