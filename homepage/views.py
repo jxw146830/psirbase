@@ -68,14 +68,14 @@ def search1(request):
     #notify user of invalid input if invalid char detected
     if inputOkay == 2:
         data = {
-            "sirSpecVal": "INVALID INPUT",
-            "sirSrchType": "",
-            "sirName": "",
-            "sirSeq": "",
-            "sirSeqR": "",
-            "sirStage": "",
-            "sirSrc": "",
-            "pubmedID": "",
+            "sirSpecVal": 'INVALID INPUT',
+            "sirSrchType": theSrchTyp,
+            "mismatchesAllowed": theMismatchCount,
+            "sirnaResults": theSeq,
+            "sirSeqR": '',
+            "bedFileResults": '',
+            "mrnasResultSet": '',
+            "matchExists": '',
         }
         return JsonResponse(data)
 
@@ -98,24 +98,28 @@ def search1(request):
             seqChars[x] = 'T'
 
     theSeq = ''.join(seqChars)
+
+    bedFilesResultSet = ['']
     
     if theSpecVal == 'Caenorhabditis elegans':
         try:
-            resultSet = CelegansSirna.objects.get(sequence=theSeq)
-            theBed = CelegansBed.objects.get(sirname=resultSet.name)
-            data = yesResults(resultSet, theSpecVal, theSrchTyp, theBed, theMismatchCount)
+            #sirnasResultSet = CelegansSirna.objects.get(sequence=theSeq)
+            sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
+            for sirnaRow in sirnasResultSet:
+                bedFilesResultSet.append(CelegansBed.objects.filter(sirname=sirnaRow.name))
+            data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount)
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
     else:
         data = {
-            "sirSpecVal": "NOT READY",
-            "sirSrchType": "",
-            "sirName": "",
-            "sirSeq": "",
-            "sirSeqR": "",
-            "sirStage": "",
-            "sirSrc": "",
-            "pubmedID": "",
+            "sirSpecVal": 'NOT READY',
+            "sirSrchType": theSrchTyp,
+            "mismatchesAllowed": theMismatchCount,
+            "sirnaResults": theSeq,
+            "sirSeqR": '',
+            "bedFileResults": '',
+            "mrnasResultSet": '',
+            "matchExists": '',
         }
         
     return JsonResponse(data)
@@ -123,18 +127,18 @@ def search1(request):
     '''
     elif theSpecVal == 'Sus domesticus':
         try:
-            resultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
-            theSource = SusDomesticusSource.objects.get(id=resultSet.source_id)
-            data = yesResults(resultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount) 
+            sirnasResultSet = SusDomesticusSirna.objects.get(sequence=theSeq)
+            theSource = SusDomesticusSource.objects.get(id=sirnasResultSet.source_id)
+            data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, theSource, theMismatchCount) 
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
     '''
 
-def yesResults(resultSet, theSpecVal, theSrchTyp, theBed, theMismatchCount):
+def yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount):
 
     myFile = urllib.request.urlopen("https://s3-us-west-2.amazonaws.com/psirbasecdnafafiles/cElegans.txt")
 
-    sirnaSeq = resultSet.sequence
+    sirnaSeq = sirnasResultSet[0].sequence
 
     #get length for sirna sequence
     sLength = len(sirnaSeq)
@@ -246,13 +250,10 @@ def yesResults(resultSet, theSpecVal, theSrchTyp, theBed, theMismatchCount):
         "sirSpecVal": theSpecVal,
         "sirSrchType": theSrchTyp,
         "mismatchesAllowed": theMismatchCount,
-        "sirName": resultSet.name,
-        "sirSeq": resultSet.sequence,
+        "sirnaResults": sirnasResultSet,
         "sirSeqR": sirnaSeq,
-        "sirStage": theBed.stage,
-        "sirSrc": theBed.author,
-        "pubmedID": theBed.pubmed_id,
-        "resultSet": rowList,
+        "bedFileResults": bedFilesResultSet,
+        "mrnasResultSet": rowList,
         "matchExists": matchFound,
     }
     return data
@@ -263,12 +264,11 @@ def noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount):
         "sirSpecVal": theSpecVal,
         "sirSrchType": theSrchTyp,
         "mismatchesAllowed": theMismatchCount,
-        "sirName": "",
-        "sirSeq": theSeq,
-        "sirSeqR": "",
-        "sirStage": "EXISTS NOT",
-        "sirSrc": "",
-        "pubmedID": "",
+        "sirnaResults": theSeq,
+        "sirSeqR": 'EXISTS NOT',
+        "bedFileResults": '',
+        "mrnasResultSet": '',
+        "matchExists": '',
     }
     return data
 

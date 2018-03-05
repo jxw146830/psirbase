@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'psiRbase-dev.us-west-2.elasticbeanstalk.com',
     'www.psirbase.tk',
+    '*.psirbase.tk',
+    'psirbase.tk',
 ]
 
 

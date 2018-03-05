@@ -1486,23 +1486,27 @@ $(document).ready(
                             $("#resultsTable").html("The siRNA sequence " + data.sirSeq + " may consist of the following characters only: a, c, g, t, u, A, C, G, T, U <br /><br />(No spaces or special characters)");
                         }
                         //if sirna sequence doesn't exist for the species
-                        else if(data.sirStage == "EXISTS NOT"){
-                            $("#resultsTable").html("The siRNA sequence " + data.sirSeq + " does not exist for " + data.sirSpecVal);
+                        else if(data.sirSeqR == "EXISTS NOT"){
+                            $("#resultsTable").html("The siRNA sequence " + data.sirnaResults + " does not exist for " + data.sirSpecVal);
                         }
                         //only process non-empty result sets
                         else if(data.matchExists == 2){
-                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />siRname: " + data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc + "<br />Mismatches: " + data.mismatchesAllowed);
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Mismatches: " + data.mismatchesAllowed + "<br />siRname: ");
+							
+							DFALKDJKALSJDLA
+							
+							data.sirName + "<br />Original Input Sequence: " + data.sirSeq + "<br />Input Flipped & Reversed: " + data.sirSeqR + "<br />Stage: " + data.sirStage + "<br />Source Author: " + data.sirSrc);
                             if(data.pubmedID != null)
                                 $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
-                            for(i=0; i <= data.resultSet.length - 1; i++){
+                            for(i=0; i <= data.mrnasResultSet.length - 1; i++){
                                 if(i==0){
                                     continue;
                                 }
                                 $("#resultsTable").append("<br /><br />Result " + i + ":");
-                                $("#resultsTable").append("<br />mRNA name: " + data.resultSet[i][0]);
-                                $("#resultsTable").append("<br />Chromosome #: " + data.resultSet[i][1]);
-                                $("#resultsTable").append("<br />Start position: " + data.resultSet[i][2]);
-                                $("#resultsTable").append("<br />End position: " + data.resultSet[i][3]);
+                                $("#resultsTable").append("<br />mRNA name: " + data.mrnasResultSet[i][0]);
+                                $("#resultsTable").append("<br />Chromosome #: " + data.mrnasResultSet[i][1]);
+                                $("#resultsTable").append("<br />Start position: " + data.mrnasResultSet[i][2]);
+                                $("#resultsTable").append("<br />End position: " + data.mrnasResultSet[i][3]);
                             }
                         }
                         else {
