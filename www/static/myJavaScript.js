@@ -1493,7 +1493,11 @@ $(document).ready(
                         else {
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							
+							var bedCount = -1
 							for(var bedRowsForThisName in data.bedFileResults){
+								bedCount = bedCount + 1;
+								if (bedCount == 0)
+									continue;
 								$("#resultsTable").append(bedRowsForThisName);
 								/*
 								for(var bedRow in bedRowsForThisName){
