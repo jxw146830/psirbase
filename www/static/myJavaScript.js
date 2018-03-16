@@ -1494,7 +1494,11 @@ $(document).ready(
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							
 							for(var bedRowsForThisName in data.bedFileResults){
+								$("#resultsTable").append(bedRowsForThisName);
+								/*
 								for(var bedRow in bedRowsForThisName){
+									//$("#resultsTable").append(bedRow);
+									/*
 									$("#resultsTable").append("Chromosome: " + bedRow.chr_num + "<br />" +
 										"Start: " + bedRow.start + "<br />" +
 										"End: " + bedRow.end + "<br />" +
@@ -1505,7 +1509,9 @@ $(document).ready(
 										"Pubmed ID: " + bedRow.pubmed_id + "<br />" +
 										"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
 									);
+									*/
 								}
+								*/
 							}
 							/*
                             if(data.pubmedID != null)
