@@ -160,9 +160,15 @@ def search1(request):
                         #get matching sequence for each bed row
                         if bedRow.chr_num == 'I':
                             bedRowStart = bedRow.start
+                            bedRowEnd = bedRow.end
+                            sliceResult = 'nothing yet'
+                            sliceResult2 = 'nothing yet
+                            lastTwo = 'nothing yet'
+                            onlyOneSliceNeeded = 1
                             if int(bedRowStart) <= 99:
+                                lastTwo = bedRowStart
                                 sliceResult = CelegansChrSliceI.objects.get(start=0)
-                                matchedSequence = chrSlice.sequence[ int(bedRowStart) : int(bedRowStart)+theSeqLength ]
+                                #matchedSequence = sliceResult.sequence[ int(bedRowStart) : int(bedRowStart)+theSeqLength ]
                             else:
                                 startLength = len(bedRowStart)
                                 lastTwo = bedRowStart [ startLength-2 : startLength ]
@@ -170,7 +176,20 @@ def search1(request):
                                 bedRowStart = bedRowStart + '00'
                                 bedRowStart = int(bedRowStart)
                                 sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
+                                #matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
+                            if int(bedRowEnd) > 99:
+                                endLength = len(bedRowEnd)
+                                bedRowEnd = bedRowEnd[ 0 : endLength-2]
+                                bedRowEnd = bedRowEnd + '00'
+                                if bedRowStart != bedRowEnd:
+                                    onlyOneSliceNeeded = 2
+                                    bedRowEnd = int(bedRowEnd)
+                                    sliceResult2 = CelegansChrSliceI.objects.get(start=bedRowEnd)
+                            if onlyOneSliceNeeded == 1:
                                 matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
+                            else:
+                                combinedSlice = sliceResult.sequence + sliceResult2.sequence
+                                matchedSequence = combinedSlice[ int(lastTwo) : int(lastTwo)+theSeqLength ]
                             if bedRow.strand == '+':
                                     #flip matched sequence
                                     preMatchedSequence = list(matchedSequence)
