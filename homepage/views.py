@@ -187,8 +187,8 @@ def search1(request):
                                 seqIndex = seqIndex + 1
                         else:
                             matchedSequence = 'coming soon'
-                        if mmComputed <= theMismatchCount:
-                            bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
+                        #if mmComputed <= theMismatchCount:
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
 
             #get subset of mRNAs
             bedCount = -1
