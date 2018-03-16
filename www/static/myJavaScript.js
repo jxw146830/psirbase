@@ -1479,7 +1479,7 @@ $(document).ready(
                     success: function (data) {
                         //if species not available yet
                         if(data.sirSrchType == "NOT READY"){
-                            $("#resultsTable").html("Data for " data.sirSpecVal + " is not available yet.");
+                            $("#resultsTable").html("Data for " + data.sirSpecVal + " is not available yet.");
                         }
                         //if user input is invalid
                         else if(data.sirSpecVal == "INVALID INPUT"){
