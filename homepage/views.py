@@ -120,18 +120,18 @@ def search1(request):
                 if bedCount == 0:
                     continue
                 currentMrna1 = bedRow[8]
-                currentMrna2 = CelegansMrna.objects.get(name=currentMrna1)
                 #check if current mRNA already added to output list
-                currentMrna = [currentMrna2.chr_num, currentMrna2.start, currentMrna2.end, currentMrna2.name, currentMrna2.strand]
                 inResultSet = 1
-                
+                '''
                 if len(mrnasResultSet) > 1:
                     for item in mrnasResultSet:
-                        if item[3] == currentMrna[3]:
+                        if item[3] == currentMrna1:
                             inResultSet = 2
-                
+                '''
+                currentMrna2 = CelegansMrna.objects.get(name=currentMrna1)
+
                 if inResultSet == 1:
-                    mrnasResultSet.append(currentMrna)
+                    mrnasResultSet.append([currentMrna2.chr_num, currentMrna2.start, currentMrna2.end, currentMrna2.name, currentMrna2.strand])
             
             #data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount)
             data = {

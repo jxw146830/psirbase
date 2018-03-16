@@ -1511,7 +1511,7 @@ $(document).ready(
 							}
 							
 							$("#resultsTable").append("<hr /><br /><br />");
-							
+							/*
                             for(i=0; i <= data.mrnaResults.length - 1; i++){
                                 if(i==0)
                                     continue;
@@ -1522,7 +1522,7 @@ $(document).ready(
 									"End: " + data.mrnaResults[i][2] + "<br />" +
 									"Strand: " + data.mrnaResults[i][4] + "<br /><br />");
                             }
-							
+							*/
                         }
                     }
                 });
