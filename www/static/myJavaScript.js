@@ -1492,11 +1492,12 @@ $(document).ready(
                         //only process non-empty result sets
                         else {
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
-							/*
+							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)
 									continue;
-								
+								$("#resultsTable").append(data.bedFileResults[i] + "<br />"
+								/*
 								for(j=0; j <= data.bedFileResults[i].length - 1; j++){
 									$("#resultsTable").append("Chromosome: " + data.bedFileResults[i][j].chr_num + "<br />" +
 										"Start: " + data.bedFileResults[i][j].start + "<br />" +
@@ -1509,9 +1510,9 @@ $(document).ready(
 										//"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
 									);
 								}
-								
+								*/
 							}
-							*/
+							
 							/*
                             if(data.pubmedID != null)
                                 $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
