@@ -1489,7 +1489,11 @@ $(document).ready(
                         else if(data.sirSeq == "EXISTS NOT"){
                             $("#resultsTable").html("The siRNA sequence " + data.sirnaResults + " does not exist for " + data.sirSpecVal);
                         }
-                        //only process non-empty result sets
+						else if(data.resultsFound == "no"){
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
+							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs)");
+                        }
+						//only process non-empty result sets
                         else {
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							

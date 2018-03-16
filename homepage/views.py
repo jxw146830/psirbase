@@ -211,6 +211,11 @@ def search1(request):
                 if inResultSet == 1:
                     currentMrna2 = CelegansMrna.objects.get(name=currentMrna1)
                     mrnasResultSet.append([currentMrna2.chr_num, currentMrna2.start, currentMrna2.end, currentMrna2.name, currentMrna2.strand])
+
+            resultsWereFound = 'yes'
+            #if no results (because of mismatch limit exceeded for all sirnas)
+            if len(bedFilesResultSet) == 1:
+                resultsWereFound = 'no'
             
             #data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount)
             data = {
@@ -221,6 +226,7 @@ def search1(request):
                 "mismatchesAllowed": theMismatchCount,
                 "bedFileResults": bedFilesResultSet,
                 "mrnaResults": mrnasResultSet,
+                "resultsFound": resultsWereFound,
             }
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
