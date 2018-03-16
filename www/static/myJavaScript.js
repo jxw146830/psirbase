@@ -1498,7 +1498,7 @@ $(document).ready(
 								/*
 								for(var bedRow in bedRowsForThisName){
 									//$("#resultsTable").append(bedRow);
-									/*
+									
 									$("#resultsTable").append("Chromosome: " + bedRow.chr_num + "<br />" +
 										"Start: " + bedRow.start + "<br />" +
 										"End: " + bedRow.end + "<br />" +
@@ -1509,7 +1509,7 @@ $(document).ready(
 										"Pubmed ID: " + bedRow.pubmed_id + "<br />" +
 										"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
 									);
-									*/
+									
 								}
 								*/
 							}
