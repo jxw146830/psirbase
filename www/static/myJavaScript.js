@@ -1510,7 +1510,7 @@ $(document).ready(
 
 							}
 							
-							$("#resultsTable").append("<br /><hr /><br /><br />Genes:<br /><br />");
+							$("#resultsTable").append("<br /><hr /><br /><br />Genes<br /><br />");
 							
                             for(i=0; i <= data.mrnaResults.length - 1; i++){
                                 if(i==0)
