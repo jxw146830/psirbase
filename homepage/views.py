@@ -120,10 +120,12 @@ def search1(request):
                 #check if current mRNA already added to output list
                 currentMrna = [currentMrna2.chr_num, currentMrna2.start, currentMrna2.end, currentMrna2.name, currentMrna2.strand]
                 inResultSet = 1
+                '''
                 if len(mrnasResultSet) > 1:
                     for item in mrnasResultSet:
                         if item[3] == currentMrna[3]:
                             inResultSet = 2
+                '''
                 if inResultSet == 1:
                     mrnasResultSet.append([currentMrna2.chr_num, currentMrna2.start, currentMrna2.end, currentMrna2.name, currentMrna2.strand])
             
