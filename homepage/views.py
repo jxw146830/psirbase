@@ -136,12 +136,12 @@ def search1(request):
                                 matchedSequence = 'inFirst100'
                             else:
                                 startLength = len(bedRowStart)
+                                lastTwo = bedRowStart [ startLength-2 : startLength ]
                                 bedRowStart = bedRowStart[ 0 : startLength-2]
                                 bedRowStart = bedRowStart + '00'
-                                #bedRowStart = int(bedRowStart)
-                                #sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
-                                #matchedSequence = str(sliceResult.end)
-                                matchedSequence = bedRowStart
+                                bedRowStart = int(bedRowStart)
+                                sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
+                                matchedSequence = sliceResult.sequence[ int(lastTwo)-1 : int(lastTwo)-1+theSeqLength ]
                         else:
                             matchedSequence = 'coming soon'
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
