@@ -1496,8 +1496,6 @@ $(document).ready(
 							var bedCount = -1
 							for(var bedRowsForThisName in data.bedFileResults){
 								bedCount = bedCount + 1;
-								if (bedCount == 0)
-									continue;
 								$("#resultsTable").append(bedRowsForThisName + "<br />");
 								/*
 								for(var bedRow in bedRowsForThisName){
@@ -1517,7 +1515,7 @@ $(document).ready(
 								}
 								*/
 							}
-							
+							/*
                             if(data.pubmedID != null)
                                 $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
                             for(i=0; i <= data.mrnasResultSet.length - 1; i++){
@@ -1530,7 +1528,7 @@ $(document).ready(
                                 $("#resultsTable").append("<br />Start position: " + data.mrnasResultSet[i][2]);
                                 $("#resultsTable").append("<br />End position: " + data.mrnasResultSet[i][3]);
                             }
-							
+							*/
                         }
                     }
                 });
