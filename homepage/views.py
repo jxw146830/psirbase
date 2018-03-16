@@ -112,7 +112,8 @@ def search1(request):
                 #remove > character to get bed file sirna name equivalent
                 sirName = sirName.replace('>','')
                 bedRows = CelegansBed.objects.filter(name=sirName)
-                bedFilesResultSet.append(sirName)
+                for bedRow in bedRows:
+                    bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna])
 
             
             
