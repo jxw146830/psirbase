@@ -137,7 +137,7 @@ def search1(request):
                             else:
                                 startLength = len(bedRowStart)
                                 bedRowStart = bedRowStart[ 0 : startLength-2]
-                                bedRowStart = bedRowStart.join('00')
+                                bedRowStart = bedRowStart + '00'
                                 bedRowStart = int(bedRowStart)
                                 sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
                                 matchedSequence = str(sliceResult.end)
