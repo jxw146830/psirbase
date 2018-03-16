@@ -131,7 +131,7 @@ def search1(request):
                 sirName = sirName.replace('>','')
                 bedRows = CelegansBed.objects.filter(name=sirName)
                 for bedRow in bedRows:
-                    
+                    mmComputed = 0
                     inResultSet = 1
                     #check if current bed row already added to output list
                     if len(bedFilesResultSet) > 1:
@@ -180,9 +180,17 @@ def search1(request):
                                         matchedSequence = ''
                                         for i in preMatchedSequence:
                                             matchedSequence = i + matchedSequence
+
+                                        #compute number of mismatches present in matched sequence
+                                        seqIndex = 0
+                                        for base in matchedSequence:
+                                            if base != theSeqR[seqIndex]:
+                                                mmComputed = mmComputed + 1
+                                            seqIndex = seqIndex + 1
                         else:
                             matchedSequence = 'coming soon'
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
+                        if mmComputed <= theMismatchCount:
+                            bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
 
             #get subset of mRNAs
             bedCount = -1
