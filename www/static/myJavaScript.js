@@ -1492,7 +1492,7 @@ $(document).ready(
                         //only process non-empty result sets
                         else {
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
-							
+							/*
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)
 									continue;
@@ -1509,8 +1509,9 @@ $(document).ready(
 										//"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
 									);
 								}
-							
+								
 							}
+							*/
 							/*
                             if(data.pubmedID != null)
                                 $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
