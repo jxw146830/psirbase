@@ -143,17 +143,15 @@ def search1(request):
                             if bedResult[0] == bedRow.chr_num and bedResult[1] == bedRow.start and bedResult[2] == bedRow.end and bedResult[3] == bedRow.name and bedResult[4] == bedRow.strand and bedResult[5] == bedRow.stage and bedResult[6] == bedRow.source and bedResult[7] == bedRow.pubmed_id and bedResult[8] == bedRow.target_mrna:
                                 inResultSet = 2
 
-                    #current bed row not in output list yet            
+                    #current bed row not yet in output list            
                     if inResultSet == 1:
                         matchedSequence = 'nothing yet'
                         #get matching sequence for each bed row
                         if bedRow.chr_num == 'I':
                             bedRowStart = bedRow.start
                             if int(bedRowStart) <= 99:
-                                chrSlice = CelegansChrSliceI.objects.get(start=0)
-                                chrSliceSeq = chrSlice.sequence
-                                #replace below with correct code and finish later---------------------------~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------
-                                matchedSequence = 'inFirst100'
+                                sliceResult = CelegansChrSliceI.objects.get(start=0)
+                                matchedSequence = chrSlice.sequence[ int(bedRowStart) : int(bedRowStart)+theSeqLength ]
                             else:
                                 startLength = len(bedRowStart)
                                 lastTwo = bedRowStart [ startLength-2 : startLength ]
@@ -162,31 +160,31 @@ def search1(request):
                                 bedRowStart = int(bedRowStart)
                                 sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
                                 matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
-                                if bedRow.strand == '+':
-                                        #flip matched sequence
-                                        preMatchedSequence = list(matchedSequence)
-                                        for x in range(0, theSeqLength):
-                                            if preMatchedSequence[x] == 'A':
-                                                preMatchedSequence[x] = 'T'
-                                            elif preMatchedSequence[x] == 'T':
-                                                preMatchedSequence[x] = 'A'
-                                            elif preMatchedSequence[x] == 'C':
-                                                preMatchedSequence[x] = 'G'
-                                            elif preMatchedSequence[x] == 'G':
-                                                preMatchedSequence[x] = 'C'
-                                        preMatchedSequence = ''.join(preMatchedSequence)
+                            if bedRow.strand == '+':
+                                    #flip matched sequence
+                                    preMatchedSequence = list(matchedSequence)
+                                    for x in range(0, theSeqLength):
+                                        if preMatchedSequence[x] == 'A':
+                                            preMatchedSequence[x] = 'T'
+                                        elif preMatchedSequence[x] == 'T':
+                                            preMatchedSequence[x] = 'A'
+                                        elif preMatchedSequence[x] == 'C':
+                                            preMatchedSequence[x] = 'G'
+                                        elif preMatchedSequence[x] == 'G':
+                                            preMatchedSequence[x] = 'C'
+                                    preMatchedSequence = ''.join(preMatchedSequence)
 
-                                        #reverse sirna sequence
-                                        matchedSequence = ''
-                                        for i in preMatchedSequence:
-                                            matchedSequence = i + matchedSequence
+                                    #reverse matched sequence
+                                    matchedSequence = ''
+                                    for i in preMatchedSequence:
+                                        matchedSequence = i + matchedSequence
 
-                                        #compute number of mismatches present in matched sequence
-                                        seqIndex = 0
-                                        for base in matchedSequence:
-                                            if base != theSeqR[seqIndex]:
-                                                mmComputed = mmComputed + 1
-                                            seqIndex = seqIndex + 1
+                            #compute number of mismatches present in matched sequence
+                            seqIndex = 0
+                            for base in matchedSequence:
+                                if base != theSeqR[seqIndex]:
+                                    mmComputed = mmComputed + 1
+                                seqIndex = seqIndex + 1
                         else:
                             matchedSequence = 'coming soon'
                         if mmComputed <= theMismatchCount:
