@@ -125,6 +125,17 @@ def search1(request):
         try:
             #get subset of bed files
             sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
+            if sirnasResultSet.exists() == False:
+                data = {
+                    "sirSpecVal": theSpecVal,
+                    "sirSrchType": theSrchTyp,
+                    "mismatchesAllowed": theMismatchCount,
+                    "sirnaResults": theSeq,
+                    "sirSeq": 'EXISTS NOT',
+                    "bedFileResults": '',
+                    "mrnasResultSet": '',
+                }
+                return JsonResponse(data)
             for sirnaRow in sirnasResultSet:
                 sirName = sirnaRow.name
                 #remove > character to get bed file sirna name equivalent
@@ -187,8 +198,8 @@ def search1(request):
                                 seqIndex = seqIndex + 1
                         else:
                             matchedSequence = 'coming soon'
-                        #if mmComputed <= theMismatchCount:
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed])
+                        if mmComputed <= int(theMismatchCount):
+                            bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed])
 
             #get subset of mRNAs
             bedCount = -1
@@ -229,7 +240,7 @@ def search1(request):
                 "resultsFound": resultsWereFound,
             }
         except ObjectDoesNotExist:
-            data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)
+            data = ''
     else:
         data = {
             "sirSpecVal": theSpecVal,
@@ -374,19 +385,6 @@ def yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMi
         "sirSeq": sirnaSeq,
         "bedFileResults": bedFilesResultSet,
         "mrnasResultSet": rowList,
-    }
-    return data
-
-
-def noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount):
-    data = {
-        "sirSpecVal": theSpecVal,
-        "sirSrchType": theSrchTyp,
-        "mismatchesAllowed": theMismatchCount,
-        "sirnaResults": theSeq,
-        "sirSeq": 'EXISTS NOT',
-        "bedFileResults": '',
-        "mrnasResultSet": '',
     }
     return data
 
