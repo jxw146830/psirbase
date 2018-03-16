@@ -162,7 +162,7 @@ def search1(request):
                             bedRowStart = bedRow.start
                             bedRowEnd = bedRow.end
                             sliceResult = 'nothing yet'
-                            sliceResult2 = 'nothing yet
+                            sliceResult2 = 'nothing yet'
                             lastTwo = 'nothing yet'
                             onlyOneSliceNeeded = 1
                             if int(bedRowStart) <= 99:
