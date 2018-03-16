@@ -162,6 +162,24 @@ def search1(request):
                                 bedRowStart = int(bedRowStart)
                                 sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
                                 matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
+                                if bedRow.strand == '+':
+                                        #flip matched sequence
+                                        preMatchedSequence = list(matchedSequence)
+                                        for x in range(0, theSeqLength):
+                                            if preMatchedSequence[x] == 'A':
+                                                preMatchedSequence[x] = 'T'
+                                            elif preMatchedSequence[x] == 'T':
+                                                preMatchedSequence[x] = 'A'
+                                            elif preMatchedSequence[x] == 'C':
+                                                preMatchedSequence[x] = 'G'
+                                            elif preMatchedSequence[x] == 'G':
+                                                preMatchedSequence[x] = 'C'
+                                        preMatchedSequence = ''.join(preMatchedSequence)
+
+                                        #reverse sirna sequence
+                                        matchedSequence = ''
+                                        for i in preMatchedSequence:
+                                            matchedSequence = i + matchedSequence
                         else:
                             matchedSequence = 'coming soon'
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
