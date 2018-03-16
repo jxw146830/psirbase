@@ -107,9 +107,8 @@ def search1(request):
             
 
             sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
-            for sirnaRow in sirnasResultSet:
-                #bedRows = CelegansBed.objects.filter(name=sirnaRow.name)
-                bedFilesResultSet.append(sirnaRow.name)
+            #bedRows = CelegansBed.objects.filter(name=sirnaRow.name)
+            bedFilesResultSet.append([sirnaRow.name for sirnaRow in sirnasResultSet])
 
             
             
