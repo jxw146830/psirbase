@@ -119,9 +119,13 @@ def search1(request):
                 currentMrna = CelegansMrna.objects.get(name=currentMrna)
                 #check if current mRNA already added to output list
                 currentMrna = [currentMrna.chr_num, currentMrna.start, currentMrna.end, currentMrna.name, currentMrna.strand]
-                if currentMrna in mrnasResultSet:
-                    continue
-                mrnasResultSet.append(currentMrna)
+                inResultSet = 1
+                if len(mrnasResultSet) > 0:
+                    for item in mrnasResultSet:
+                        if item[3] == currentMrna[3]:
+                            inResultSet = 2
+                if inResultSet == 1:
+                    mrnasResultSet.append(currentMrna)
             
             #data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount)
             data = {
