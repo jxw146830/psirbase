@@ -111,7 +111,7 @@ def search1(request):
                 sirName = sirnaRow.name
                 sirNameLength = len(sirName)
                 #remove > character to get bed file sirna name equivalent
-                sirName = sirName[ 1 : sirNameLength ]
+                sirName = sirName.replace('>','')
                 bedRows = CelegansBed.objects.filter(name=sirName)
                 bedFilesResultSet.append(bedRows)
 
