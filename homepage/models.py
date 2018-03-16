@@ -8,7 +8,7 @@ class CelegansSirna(models.Model):
     name = models.CharField(max_length=50)
     def __str__(self):
         return self.name
-
+'''
 class CelegansBed(models.Model):
     chr_num = models.CharField(max_length=50, default=DEFAULT_PLACEHOLDER)
     startPos = models.CharField(max_length=20, default=DEFAULT_PLACEHOLDER)
@@ -20,4 +20,4 @@ class CelegansBed(models.Model):
     pubmed_id = models.CharField(max_length=20, blank=True, null=True)
     def __str__(self):
         return self.author
-
+'''
