@@ -28,3 +28,8 @@ class CelegansMrna(models.Model):
     end = models.CharField(max_length=20, default=DEFAULT_PLACEHOLDER)
     name = models.CharField(max_length=30, default=DEFAULT_PLACEHOLDER)
     strand = models.CharField(max_length=1, default="?")
+
+class CelegansChrSliceI(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
