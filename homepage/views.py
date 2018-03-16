@@ -11,7 +11,7 @@ from psiRbase.settings import PROJECT_ROOT
 import urllib.request
 import string
 
-from .models import CelegansSirna, CelegansBed
+from .models import CelegansSirna, CelegansBed, CelegansMrna
 
 def index(request):
     form = SearchForm()
@@ -99,13 +99,11 @@ def search1(request):
     theSeq = ''.join(seqChars)
 
     bedFilesResultSet = ['']
+    mrnasResultSet = ['']
     
     if theSpecVal == 'Caenorhabditis elegans':
         try:
-            #sirnasResultSet = CelegansSirna.objects.get(sequence=theSeq)
-
-            
-
+            #get subset of bed files
             sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
             for sirnaRow in sirnasResultSet:
                 sirName = sirnaRow.name
@@ -115,7 +113,15 @@ def search1(request):
                 for bedRow in bedRows:
                     bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna])
 
-            
+            #get subset of mRNAs
+            for bedRow in bedFilesResultSet:
+                currentMrna = bedRow[8]
+                currentMrna = CelegansMrna.objects.get(name=currentMrna)
+                #check if current mRNA already added to output list
+                currentMrna = [currentMrna.chr_num, currentMrna.start, currentMrna.end, currentMrna.name, currentMrna.strand]
+                if currentMrna in mrnasResultSet:
+                    continue
+                mrnasResultSet.append(currentMrna)
             
             #data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount)
             data = {
@@ -124,7 +130,7 @@ def search1(request):
                 "sirSeq": theSeq,
                 "mismatchesAllowed": theMismatchCount,
                 "bedFileResults": bedFilesResultSet,
-                "mrnasResultSet": '',
+                "mrnaResults": mrnasResultSet,
             }
         except ObjectDoesNotExist:
             data = noResults(theSpecVal, theSrchTyp, theSeq, theMismatchCount)

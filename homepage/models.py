@@ -22,3 +22,9 @@ class CelegansBed(models.Model):
     def __str__(self):
         return self.name
 
+class CelegansMrna(models.Model):
+    chr_num = models.CharField(max_length=10, default=DEFAULT_PLACEHOLDER)
+    start = models.CharField(max_length=20, default=DEFAULT_PLACEHOLDER)
+    end = models.CharField(max_length=20, default=DEFAULT_PLACEHOLDER)
+    name = models.CharField(max_length=30, default=DEFAULT_PLACEHOLDER)
+    strand = models.CharField(max_length=1, default="?")

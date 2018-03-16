@@ -1510,20 +1510,19 @@ $(document).ready(
 
 							}
 							
-							/*
-                            if(data.pubmedID != null)
-                                $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
-                            for(i=0; i <= data.mrnasResultSet.length - 1; i++){
-                                if(i==0){
+							$("#resultsTable").append("<hr /><br /><br />");
+							
+                            for(i=0; i <= data.mrnaResults.length - 1; i++){
+                                if(i==0)
                                     continue;
-                                }
-                                $("#resultsTable").append("<br /><br />Result " + i + ":");
-                                $("#resultsTable").append("<br />mRNA name: " + data.mrnasResultSet[i][0]);
-                                $("#resultsTable").append("<br />Chromosome #: " + data.mrnasResultSet[i][1]);
-                                $("#resultsTable").append("<br />Start position: " + data.mrnasResultSet[i][2]);
-                                $("#resultsTable").append("<br />End position: " + data.mrnasResultSet[i][3]);
+                                
+                                $("#resultsTable").append("mRNA: " + data.mrnaResults[i][3] + "<br />" +
+									"Chromosome: " + data.mrnaResults[i][0] + "<br />" +
+									"Start: " + data.mrnaResults[i][1] + "<br />" +
+									"End: " + data.mrnaResults[i][2] + "<br />" +
+									"Strand: " + data.mrnaResults[i][4] + "<br /><br />");
                             }
-							*/
+							
                         }
                     }
                 });
