@@ -1506,7 +1506,8 @@ $(document).ready(
 									"Source: " + data.bedFileResults[i][6] + "<br />" +
 									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
 									"Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
-									"Matched sequence: " + data.bedFileResults[i][9] + "<br /><br />"
+									"Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
+									"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
 								);
 
 							}
