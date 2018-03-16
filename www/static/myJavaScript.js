@@ -1494,9 +1494,9 @@ $(document).ready(
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							
 							var bedCount = -1
-							for(var bedRowsForThisName in data.bedFileResults){
-								bedCount = bedCount + 1;
+							data.bedFileResults.forEach(function(bedRowsForThisName){
 								$("#resultsTable").append(bedRowsForThisName + "<br />");
+							});
 								/*
 								for(var bedRow in bedRowsForThisName){
 									//$("#resultsTable").append(bedRow + "<br />");
