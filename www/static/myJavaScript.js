@@ -1495,15 +1495,15 @@ $(document).ready(
 							
 							for(var bedRowsForThisName in data.bedFileResults){
 								for(var bedRow in bedRowsForThisName){
-									$("#resultsTable").append("Chromosome: " + bedRow[1] + "<br />" +
-										"Start: " + bedRow[2] + "<br />" +
-										"End: " + bedRow[3] + "<br />" +
-										"Name: " + bedRow[4] + "<br />" +
-										"Strand: " + bedRow[5] + "<br />" +
-										"Stage: " + bedRow[6] + "<br />" +
-										"Source: " + bedRow[7] + "<br />" +
-										"Pubmed ID: " + bedRow[8] + "<br />" +
-										"Target mRNA: " + bedRow[9] + "<br /><br />"
+									$("#resultsTable").append("Chromosome: " + bedRow.chr_num + "<br />" +
+										"Start: " + bedRow.start + "<br />" +
+										"End: " + bedRow.end + "<br />" +
+										"Name: " + bedRow.name + "<br />" +
+										"Strand: " + bedRow.strand + "<br />" +
+										"Stage: " + bedRow.stage + "<br />" +
+										"Source: " + bedRow.source + "<br />" +
+										"Pubmed ID: " + bedRow.pubmed_id + "<br />" +
+										"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
 									);
 								}
 							}
