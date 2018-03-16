@@ -1497,7 +1497,7 @@ $(document).ready(
 								if(i==0)
 									continue;
 								$("#resultsTable").append(data.bedFileResults[i] + "<br />");
-							}
+							
 								/*
 								for(var bedRow in bedRowsForThisName){
 									//$("#resultsTable").append(bedRow + "<br />");
