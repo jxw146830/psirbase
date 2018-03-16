@@ -1503,7 +1503,7 @@ $(document).ready(
 										"Stage: " + bedRow[6] + "<br />" +
 										"Source: " + bedRow[7] + "<br />" +
 										"Pubmed ID: " + bedRow[8] + "<br />" +
-										"Target mRNA: " + bedRow[9] + "<br /><br />" +
+										"Target mRNA: " + bedRow[9] + "<br /><br />"
 									);
 								}
 							}
