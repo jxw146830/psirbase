@@ -1497,10 +1497,10 @@ $(document).ready(
 								if(i==0)
 									continue;
 
-								$("#resultsTable").append("Chromosome: " + data.bedFileResults[i][0] + "<br />" +
+								$("#resultsTable").append(data.bedFileResults[i][3] + "<br />" +
+									"Chromosome: " + data.bedFileResults[i][0] + "<br />" +
 									"Start: " + data.bedFileResults[i][1] + "<br />" +
 									"End: " + data.bedFileResults[i][2] + "<br />" +
-									"Name: " + data.bedFileResults[i][3] + "<br />" +
 									"Strand: " + data.bedFileResults[i][4] + "<br />" +
 									"Stage: " + data.bedFileResults[i][5] + "<br />" +
 									"Source: " + data.bedFileResults[i][6] + "<br />" +
@@ -1510,13 +1510,13 @@ $(document).ready(
 
 							}
 							
-							$("#resultsTable").append("<hr /><br /><br />");
+							$("#resultsTable").append("<br /><hr /><br /><br />Genes:<br /><br />");
 							
                             for(i=0; i <= data.mrnaResults.length - 1; i++){
                                 if(i==0)
                                     continue;
                                 
-                                $("#resultsTable").append("mRNA: " + data.mrnaResults[i][3] + "<br />" +
+                                $("#resultsTable").append(data.mrnaResults[i][3] + "<br />" +
 									"Chromosome: " + data.mrnaResults[i][0] + "<br />" +
 									"Start: " + data.mrnaResults[i][1] + "<br />" +
 									"End: " + data.mrnaResults[i][2] + "<br />" +

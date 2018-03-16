@@ -122,12 +122,12 @@ def search1(request):
                 currentMrna1 = bedRow[8]
                 #check if current mRNA already added to output list
                 inResultSet = 1
-                '''
+                
                 if len(mrnasResultSet) > 1:
                     for item in mrnasResultSet:
                         if item[3] == currentMrna1:
                             inResultSet = 2
-                '''
+                
                 currentMrna2 = CelegansMrna.objects.get(name=currentMrna1)
 
                 if inResultSet == 1:
