@@ -1497,7 +1497,7 @@ $(document).ready(
 								if(i==0)
 									continue;
 								
-								for(j=0; i <= data.bedFileResults[i].length - 1; j++){
+								for(j=0; j <= data.bedFileResults[i].length - 1; j++){
 									$("#resultsTable").append("Chromosome: " + data.bedFileResults[i][j][1] + "<br />" +
 										"Start: " + data.bedFileResults[i][j][2] + "<br />" +
 										"End: " + data.bedFileResults[i][j][3] + "<br />"
