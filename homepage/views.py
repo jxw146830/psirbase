@@ -11,7 +11,7 @@ from psiRbase.settings import PROJECT_ROOT
 import urllib.request
 import string
 
-from .models import CelegansSirna, CelegansBed, CelegansMrna
+from .models import CelegansSirna, CelegansBed, CelegansMrna, CelegansChrSliceI
 
 def index(request):
     form = SearchForm()
@@ -122,9 +122,28 @@ def search1(request):
                                 continue
                             if bedResult[0] == bedRow.chr_num and bedResult[1] == bedRow.start and bedResult[2] == bedRow.end and bedResult[3] == bedRow.name and bedResult[4] == bedRow.strand and bedResult[5] == bedRow.stage and bedResult[6] == bedRow.source and bedResult[7] == bedRow.pubmed_id and bedResult[8] == bedRow.target_mrna:
                                 inResultSet = 2
-                                
-                    if inResultSet == 1:            
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna])
+
+                    #current bed row not in output list yet            
+                    if inResultSet == 1:
+                        matchedSequence = 'nothing yet'
+                        #get matching sequence for each bed row
+                        if bedRow.chr_num == 'I':
+                            bedRowStart = bedRow.start
+                            if int(bedRowStart) <= 99:
+                                chrSlice = CelegansChrSliceI.objects.get(start=0)
+                                chrSliceSeq = chrSlice.sequence
+                                #replace below with correct code and finish later---------------------------~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------
+                                matchedSequence = 'inFirst100'
+                            else:
+                                startLength = len(bedRowStart)
+                                bedRowStart = bedRowStart[ 0 : startLength-2]
+                                bedRowStart = bedRowStart.join('00')
+                                bedRowStart = int(bedRowStart)
+                                sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
+                                matchedSequence = str(sliceResult.end)
+                        else:
+                            matchedSequence = 'coming soon'
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
 
             #get subset of mRNAs
             bedCount = -1

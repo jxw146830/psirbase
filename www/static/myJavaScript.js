@@ -1505,7 +1505,8 @@ $(document).ready(
 									"Stage: " + data.bedFileResults[i][5] + "<br />" +
 									"Source: " + data.bedFileResults[i][6] + "<br />" +
 									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
-									"Target mRNA: " + data.bedFileResults[i][8] + "<br /><br />"
+									"Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
+									"Matched sequence: " + data.bedFileResults[i][9] + "<br /><br />"
 								);
 
 							}
