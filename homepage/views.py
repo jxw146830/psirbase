@@ -98,6 +98,26 @@ def search1(request):
 
     theSeq = ''.join(seqChars)
 
+
+    #flip sirna sequence
+    sirnaSeq = list(theSeq)
+    for x in range(0, sLength):
+        if sirnaSeq[x] == 'A':
+            sirnaSeq[x] = 'T'
+        elif sirnaSeq[x] == 'T':
+            sirnaSeq[x] = 'A'
+        elif sirnaSeq[x] == 'C':
+            sirnaSeq[x] = 'G'
+        elif sirnaSeq[x] == 'G':
+            sirnaSeq[x] = 'C'
+    sirnaSeq = ''.join(sirnaSeq)
+
+    #reverse sirna sequence
+    theSeqR = ''
+    for i in sirnaSeq:
+        theSeqR = i + theSeqR
+
+
     bedFilesResultSet = ['']
     mrnasResultSet = ['']
     
@@ -141,7 +161,7 @@ def search1(request):
                                 bedRowStart = bedRowStart + '00'
                                 bedRowStart = int(bedRowStart)
                                 sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
-                                matchedSequence = sliceResult.sequence[ int(lastTwo)-1 : int(lastTwo)-1+theSeqLength ]
+                                matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
                         else:
                             matchedSequence = 'coming soon'
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence])
@@ -173,6 +193,7 @@ def search1(request):
                 "sirSpecVal": theSpecVal,
                 "sirSrchType": theSrchTyp,
                 "sirSeq": theSeq,
+                "sirSeqR": theSeqR,
                 "mismatchesAllowed": theMismatchCount,
                 "bedFileResults": bedFilesResultSet,
                 "mrnaResults": mrnasResultSet,
