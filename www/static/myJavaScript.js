@@ -1496,25 +1496,20 @@ $(document).ready(
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)
 									continue;
-								$("#resultsTable").append(data.bedFileResults[i] + "<br />");
-							
-								/*
-								for(var bedRow in bedRowsForThisName){
-									//$("#resultsTable").append(bedRow + "<br />");
-									
-									$("#resultsTable").append("Chromosome: " + bedRow.chr_num + "<br />" +
-										"Start: " + bedRow.start + "<br />" +
-										"End: " + bedRow.end + "<br />" +
-										"Name: " + bedRow.name + "<br />" +
-										"Strand: " + bedRow.strand + "<br />" +
-										"Stage: " + bedRow.stage + "<br />" +
-										"Source: " + bedRow.source + "<br />" +
-										"Pubmed ID: " + bedRow.pubmed_id + "<br />" +
-										"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
+								
+								for(j=0; i <= data.bedFileResults[i].length - 1; j++){
+									$("#resultsTable").append("Chromosome: " + data.bedFileResults[i][j][1] + "<br />" +
+										"Start: " + data.bedFileResults[i][j][2] + "<br />" +
+										"End: " + data.bedFileResults[i][j][3] + "<br />"
+										//"Name: " + bedRow.name + "<br />" +
+										//"Strand: " + bedRow.strand + "<br />" +
+										//"Stage: " + bedRow.stage + "<br />" +
+										//"Source: " + bedRow.source + "<br />" +
+										//"Pubmed ID: " + bedRow.pubmed_id + "<br />" +
+										//"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
 									);
-									
 								}
-								*/
+							
 							}
 							/*
                             if(data.pubmedID != null)
