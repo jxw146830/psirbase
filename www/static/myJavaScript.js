@@ -1492,27 +1492,24 @@ $(document).ready(
                         //only process non-empty result sets
                         else {
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
-							/*
+							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)
 									continue;
-								$("#resultsTable").append(data.bedFileResults[i] + "<br />")
-								
-								for(j=0; j <= data.bedFileResults[i].length - 1; j++){
-									$("#resultsTable").append("Chromosome: " + data.bedFileResults[i][j].chr_num + "<br />" +
-										"Start: " + data.bedFileResults[i][j].start + "<br />" +
-										"End: " + data.bedFileResults[i][j].end + "<br />"
-										//"Name: " + bedRow.name + "<br />" +
-										//"Strand: " + bedRow.strand + "<br />" +
-										//"Stage: " + bedRow.stage + "<br />" +
-										//"Source: " + bedRow.source + "<br />" +
-										//"Pubmed ID: " + bedRow.pubmed_id + "<br />" +
-										//"Target mRNA: " + bedRow.target_mrna + "<br /><br />"
-									);
-								}
-								
+
+								$("#resultsTable").append("Chromosome: " + data.bedFileResults[i][0] + "<br />" +
+									"Start: " + data.bedFileResults[i][1] + "<br />" +
+									"End: " + data.bedFileResults[i][2] + "<br />" +
+									"Name: " + data.bedFileResults[i][3] + "<br />" +
+									"Strand: " + data.bedFileResults[i][4] + "<br />" +
+									"Stage: " + data.bedFileResults[i][5] + "<br />" +
+									"Source: " + data.bedFileResults[i][6] + "<br />" +
+									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
+									"Target mRNA: " + data.bedFileResults[i][8] + "<br /><br />"
+								);
+
 							}
-							*/
+							
 							/*
                             if(data.pubmedID != null)
                                 $("#resultsTable").append("<br />Pubmed ID: " + data.pubmedID);
