@@ -101,7 +101,7 @@ def search1(request):
 
     #flip sirna sequence
     sirnaSeq = list(theSeq)
-    for x in range(0, sLength):
+    for x in range(0, theSeqLength):
         if sirnaSeq[x] == 'A':
             sirnaSeq[x] = 'T'
         elif sirnaSeq[x] == 'T':
