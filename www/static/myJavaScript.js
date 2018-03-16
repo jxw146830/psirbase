@@ -1492,16 +1492,16 @@ $(document).ready(
                         //only process non-empty result sets
                         else {
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
-							/*
+							
 							var bedCount = -1
 							for(var bedRowsForThisName in data.bedFileResults){
 								bedCount = bedCount + 1;
 								if (bedCount == 0)
 									continue;
-								$("#resultsTable").append(bedRowsForThisName);
-								
+								$("#resultsTable").append(bedRowsForThisName + "<br />");
+								/*
 								for(var bedRow in bedRowsForThisName){
-									//$("#resultsTable").append(bedRow);
+									//$("#resultsTable").append(bedRow + "<br />");
 									
 									$("#resultsTable").append("Chromosome: " + bedRow.chr_num + "<br />" +
 										"Start: " + bedRow.start + "<br />" +
@@ -1515,7 +1515,7 @@ $(document).ready(
 									);
 									
 								}
-								
+								*/
 							}
 							
                             if(data.pubmedID != null)
@@ -1530,7 +1530,7 @@ $(document).ready(
                                 $("#resultsTable").append("<br />Start position: " + data.mrnasResultSet[i][2]);
                                 $("#resultsTable").append("<br />End position: " + data.mrnasResultSet[i][3]);
                             }
-							*/
+							
                         }
                     }
                 });

@@ -104,14 +104,14 @@ def search1(request):
         try:
             #sirnasResultSet = CelegansSirna.objects.get(sequence=theSeq)
 
-            '''
+            
 
             sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
             for sirnaRow in sirnasResultSet:
-                bedRows = CelegansBed.objects.filter(name=sirnaRow.name)
-                bedFilesResultSet.append(bedRows)
+                #bedRows = CelegansBed.objects.filter(name=sirnaRow.name)
+                bedFilesResultSet.append(sirnaRow.name)
 
-            '''
+            
             
             #data = yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMismatchCount)
             data = {
