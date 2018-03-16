@@ -109,11 +109,10 @@ def search1(request):
             sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
             for sirnaRow in sirnasResultSet:
                 sirName = sirnaRow.name
-                sirNameLength = len(sirName)
                 #remove > character to get bed file sirna name equivalent
                 sirName = sirName.replace('>','')
                 bedRows = CelegansBed.objects.filter(name=sirName)
-                bedFilesResultSet.append(bedRows)
+                bedFilesResultSet.extend(bedRows)
 
             
             
