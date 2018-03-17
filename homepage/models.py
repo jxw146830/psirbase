@@ -33,3 +33,33 @@ class CelegansChrSliceI(models.Model):
     start = models.IntegerField()
     end = models.IntegerField()
     sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
+
+class CelegansChrSliceII(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
+
+class CelegansChrSliceIII(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
+
+class CelegansChrSliceIV(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
+
+class CelegansChrSliceV(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
+
+class CelegansChrSliceX(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
+    
+class CelegansChrSliceMtDNA(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+    sequence = models.CharField(max_length=100, default=DEFAULT_PLACEHOLDER)
