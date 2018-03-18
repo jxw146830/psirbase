@@ -152,6 +152,7 @@ def search1(request):
             #get subset of bed files
             bedRows = CelegansBed.objects.filter(target_mrna=theTarget)
             for bedRow in bedRows:
+                mmComputed = 0
                 inResultSet = 1
 
                 #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
