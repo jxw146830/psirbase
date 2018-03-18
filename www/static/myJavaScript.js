@@ -1575,6 +1575,7 @@ $(document).ready(
 									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
 									"Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
 									"siRNA Sequence: " + data.bedFileResults[i][11] + "<br />" +
+									"Flipped & Reversed: " + data.bedFileResults[i][12] + "<br />" +
 									"Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
 									"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
 								);
