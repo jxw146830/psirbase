@@ -35,7 +35,7 @@ def search1(request):
     data = ''
     inputOkay = 1
     dotsDetected = 1
-    originalSeq = theSeq #to retain sequences with dots before removing those dots
+    originalSeq = ''
     
     #get length for user input
     theSeqLength = len(theSeq)
@@ -103,6 +103,8 @@ def search1(request):
 
         theSeq = ''.join(seqChars)
 
+        originalSeq = theSeq
+        
         #remove dots from sequence if dots are present
         for base in theSeq:
             if base == '.':
