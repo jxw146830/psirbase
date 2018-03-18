@@ -33,16 +33,13 @@ def search1(request):
     theTarget = theSeq
     theMismatchCount = request.GET.get('mmVal', None)
     data = ''
-
-    #THE FOLLOWING CHECKS IF USER INPUT IS VALID (string only consists of A, C, G, T, U, a, c, g, t, u)
+    inputOkay = 1
+    dotsDetected = 1
+    originalSeq = theSeq #to retain sequences with dots before removing those dots
     
     #get length for user input
     theSeqLength = len(theSeq)
 
-    inputOkay = 1
-    
-    dotDetected = 1
-    
     if theSrchTyp == 'by siRNA sequence':
         #check each character
         seqChars = list(theSeq)
@@ -68,7 +65,6 @@ def search1(request):
             if seqChars[x] == 'u':
                 continue
             if seqChars[x] == '.':
-                dotDetected = 2
                 continue
             #invalid char detected
             inputOkay = 2
@@ -107,6 +103,18 @@ def search1(request):
 
         theSeq = ''.join(seqChars)
 
+        #remove dots from sequence if dots are present
+        for base in theSeq:
+            if base == '.':
+                dotsDetected = 2
+        if dotsDetected == 2:
+            preSeq = ''
+            for base in actualSirnaSeq:
+                if base != '.':
+                    preSeq = preSeq + base
+            theSeq = preSeq
+            theSeqLength = len(theSeq)
+                    
         #flip sirna sequence
         sirnaSeq = list(theSeq)
         for x in range(0, theSeqLength):
@@ -156,6 +164,7 @@ def search1(request):
                 inResultSet = 1
                 actualSirnaSeq = 'nothing yet'
                 actualSirnaSeqR = 'nothing yet'
+                dotsDetected = 1
                 
                 #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
                 sirName = '>' + bedRow.name
@@ -163,6 +172,18 @@ def search1(request):
                 for sirna in sirnasResultSet:
                     actualSirnaSeq = sirna.sequence
                 theSeqLength = len(actualSirnaSeq)
+
+                #remove dots from sequence if dots are present
+                for base in actualSirnaSeq:
+                    if base == '.':
+                        dotsDetected = 2
+                if dotsDetected == 2:
+                    preActualSirnaSeq = ''
+                    for base in actualSirnaSeq:
+                        if base != '.':
+                            preActualSirnaSeq = preActualSirnaSeq + base
+                    actualSirnaSeq = preActualSirnaSeq
+                    theSeqLength = len(actualSirnaSeq)
                 
                 #check if current bed row already added to output list
                 if len(bedFilesResultSet) > 1:
@@ -276,8 +297,6 @@ def search1(request):
                             preMatchedSequence[x] = 'G'
                         elif preMatchedSequence[x] == 'G':
                             preMatchedSequence[x] = 'C'
-                        elif preMatchedSequence[x] == '.':
-                            dotDetected = 2
                     preMatchedSequence = ''.join(preMatchedSequence)
 
                     #reverse actual sirna sequence
@@ -292,10 +311,8 @@ def search1(request):
                             mmComputed = mmComputed + 1
                         seqIndex = seqIndex + 1
                     
-                    if dotDetected == 2:
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?', actualSirnaSeq, actualSirnaSeqR])
-                    elif mmComputed <= int(theMismatchCount):
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq, actualSirnaSeqR])
+                    if mmComputed <= int(theMismatchCount):
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq, actualSirnaSeqR, originalSeq, dotsDetected])
 
             resultsWereFound = 'yes'
             #if no results (because of mismatch limit exceeded for all associated sirnas or because no sirnas simply affect this mRNA)
@@ -447,9 +464,7 @@ def search1(request):
                             mmComputed = mmComputed + 1
                         seqIndex = seqIndex + 1
 
-                    if dotDetected == 2:
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?'])
-                    elif mmComputed <= int(theMismatchCount):
+                    if mmComputed <= int(theMismatchCount):
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed])
 
         #get subset of mRNAs
@@ -489,6 +504,8 @@ def search1(request):
             "bedFileResults": bedFilesResultSet,
             "mrnaResults": mrnasResultSet,
             "resultsFound": resultsWereFound,
+            "dotsInSequence": dotsDetected,
+            "originalSeq": originalSeq,
         }
     else:
         data = {

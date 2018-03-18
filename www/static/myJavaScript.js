@@ -1525,7 +1525,10 @@ $(document).ready(
                         }
 						//only process non-empty result sets
                         else if(searchT == 'by siRNA sequence'){
-                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq);
+							if(data.dotsInSequence == 2 || data.dotsInSequence == '2')
+								$("#resultsTable").append("<br />Before Dots Removed: " + data.originalSeq);
+							$("#resultsTable").append("<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)
@@ -1573,9 +1576,15 @@ $(document).ready(
 									"Stage: " + data.bedFileResults[i][5] + "<br />" +
 									"Source: " + data.bedFileResults[i][6] + "<br />" +
 									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
-									"Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
-									"siRNA Sequence: " + data.bedFileResults[i][11] + "<br />" +
-									"Flipped & Reversed: " + data.bedFileResults[i][12] + "<br />" +
+									"Target mRNA: " + data.bedFileResults[i][8] + "<br />"
+								);
+								if(data.bedFileResults[i][14] == 1 || data.bedFileResults[i][14] == '1')
+									$("#resultsTable").append("siRNA Sequence: " + data.bedFileResults[i][11] + "<br />");
+								else{
+									$("#resultsTable").append("siRNA Sequence (before removing dots): " + data.bedFileResults[i][13] + "<br />");
+									$("#resultsTable").append("siRNA Sequence (after): " + data.bedFileResults[i][11] + "<br />");
+								}
+								$("#resultsTable").append("Flipped & Reversed: " + data.bedFileResults[i][12] + "<br />" +
 									"Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
 									"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
 								);
