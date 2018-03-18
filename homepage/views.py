@@ -273,9 +273,13 @@ def search1(request):
                     
                     if dotDetected == 2:
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?', actualSirnaSeq])
+                    else:
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq])
+                    '''
                     elif mmComputed <= int(theMismatchCount):
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq])
-
+                    '''
+                    
             resultsWereFound = 'yes'
             #if no results (because of mismatch limit exceeded for all associated sirnas or because no sirnas simply affect this mRNA)
             if len(bedFilesResultSet) == 1:
