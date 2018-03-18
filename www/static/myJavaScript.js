@@ -1527,7 +1527,7 @@ $(document).ready(
                         else if(searchT == 'by siRNA sequence'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType);
 							if(data.dotsInSequence == 2 || data.dotsInSequence == '2'){
-								//$("#resultsTable").append("<br />siRNA Sequence (Before Dots Removed): " + data.originalSeq);
+								$("#resultsTable").append("<br />siRNA Sequence (Before Dots Removed): " + data.originalSeq);
 								$("#resultsTable").append("<br />siRNA Sequence (After Dots Removed): " +  data.sirSeq);
 							}
 							else

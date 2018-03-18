@@ -111,7 +111,7 @@ def search1(request):
                 dotsDetected = 2
         if dotsDetected == 2:
             preSeq = ''
-            for base in actualSirnaSeq:
+            for base in theSeq:
                 if base != '.':
                     preSeq = preSeq + base
             theSeq = preSeq
