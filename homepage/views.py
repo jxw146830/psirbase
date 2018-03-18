@@ -254,18 +254,18 @@ def search1(request):
                             for i in preMatchedSequence:
                                 matchedSequence = i + matchedSequence
 
-                    #compute number of mismatches present in matched sequence
-                    seqIndex = 0
-                    for base in matchedSequence:
-                        if base != theSeqR[seqIndex]:
-                            mmComputed = mmComputed + 1
-                        seqIndex = seqIndex + 1
-
                     #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
                     sirnasResultSet = CelegansSirna.objects.filter(name=bedRow.name)
                     actualSirnaSeq = 'nothing yet'
                     for sirna in sirnasResultSet:
                         actualSirnaSeq = sirna.sequence
+                        
+                    #compute number of mismatches present in matched sequence
+                    seqIndex = 0
+                    for base in matchedSequence:
+                        if base != actualSirnaSeq[seqIndex]:
+                            mmComputed = mmComputed + 1
+                        seqIndex = seqIndex + 1
                     
                     if dotDetected == 2:
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?', actualSirnaSeq])
