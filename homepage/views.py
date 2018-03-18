@@ -172,7 +172,8 @@ def search1(request):
                 for sirna in sirnasResultSet:
                     actualSirnaSeq = sirna.sequence
                 theSeqLength = len(actualSirnaSeq)
-
+                originalSeq = actualSirnaSeq
+                
                 #remove dots from sequence if dots are present
                 for base in actualSirnaSeq:
                     if base == '.':
@@ -332,7 +333,7 @@ def search1(request):
 
         #otherwise, do all this for by siRNA sequence search type (no else thing required, since above returns)
         #get subset of sirnas
-        sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
+        sirnasResultSet = CelegansSirna.objects.filter(sequence=originalSeq)
         if sirnasResultSet.exists() == False:
             data = {
                 "sirSpecVal": theSpecVal,

@@ -1525,9 +1525,13 @@ $(document).ready(
                         }
 						//only process non-empty result sets
                         else if(searchT == 'by siRNA sequence'){
-                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq);
-							if(data.dotsInSequence == 2 || data.dotsInSequence == '2')
-								$("#resultsTable").append("<br />Before Dots Removed: " + data.originalSeq);
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType);
+							if(data.dotsInSequence == 2 || data.dotsInSequence == '2'){
+								$("#resultsTable").append("<br />siRNA Sequence (Before Dots Removed): " + data.originalSeq);
+								$("#resultsTable").append("<br />siRNA Sequence (After Dots Removed): " +  data.sirSeq);
+							}
+							else
+								$("#resultsTable").append("<br />siRNA Sequence: " +  data.sirSeq);
 							$("#resultsTable").append("<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
