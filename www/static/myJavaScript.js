@@ -1524,7 +1524,7 @@ $(document).ready(
 							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs or simply no siRNAs affect this mRNA)");
                         }
 						//only process non-empty result sets
-                        else if(searchT = 'by siRNA sequence'){
+                        else if(searchT == 'by siRNA sequence'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
@@ -1557,7 +1557,7 @@ $(document).ready(
 								);
                             }	
                         }
-						else if(searchT = 'by MRNA name'){
+						else if(searchT == 'by MRNA name'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[0] + "<br />Start: " + data.mrnaResults[1] + "<br />End: " + data.mrnaResults[2] + "<br />Strand: " + data.mrnaResults[4]);
 							
 							$("#resultsTable").append("<br /><br /><br /><hr /><br /><br /><br />");
