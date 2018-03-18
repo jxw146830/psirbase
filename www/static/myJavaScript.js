@@ -1515,11 +1515,11 @@ $(document).ready(
                             $("#resultsTable").html("The mRNA name " + data.sirnaResults + " does not exist for " + data.sirSpecVal);
                         }
 						//if mismatch limit exceeded for all sirnas that were returned
-						else if(data.resultsFound == "no" && searchT = 'by siRNA sequence'){
+						else if(data.resultsFound == "no" && searchT == 'by siRNA sequence'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
 							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs)");
                         }
-						else if(data.resultsFound == "no" && searchT = 'by MRNA name'){
+						else if(data.resultsFound == "no" && searchT == 'by MRNA name'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[0] + "<br />Start: " + data.mrnaResults[1] + "<br />End: " + data.mrnaResults[2] + "<br />Strand: " + data.mrnaResults[4] + "<br /><br />");
 							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs or simply no siRNAs affect this mRNA)");
                         }
