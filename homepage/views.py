@@ -153,6 +153,15 @@ def search1(request):
             bedRows = CelegansBed.objects.filter(target_mrna=theTarget)
             for bedRow in bedRows:
                 inResultSet = 1
+
+                #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
+                actualSirnaSeq = 'nothing yet'
+                sirName = '>' + bedRow.name
+                sirnasResultSet = CelegansSirna.objects.filter(name=sirName)
+                for sirna in sirnasResultSet:
+                    actualSirnaSeq = sirna.sequence
+                theSeqLength = len(actualSirnaSeq)
+                
                 #check if current bed row already added to output list
                 if len(bedFilesResultSet) > 1:
                     bedCount = -1
@@ -253,15 +262,6 @@ def search1(request):
                             matchedSequence = ''
                             for i in preMatchedSequence:
                                 matchedSequence = i + matchedSequence
-
-                    #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
-                    actualSirnaSeq = 'nothing yet'
-                    '''
-                    sirName = '>' + bedRow.name
-                    sirnasResultSet = CelegansSirna.objects.filter(name=sirName)
-                    for sirna in sirnasResultSet:
-                        actualSirnaSeq = sirna.sequence
-                    '''
                     
                     #compute number of mismatches present in matched sequence
                     seqIndex = 0
@@ -274,7 +274,6 @@ def search1(request):
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?', actualSirnaSeq])
                     elif mmComputed <= int(theMismatchCount):
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq])
-
 
             resultsWereFound = 'yes'
             #if no results (because of mismatch limit exceeded for all associated sirnas or because no sirnas simply affect this mRNA)
