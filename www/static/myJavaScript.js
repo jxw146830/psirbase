@@ -1560,7 +1560,7 @@ $(document).ready(
 						else if(searchT == 'by MRNA name'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4]);
 							
-							$("#resultsTable").append("<br /><br /><hr /><br /><br />");
+							$("#resultsTable").append("<br /><br /><br /><hr /><br /><br />");
 							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)

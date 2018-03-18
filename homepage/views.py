@@ -276,6 +276,8 @@ def search1(request):
                             preMatchedSequence[x] = 'G'
                         elif preMatchedSequence[x] == 'G':
                             preMatchedSequence[x] = 'C'
+                        elif preMatchedSequence[x] == '.':
+                            dotDetected = 2
                     preMatchedSequence = ''.join(preMatchedSequence)
 
                     #reverse actual sirna sequence
