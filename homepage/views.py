@@ -263,23 +263,37 @@ def search1(request):
                             matchedSequence = ''
                             for i in preMatchedSequence:
                                 matchedSequence = i + matchedSequence
+
+                            #flip actual sirna sequence
+                            preMatchedSequence = list(actualSirnaSeq)
+                            for x in range(0, theSeqLength):
+                                if preMatchedSequence[x] == 'A':
+                                    preMatchedSequence[x] = 'T'
+                                elif preMatchedSequence[x] == 'T':
+                                    preMatchedSequence[x] = 'A'
+                                elif preMatchedSequence[x] == 'C':
+                                    preMatchedSequence[x] = 'G'
+                                elif preMatchedSequence[x] == 'G':
+                                    preMatchedSequence[x] = 'C'
+                            preMatchedSequence = ''.join(preMatchedSequence)
+
+                            #reverse actual sirna sequence
+                            actualSirnaSeqR = ''
+                            for i in preMatchedSequence:
+                                actualSirnaSeqR = i + actualSirnaSeqR                                
                     
                     #compute number of mismatches present in matched sequence
                     seqIndex = 0
                     for base in matchedSequence:
-                        if base != actualSirnaSeq[seqIndex]:
+                        if base != actualSirnaSeqR[seqIndex]:
                             mmComputed = mmComputed + 1
                         seqIndex = seqIndex + 1
                     
                     if dotDetected == 2:
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?', actualSirnaSeq])
-                    else:
-                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq])
-                    '''
                     elif mmComputed <= int(theMismatchCount):
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq])
-                    '''
-                    
+
             resultsWereFound = 'yes'
             #if no results (because of mismatch limit exceeded for all associated sirnas or because no sirnas simply affect this mRNA)
             if len(bedFilesResultSet) == 1:
