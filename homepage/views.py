@@ -130,7 +130,7 @@ def search1(request):
         #do this for by mRNA name search type
         if theSrchTyp == 'by MRNA name':
             #get mRNA info
-            currentMrna = CelegansMrna.objects.get(name=theTarget)
+            currentMrna = CelegansMrna.objects.filter(name=theTarget)
             if currentMrna.exists() == False:
                 data = {
                     "sirSpecVal": theSpecVal,
@@ -142,7 +142,8 @@ def search1(request):
                     "mrnasResultSet": '',
                 }
                 return JsonResponse(data)
-            mrnasResultSet = [currentMrna.chr_num, currentMrna.start, currentMrna.end, currentMrna.name, currentMrna.strand]
+            for mrna in currentMrna:
+                mrnasResultSet.append([mrna.chr_num, mrna.start, mrna.end, mrna.name, mrna.strand])
         
             #get subset of bed files
             bedRows = CelegansBed.objects.filter(target_mrna=theTarget)

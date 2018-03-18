@@ -1475,15 +1475,15 @@ $(document).ready(
                 $("#resultGhost").show(0);
 				
 				if(seq == '' || searchT == 'no search type selected' || specVal == 'no species selected'){
-					$("#resultsTable").html("Error:\n\n");
+					$("#resultsTable").html("Error:<br /><br />");
 					if(specVal == 'no species selected')
-						$("#resultsTable").append("You must select a species.\n");
+						$("#resultsTable").append("You must select a species.<br />");
 					if(searchT == 'no search type selected')
-						$("#resultsTable").append("You must select a search type.\n");
+						$("#resultsTable").append("You must select a search type.<br />");
 					if(seq == '' && searchT == 'by siRNA sequence')
-						$("#resultsTable").append("You must enter an siRNA sequence.\n");
+						$("#resultsTable").append("You must enter an siRNA sequence.<br />");
 					if(seq == '' && searchT == 'by MRNA name')
-						$("#resultsTable").append("You must enter an mRNA name.\n");
+						$("#resultsTable").append("You must enter an mRNA name.");
 					return;
 				}
                 
@@ -1520,7 +1520,7 @@ $(document).ready(
 							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs)");
                         }
 						else if(data.resultsFound == "no" && searchT == 'by MRNA name'){
-                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[0] + "<br />Start: " + data.mrnaResults[1] + "<br />End: " + data.mrnaResults[2] + "<br />Strand: " + data.mrnaResults[4] + "<br /><br />");
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4] + "<br /><br />");
 							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs or simply no siRNAs affect this mRNA)");
                         }
 						//only process non-empty result sets
@@ -1558,7 +1558,7 @@ $(document).ready(
                             }	
                         }
 						else if(searchT == 'by MRNA name'){
-                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[0] + "<br />Start: " + data.mrnaResults[1] + "<br />End: " + data.mrnaResults[2] + "<br />Strand: " + data.mrnaResults[4]);
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4] + "<br /><br />");
 							
 							$("#resultsTable").append("<br /><br /><br /><hr /><br /><br /><br />");
 							
@@ -1574,8 +1574,6 @@ $(document).ready(
 									"Source: " + data.bedFileResults[i][6] + "<br />" +
 									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
 									"Target mRNA: " + data.bedFileResults[i][8] + "<br /><br />"
-									// + "Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
-									//"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
 								);
 							}
                         }
