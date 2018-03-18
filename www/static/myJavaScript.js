@@ -1558,9 +1558,9 @@ $(document).ready(
                             }	
                         }
 						else if(searchT == 'by MRNA name'){
-                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4] + "<br /><br />");
+                            $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4]);
 							
-							$("#resultsTable").append("<br /><br /><br /><hr /><br /><br /><br />");
+							$("#resultsTable").append("<br /><br /><hr /><br /><br />");
 							
 							for(i=0; i <= data.bedFileResults.length - 1; i++){
 								if(i==0)
@@ -1573,7 +1573,10 @@ $(document).ready(
 									"Stage: " + data.bedFileResults[i][5] + "<br />" +
 									"Source: " + data.bedFileResults[i][6] + "<br />" +
 									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
-									"Target mRNA: " + data.bedFileResults[i][8] + "<br /><br />"
+									"Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
+									"siRNA Sequence: " + data.bedFileResults[i][11] + "<br />" +
+									"Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
+									"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
 								);
 							}
                         }

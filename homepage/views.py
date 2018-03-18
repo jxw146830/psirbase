@@ -40,7 +40,9 @@ def search1(request):
     theSeqLength = len(theSeq)
 
     inputOkay = 1
-
+    
+    dotDetected = 1
+    
     if theSrchTyp == 'by siRNA sequence':
         #check each character
         seqChars = list(theSeq)
@@ -64,6 +66,9 @@ def search1(request):
             if seqChars[x] == 't':
                 continue
             if seqChars[x] == 'u':
+                continue
+            if seqChars[x] == '.':
+                dotDetected = 2
                 continue
             #invalid char detected
             inputOkay = 2
@@ -101,7 +106,6 @@ def search1(request):
                 seqChars[x] = 'T'
 
         theSeq = ''.join(seqChars)
-
 
         #flip sirna sequence
         sirnaSeq = list(theSeq)
@@ -159,7 +163,115 @@ def search1(request):
                         if bedResult[0] == bedRow.chr_num and bedResult[1] == bedRow.start and bedResult[2] == bedRow.end and bedResult[3] == bedRow.name and bedResult[4] == bedRow.strand and bedResult[5] == bedRow.stage and bedResult[6] == bedRow.source and bedResult[7] == bedRow.pubmed_id and bedResult[8] == bedRow.target_mrna:
                             inResultSet = 2
                 if inResultSet == 1:
-                    bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna])
+                    matchedSequence = 'nothing yet'
+                    #get matching sequence for each bed row
+                    bedRowStart = bedRow.start
+                    bedRowEnd = bedRow.end
+                    sliceResult = 'nothing yet'
+                    sliceResult2 = 'nothing yet'
+                    lastTwo = 'nothing yet'
+                    onlyOneSliceNeeded = 1
+                    if int(bedRowStart) <= 99:
+                        lastTwo = bedRowStart
+                        if bedRow.chr_num == 'I':
+                            sliceResult = CelegansChrSliceI.objects.get(start=0)
+                        if bedRow.chr_num == 'II':
+                            sliceResult = CelegansChrSliceII.objects.get(start=0)
+                        if bedRow.chr_num == 'III':
+                            sliceResult = CelegansChrSliceIII.objects.get(start=0)
+                        if bedRow.chr_num == 'IV':
+                            sliceResult = CelegansChrSliceIV.objects.get(start=0)
+                        if bedRow.chr_num == 'V':
+                            sliceResult = CelegansChrSliceV.objects.get(start=0)
+                        if bedRow.chr_num == 'X':
+                            sliceResult = CelegansChrSliceX.objects.get(start=0)
+                        if bedRow.chr_num == 'MtDNA':
+                            sliceResult = CelegansChrSliceMtDNA.objects.get(start=0)
+                        #matchedSequence = sliceResult.sequence[ int(bedRowStart) : int(bedRowStart)+theSeqLength ]
+                    else:
+                        startLength = len(bedRowStart)
+                        lastTwo = bedRowStart [ startLength-2 : startLength ]
+                        bedRowStart = bedRowStart[ 0 : startLength-2]
+                        bedRowStart = bedRowStart + '00'
+                        bedRowStart = int(bedRowStart)
+                        if bedRow.chr_num == 'I':
+                            sliceResult = CelegansChrSliceI.objects.get(start=bedRowStart)
+                        if bedRow.chr_num == 'II':
+                            sliceResult = CelegansChrSliceII.objects.get(start=bedRowStart)
+                        if bedRow.chr_num == 'III':
+                            sliceResult = CelegansChrSliceIII.objects.get(start=bedRowStart)
+                        if bedRow.chr_num == 'IV':
+                            sliceResult = CelegansChrSliceIV.objects.get(start=bedRowStart)
+                        if bedRow.chr_num == 'V':
+                            sliceResult = CelegansChrSliceV.objects.get(start=bedRowStart)
+                        if bedRow.chr_num == 'X':
+                            sliceResult = CelegansChrSliceX.objects.get(start=bedRowStart)
+                        if bedRow.chr_num == 'MtDNA':
+                            sliceResult = CelegansChrSliceMtDNA.objects.get(start=bedRowStart)
+                        #matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
+                    if int(bedRowEnd) > 99:
+                        endLength = len(bedRowEnd)
+                        bedRowEnd = bedRowEnd[ 0 : endLength-2]
+                        bedRowEnd = bedRowEnd + '00'
+                        if bedRowStart != bedRowEnd:
+                            onlyOneSliceNeeded = 2
+                            bedRowEnd = int(bedRowEnd)
+                            if bedRow.chr_num == 'I':
+                                sliceResult2 = CelegansChrSliceI.objects.get(start=bedRowEnd)
+                            if bedRow.chr_num == 'II':
+                                sliceResult2 = CelegansChrSliceII.objects.get(start=bedRowEnd)
+                            if bedRow.chr_num == 'III':
+                                sliceResult2 = CelegansChrSliceIII.objects.get(start=bedRowEnd)
+                            if bedRow.chr_num == 'IV':
+                                sliceResult2 = CelegansChrSliceIV.objects.get(start=bedRowEnd)
+                            if bedRow.chr_num == 'V':
+                                sliceResult2 = CelegansChrSliceV.objects.get(start=bedRowEnd)
+                            if bedRow.chr_num == 'X':
+                                sliceResult2 = CelegansChrSliceX.objects.get(start=bedRowEnd)
+                            if bedRow.chr_num == 'MtDNA':
+                                sliceResult2 = CelegansChrSliceMtDNA.objects.get(start=bedRowEnd)
+                    if onlyOneSliceNeeded == 1:
+                        matchedSequence = sliceResult.sequence[ int(lastTwo) : int(lastTwo)+theSeqLength ]
+                    else:
+                        combinedSlice = sliceResult.sequence + sliceResult2.sequence
+                        matchedSequence = combinedSlice[ int(lastTwo) : int(lastTwo)+theSeqLength ]
+                    if bedRow.strand == '+':
+                            #flip matched sequence
+                            preMatchedSequence = list(matchedSequence)
+                            for x in range(0, theSeqLength):
+                                if preMatchedSequence[x] == 'A':
+                                    preMatchedSequence[x] = 'T'
+                                elif preMatchedSequence[x] == 'T':
+                                    preMatchedSequence[x] = 'A'
+                                elif preMatchedSequence[x] == 'C':
+                                    preMatchedSequence[x] = 'G'
+                                elif preMatchedSequence[x] == 'G':
+                                    preMatchedSequence[x] = 'C'
+                            preMatchedSequence = ''.join(preMatchedSequence)
+
+                            #reverse matched sequence
+                            matchedSequence = ''
+                            for i in preMatchedSequence:
+                                matchedSequence = i + matchedSequence
+
+                    #compute number of mismatches present in matched sequence
+                    seqIndex = 0
+                    for base in matchedSequence:
+                        if base != theSeqR[seqIndex]:
+                            mmComputed = mmComputed + 1
+                        seqIndex = seqIndex + 1
+
+                    #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
+                    sirnasResultSet = CelegansSirna.objects.filter(name=bedRow.name)
+                    actualSirnaSeq = 'nothing yet'
+                    for sirna in sirnasResultSet:
+                        actualSirnaSeq = sirna.sequence
+                    
+                    if dotDetected == 2:
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?', actualSirnaSeq])
+                    elif mmComputed <= int(theMismatchCount):
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed, actualSirnaSeq])
+
 
             resultsWereFound = 'yes'
             #if no results (because of mismatch limit exceeded for all associated sirnas or because no sirnas simply affect this mRNA)
@@ -176,7 +288,7 @@ def search1(request):
                 "resultsFound": resultsWereFound,
             }
             return JsonResponse(data)
-                
+
         #otherwise, do all this for by siRNA sequence search type (no else thing required, since above returns)
         #get subset of sirnas
         sirnasResultSet = CelegansSirna.objects.filter(sequence=theSeq)
@@ -310,7 +422,10 @@ def search1(request):
                         if base != theSeqR[seqIndex]:
                             mmComputed = mmComputed + 1
                         seqIndex = seqIndex + 1
-                    if mmComputed <= int(theMismatchCount):
+
+                    if dotDetected == 2:
+                        bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, '?'])
+                    elif mmComputed <= int(theMismatchCount):
                         bedFilesResultSet.append([bedRow.chr_num, bedRow.start, bedRow.end, bedRow.name, bedRow.strand, bedRow.stage, bedRow.source, bedRow.pubmed_id, bedRow.target_mrna, matchedSequence, mmComputed])
 
         #get subset of mRNAs
