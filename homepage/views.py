@@ -247,41 +247,41 @@ def search1(request):
                         combinedSlice = sliceResult.sequence + sliceResult2.sequence
                         matchedSequence = combinedSlice[ int(lastTwo) : int(lastTwo)+theSeqLength ]
                     if bedRow.strand == '+':
-                            #flip matched sequence
-                            preMatchedSequence = list(matchedSequence)
-                            for x in range(0, theSeqLength):
-                                if preMatchedSequence[x] == 'A':
-                                    preMatchedSequence[x] = 'T'
-                                elif preMatchedSequence[x] == 'T':
-                                    preMatchedSequence[x] = 'A'
-                                elif preMatchedSequence[x] == 'C':
-                                    preMatchedSequence[x] = 'G'
-                                elif preMatchedSequence[x] == 'G':
-                                    preMatchedSequence[x] = 'C'
-                            preMatchedSequence = ''.join(preMatchedSequence)
+                        #flip matched sequence
+                        preMatchedSequence = list(matchedSequence)
+                        for x in range(0, theSeqLength):
+                            if preMatchedSequence[x] == 'A':
+                                preMatchedSequence[x] = 'T'
+                            elif preMatchedSequence[x] == 'T':
+                                preMatchedSequence[x] = 'A'
+                            elif preMatchedSequence[x] == 'C':
+                                preMatchedSequence[x] = 'G'
+                            elif preMatchedSequence[x] == 'G':
+                                preMatchedSequence[x] = 'C'
+                        preMatchedSequence = ''.join(preMatchedSequence)
 
-                            #reverse matched sequence
-                            matchedSequence = ''
-                            for i in preMatchedSequence:
-                                matchedSequence = i + matchedSequence
+                        #reverse matched sequence
+                        matchedSequence = ''
+                        for i in preMatchedSequence:
+                            matchedSequence = i + matchedSequence
 
-                            #flip actual sirna sequence
-                            preMatchedSequence = list(actualSirnaSeq)
-                            for x in range(0, theSeqLength):
-                                if preMatchedSequence[x] == 'A':
-                                    preMatchedSequence[x] = 'T'
-                                elif preMatchedSequence[x] == 'T':
-                                    preMatchedSequence[x] = 'A'
-                                elif preMatchedSequence[x] == 'C':
-                                    preMatchedSequence[x] = 'G'
-                                elif preMatchedSequence[x] == 'G':
-                                    preMatchedSequence[x] = 'C'
-                            preMatchedSequence = ''.join(preMatchedSequence)
+                    #flip actual sirna sequence
+                    preMatchedSequence = list(actualSirnaSeq)
+                    for x in range(0, theSeqLength):
+                        if preMatchedSequence[x] == 'A':
+                            preMatchedSequence[x] = 'T'
+                        elif preMatchedSequence[x] == 'T':
+                            preMatchedSequence[x] = 'A'
+                        elif preMatchedSequence[x] == 'C':
+                            preMatchedSequence[x] = 'G'
+                        elif preMatchedSequence[x] == 'G':
+                            preMatchedSequence[x] = 'C'
+                    preMatchedSequence = ''.join(preMatchedSequence)
 
-                            #reverse actual sirna sequence
-                            actualSirnaSeqR = ''
-                            for i in preMatchedSequence:
-                                actualSirnaSeqR = i + actualSirnaSeqR                                
+                    #reverse actual sirna sequence
+                    actualSirnaSeqR = ''
+                    for i in preMatchedSequence:
+                        actualSirnaSeqR = i + actualSirnaSeqR                                
                     
                     #compute number of mismatches present in matched sequence
                     seqIndex = 0
@@ -420,23 +420,23 @@ def search1(request):
                         combinedSlice = sliceResult.sequence + sliceResult2.sequence
                         matchedSequence = combinedSlice[ int(lastTwo) : int(lastTwo)+theSeqLength ]
                     if bedRow.strand == '+':
-                            #flip matched sequence
-                            preMatchedSequence = list(matchedSequence)
-                            for x in range(0, theSeqLength):
-                                if preMatchedSequence[x] == 'A':
-                                    preMatchedSequence[x] = 'T'
-                                elif preMatchedSequence[x] == 'T':
-                                    preMatchedSequence[x] = 'A'
-                                elif preMatchedSequence[x] == 'C':
-                                    preMatchedSequence[x] = 'G'
-                                elif preMatchedSequence[x] == 'G':
-                                    preMatchedSequence[x] = 'C'
-                            preMatchedSequence = ''.join(preMatchedSequence)
+                        #flip matched sequence
+                        preMatchedSequence = list(matchedSequence)
+                        for x in range(0, theSeqLength):
+                            if preMatchedSequence[x] == 'A':
+                                preMatchedSequence[x] = 'T'
+                            elif preMatchedSequence[x] == 'T':
+                                preMatchedSequence[x] = 'A'
+                            elif preMatchedSequence[x] == 'C':
+                                preMatchedSequence[x] = 'G'
+                            elif preMatchedSequence[x] == 'G':
+                                preMatchedSequence[x] = 'C'
+                        preMatchedSequence = ''.join(preMatchedSequence)
 
-                            #reverse matched sequence
-                            matchedSequence = ''
-                            for i in preMatchedSequence:
-                                matchedSequence = i + matchedSequence
+                        #reverse matched sequence
+                        matchedSequence = ''
+                        for i in preMatchedSequence:
+                            matchedSequence = i + matchedSequence
 
                     #compute number of mismatches present in matched sequence
                     seqIndex = 0
