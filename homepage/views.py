@@ -255,12 +255,14 @@ def search1(request):
                                 matchedSequence = i + matchedSequence
 
                     #get actual sirna sequence for current bed row (to compare with matched sequence found in cDNA)
+                    actualSirnaSeq = 'nothing yet'
+                    '''
                     sirName = '>' + bedRow.name
                     sirnasResultSet = CelegansSirna.objects.filter(name=sirName)
-                    actualSirnaSeq = 'nothing yet'
                     for sirna in sirnasResultSet:
                         actualSirnaSeq = sirna.sequence
-                        
+                    '''
+                    
                     #compute number of mismatches present in matched sequence
                     seqIndex = 0
                     for base in matchedSequence:
