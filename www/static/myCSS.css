@@ -93,12 +93,12 @@ body {
     position:fixed;
     top: 80px;
     width: 100%;
-    z-index: 20;
+    z-index: 1000;
     background: hsl(0, 0%, 20%);
     border-top: solid 1px gray;
     padding-top: 10px;
     display: block;
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .menuButtonMini {
@@ -416,52 +416,6 @@ body {
     text-decoration: underline;
 }
 
-#resultGhost {
-    position: fixed;
-    top: 0;
-    z-index: 997;
-    width: 100%;
-    height: 100vh;
-    background: hsla(0, 0%, 0%, 0.75);
-}
-
-#searchResults {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    min-height: 50px;
-    font-size: 14px;
-    background: hsla(280, 100%, 15%, 0.97);
-    text-align: center;
-    display: none;
-    z-index: 998;
-    color: white;
-    top: 80px;
-}
-
-#returnGObutton {
-    background: white;
-    color: black;
-    border: solid 1px gray;
-    width: auto;
-    min-width: 50px;
-    height: auto;
-    min-height: 20px;
-    display: inline-block;
-    padding: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 36px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-#returnGObutton:hover {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
 #downloads {
     position: relative;
     width: 100%;
@@ -502,6 +456,15 @@ body {
     padding-right: 20px;
 }
 
+#RNAi-Process-Image{
+    margin: 0 auto;
+    width: 942px;
+    border: 1px solid white;
+    position: relative;
+    display: block;
+}
+
+
 #about {
     position: relative;
     width: 100%;
@@ -537,4 +500,442 @@ body {
 
 .aboutLinks:visited:hover {
     color: Chartreuse;
+}
+
+#resultGhost {
+    position: fixed;
+    top: 0;
+    z-index: 996;
+    width: 100vw;
+    height: 100vh;
+    background: hsla(0, 0%, 0%, 0.85);
+}
+
+.resultGhostSide{
+    position: fixed;
+    top: 0;
+    z-index: 997;
+    height: 100vh;
+}
+
+#searchResults {
+    height: auto;
+    min-height: 50px;
+
+    width: 100%;
+    background: hsl(280, 100%, 15%);
+    top: 80px;
+    position: absolute;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    z-index: 998;
+    color: white;
+    padding-bottom: 20px;
+
+    /*word-wrap:break-word;*/
+}
+
+#searchResults2 {
+    height: auto;
+    min-height: 50px;
+
+    width: 100%;
+
+    top: 80px;
+    position: absolute;
+    font-size: 14px;
+    text-align: left;
+    display: none;
+    z-index: 998;
+    color: white;
+
+    /*word-wrap:break-word;*/
+}
+
+#searchResultsContent {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    width: 944px;
+    background: hsl(280, 100%, 15%);
+
+}
+
+#searchDetails {
+    width: 944px;
+    display: block;
+}
+
+.searchDetailLeftA {
+    width: 442px;
+    margin-left:20px;
+
+    text-align: right;
+    display:inline-block;
+    background: black;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    color: white;
+    font-size: 12px;
+
+}
+
+.searchDetailRightA {
+    width: 442px;
+    margin-right: 20px;
+
+    text-align: left;
+    display: inline-block;
+    background: #d0d0d0;
+
+    font-size: 12px;
+
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    color: black;
+}
+
+.searchDetailLeftB {
+    width: 442px;
+    margin-left:20px;
+
+    text-align: right;
+    display:inline-block;
+    background: #282828;
+    font-size: 12px;
+
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    color: white;
+
+}
+
+.searchDetailRightB {
+    width: 442px;
+    margin-right: 20px;
+
+    text-align: left;
+    display: inline-block;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    color: black;
+    background: white;
+    font-size: 12px;
+}
+
+#downloadIconS{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+#downloadIconS:hover{
+    cursor: pointer;
+}
+
+#downloadIconM{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+#downloadIconM:hover{
+    cursor: pointer;
+}
+
+#downloadIconL{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+#downloadIconL:hover{
+    cursor: pointer;
+}
+
+#resultsTableL{
+    width: 944px;
+    display: block;
+}
+
+#resultsTableM{
+    width: 695px;
+    display: block;
+}
+
+#resultsTableS{
+    width: 100%;
+    display: block;
+}
+
+#resultsTableXS{
+    width: 100%;
+    display: block;
+}
+
+.bedLocation {
+    font-size: 12px;
+    height: 17px;
+    width: 184px;
+    padding-left: 4px;
+    padding-right: 2px;
+    background: #72613c;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top:3px;
+}
+
+.bedID {
+    font-size: 12px;
+    height: 17px;
+    width: 88px;
+    padding-left: 4px;
+    padding-right: 2px;
+    margin-left:2px;
+    background: #723c3d;
+    display: inline-block;
+}
+
+.bedStage {
+    font-size: 12px;
+    height: 17px;
+    width: 131px;
+    padding-left: 4px;
+    padding-right: 2px;
+    margin-left:2px;
+    background: #6f3c72;
+    display: inline-block;
+}
+
+.bedSource {
+    font-size: 12px;
+    height: 17px;
+    width: 132px;
+    padding-left: 4px;
+    padding-right: 2px;
+    margin-left:2px;
+    background: #423c72;
+    display: inline-block;
+}
+
+.bedPubmed {
+    font-size: 12px;
+    height: 17px;
+    width: 67px;
+    padding-left: 4px;
+    padding-right: 2px;
+    margin-left:2px;
+    background: #3c4f72;
+    display: inline-block;
+}
+
+.bedTargetMrna {
+    font-size: 12px;
+    height: 17px;
+    width: 101px;
+    padding-left: 4px;
+    padding-right: 2px;
+    margin-left:2px;
+    background: #3c6772;
+    display: inline-block;
+}
+
+.bedMatchedSeq {
+    font-size: 12px;
+    height: 17px;
+    width: 126px;
+    padding-left: 4px;
+    padding-right: 2px;
+    margin-left:2px;
+    background: #40723c;
+    display: inline-block;
+}
+
+.bedMismatches {
+    font-size: 12px;
+    height: 17px;
+    width: 11px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left:2px;
+    background: #575757;
+    display: inline-block;
+}
+
+/*for medium window width bed result table*/
+.bedResultHeaderColumn {
+    font-size: 12px;
+    height: 17px;
+    width: 113px;
+    padding-left: 4px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top:3px;
+}
+
+.bedResultColumn1 {
+    font-size: 12px;
+    height: 17px;
+    width: 263px;
+    padding-left: 4px;
+    background: white;
+    color: black;
+    display: inline-block;
+    margin-left: 2px;
+    margin-top:3px;
+}
+
+.bedResultColumn2 {
+    font-size: 12px;
+    height: 17px;
+    width: 263px;
+    padding-left: 4px;
+    background: #b4b6eb;
+    color: black;
+    display: inline-block;
+    margin-left: 2px;
+    margin-top:3px;
+}
+
+.bedResultColumn1S {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: white;
+    color: black;
+    display: inline-block;
+    margin-left: 2px;
+    width: 1px;
+}
+
+.bedResultColumn2S {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: #b4b6eb;
+    color: black;
+    display: inline-block;
+    margin-left: 2px;
+    width: 1px;
+}
+
+.bedResultXS {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: white;
+    color: black;
+    display: block;
+    margin: 0 auto;
+}
+
+.bedResultXS2 {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: #b4b6eb;
+    color: black;
+    display: block;
+    margin: 0 auto;
+}
+
+.bedResultHeaderXS {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+#mrnaList {
+    width: 944px;
+    display: block;
+}
+
+.mrnaResultIdHeader {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: hsl(300, 100%, 15%);
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-top: 2px;
+    border-top: solid 1px white;
+
+}
+
+.mrnaResultLocHeader {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: hsl(300, 100%, 25%);
+    display: block;
+    margin: 0 auto;
+    margin-top: 3px;
+}
+
+.mrnaResultId {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: hsl(300, 100%, 80%);
+    color: black;
+    display: block;
+    margin: 0 auto;
+}
+
+.mrnaResultLoc {
+    font-size: 12px;
+    height: 17px;
+    padding-left: 4px;
+    background: hsl(300, 100%, 70%);
+    color: black;
+    display: block;
+    margin: 0 auto;
+}
+
+#returnGObutton {
+    background: white;
+    color: black;
+    border: solid 1px gray;
+    max-width: 300px;
+    min-width: 100px;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 36px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#returnGObutton2 {
+    background: white;
+    color: black;
+    border: solid 1px gray;
+    width: 210px;
+    height: auto;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 36px;
+    cursor: pointer;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -125px;
+}
+
+#returnGObutton:hover {
+    font-weight: bold;
+    text-decoration: underline;
 }

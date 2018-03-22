@@ -1,23 +1,34 @@
 $(document).ready(
     function() {
+
+        //hides all DEBUG result tables
+        $("#resultsTableXS").hide();
+        $("#resultsTableS").hide();
+        $("#resultsTableM").hide();
+        $("#resultsTableL").hide();
+
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
         var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
         var isSafari = (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1);
-		
+
         var isMobileDevice = false;
-		
-		if( navigator.userAgent.match(/Android/i)
-			|| navigator.userAgent.match(/webOS/i)
-			|| navigator.userAgent.match(/iPhone/i)
-			|| navigator.userAgent.match(/iPod/i)
-			|| navigator.userAgent.match(/BlackBerry/i)
-			|| navigator.userAgent.match(/Windows Phone/i)
-			){
-			isMobileDevice = true;				
-		}
+
+        if( navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i)
+            || navigator.userAgent.match(/Windows Phone/i)
+        ){
+            isMobileDevice = true;
+        }
 
         var justMadeWindowWider = false;
         var justMadeWindowWider2 = false;
+
+        //hides results until ready to display
+        $("#resultsTableM").hide();
+        $("#resultsTableL").hide();
 
         //provides "website movement from section to section" mechanic for menu buttons
         $(document).on('click', 'a[href^="#"]', function(e) {
@@ -96,29 +107,29 @@ $(document).ready(
             $("#downloadsMenuButtonText").css("fontWeight", "normal");
             $("#downloadsMenuButtonText").css("textDecoration", "none");
         }
-        if($scrollTop >= ($aboutPageOffset - 80)){
-            if($scrollTop < ($backgroundPageOffset - 80)){
-                $("#aboutMenuButtonText").css("fontWeight", "bold");
-                $("#aboutMenuButtonText").css("textDecoration", "underline");
-                $("#miniMenuCurrentSection").text("ABOUT");
+        if($scrollTop >= ($backgroundPageOffset - 80)){
+            if($scrollTop < ($aboutPageOffset - 80)){
+                $("#backgroundMenuButtonText").css("fontWeight", "bold");
+                $("#backgroundMenuButtonText").css("textDecoration", "underline");
+                $("#miniMenuCurrentSection").text("BACKGROUND");
             }
             else{
-                $("#aboutMenuButtonText").css("fontWeight", "normal");
-                $("#aboutMenuButtonText").css("textDecoration", "none");
+                $("#backgroundMenuButtonText").css("fontWeight", "normal");
+                $("#backgroundMenuButtonText").css("textDecoration", "none");
             }
-        }
-        else{
-            $("#aboutMenuButtonText").css("fontWeight", "normal");
-            $("#aboutMenuButtonText").css("textDecoration", "none");
-        }
-        if($scrollTop >= ($backgroundPageOffset - 80)){
-            $("#backgroundMenuButtonText").css("fontWeight", "bold");
-            $("#backgroundMenuButtonText").css("textDecoration", "underline");
-            $("#miniMenuCurrentSection").text("BACKGROUND");
         }
         else{
             $("#backgroundMenuButtonText").css("fontWeight", "normal");
             $("#backgroundMenuButtonText").css("textDecoration", "none");
+        }
+        if($scrollTop >= ($aboutPageOffset - 80)){
+            $("#aboutMenuButtonText").css("fontWeight", "bold");
+            $("#aboutMenuButtonText").css("textDecoration", "underline");
+            $("#miniMenuCurrentSection").text("ABOUT");
+        }
+        else{
+            $("#aboutMenuButtonText").css("fontWeight", "normal");
+            $("#aboutMenuButtonText").css("textDecoration", "none");
         }
 
         $(window).on("scroll",
@@ -324,17 +335,114 @@ $(document).ready(
                 $("#miniMenuCurrentSection").css("display", "inline");
             }
 
-            //decreases home/search page content width if window width gets too small
+
+
+            //decreases page content width if window width gets too small
             if (windowsize < 735) {
+                computeGhostSideWidthSmall();
                 $("#searchTool").css("margin", "0");
                 $("#searchTool").css("width", "100%");
                 $("#contactForm").css("width", "100%");
+
+                $("#searchResultsContent").css("width", "100%");
+                $("#searchDetails").css("width", "100%");
+                computeSearchDetailWidth();
+
+                $(".searchDetailLeftA").css("margin", "0 auto");
+                $(".searchDetailLeftB").css("margin", "0 auto");
+                $(".searchDetailRightA").css("margin", "0 auto");
+                $(".searchDetailRightB").css("margin", "0 auto");
+
+                $(".searchDetailLeftA").css("text-align", "left");
+                $(".searchDetailLeftB").css("text-align", "left");
+
+                $(".searchDetailLeftA").css("float", "none");
+                $(".searchDetailLeftB").css("float", "none");
+                $(".searchDetailRightA").css("float", "none");
+                $(".searchDetailRightB").css("float", "none");
+
+                $(".searchDetailLeftA").css("display", "block");
+                $(".searchDetailLeftB").css("display", "block");
+                $(".searchDetailRightA").css("display", "block");
+                $(".searchDetailRightB").css("display", "block");
+
+                $(".searchDetailLeftA").css("padding-left", "4px");
+                $(".searchDetailLeftB").css("padding-left", "4px");
+                $(".searchDetailRightA").css("padding-left", "4px");
+                $(".searchDetailRightB").css("padding-left", "4px");
+
+                $(".searchDetailLeftA").css("padding-right", "0");
+                $(".searchDetailLeftB").css("padding-right", "0");
+
+                $(".searchDetailLeftA").css("border-left", "1px solid white");
+                $(".searchDetailLeftB").css("border-left", "1px solid white");
+                $(".searchDetailRightA").css("border-left", "1px solid white");
+                $(".searchDetailRightB").css("border-left", "1px solid white");
+
+                $(".searchDetailLeftA").css("border-right", "1px solid white");
+                $(".searchDetailLeftB").css("border-right", "1px solid white");
+                $(".searchDetailRightA").css("border-right", "1px solid white");
+                $(".searchDetailRightB").css("border-right", "1px solid white");
+
+                $("#searchDetailsTop").css("border-top", "1px solid white");
+
+                $("#mrnaList").css("width", "100%");
+                computeMrnaResultWidthSandXS();
+
+                $("#RNAi-Process-Image").css("width", "100%");
             }
             else if (windowsize < 984) {
+                computeGhostSideWidthMedium();
                 $("#searchTool").css("margin", "0 auto");
                 $("#searchTool").css("width", "695px");
                 $(".pageSection").css("max-width", "695px");
                 $("#contactForm").css("width", "695px");
+
+                $("#searchResultsContent").css("width", "695px");
+                $("#searchDetails").css("width", "695px");
+                $(".searchDetailLeftA").css("width", "113px");
+                $(".searchDetailLeftB").css("width", "113px");
+                $(".searchDetailRightA").css("width", "263px");
+                $(".searchDetailRightB").css("width", "263px");
+
+                $(".searchDetailLeftA").css("margin-left", "20px");
+                $(".searchDetailLeftB").css("margin-left", "20px");
+                $(".searchDetailRightA").css("margin-right", "289px");
+                $(".searchDetailRightB").css("margin-right", "289px");
+
+                $(".searchDetailRightA").css("margin-left", "2px");
+                $(".searchDetailRightB").css("margin-left", "2px");
+
+                $(".searchDetailLeftA").css("text-align", "left");
+                $(".searchDetailLeftB").css("text-align", "left");
+
+                $(".searchDetailLeftA").css("display", "inline-block");
+                $(".searchDetailLeftB").css("display", "inline-block");
+                $(".searchDetailRightA").css("display", "inline-block");
+                $(".searchDetailRightB").css("display", "inline-block");
+
+                $(".searchDetailLeftA").css("padding-left", "4px");
+                $(".searchDetailLeftB").css("padding-left", "4px");
+                $(".searchDetailRightA").css("padding-left", "4px");
+                $(".searchDetailRightB").css("padding-left", "4px");
+
+                $(".searchDetailLeftA").css("padding-right", "0");
+                $(".searchDetailLeftB").css("padding-right", "0");
+
+
+
+
+                $(".searchDetailLeftA").css("border", "0");
+                $(".searchDetailLeftB").css("border", "0");
+                $(".searchDetailRightA").css("border", "0");
+                $(".searchDetailRightB").css("border", "0");
+
+                $("#searchDetailsTop").css("border-top", "none");
+
+                $("#mrnaList").css("width", "695px");
+                computeMrnaResultWidthM();
+
+                $("#RNAi-Process-Image").css("width", "695px");
 
                 //for home+search text version A
                 $(".pageSectionA").css("max-width", "675px");
@@ -354,10 +462,57 @@ $(document).ready(
                 $("#psirbaseSummary").css("font-size", "12px");
             }
             else{
+                computeGhostSideWidthLarge();
                 $("#searchTool").css("margin", "0");
                 $("#searchTool").css("width", "100%");
                 $(".pageSection").css("max-width", "944px");
                 $("#contactForm").css("width", "944px");
+
+                $("#searchResultsContent").css("width", "944px");
+                $("#searchDetails").css("width", "944px");
+                $(".searchDetailLeftA").css("width", "186px");
+                $(".searchDetailLeftB").css("width", "186px");
+                $(".searchDetailRightA").css("width", "229px");
+                $(".searchDetailRightB").css("width", "229px");
+
+                $(".searchDetailLeftA").css("margin-left", "20px");
+                $(".searchDetailLeftB").css("margin-left", "20px");
+                $(".searchDetailRightA").css("margin-right", "497px");
+                $(".searchDetailRightB").css("margin-right", "497px");
+
+                $(".searchDetailRightA").css("margin-left", "2px");
+                $(".searchDetailRightB").css("margin-left", "2px");
+
+                $(".searchDetailLeftA").css("text-align", "left");
+                $(".searchDetailLeftB").css("text-align", "left");
+
+                $(".searchDetailLeftA").css("display", "inline-block");
+                $(".searchDetailLeftB").css("display", "inline-block");
+                $(".searchDetailRightA").css("display", "inline-block");
+                $(".searchDetailRightB").css("display", "inline-block");
+
+                $(".searchDetailLeftA").css("padding-left", "4px");
+                $(".searchDetailLeftB").css("padding-left", "4px");
+                $(".searchDetailRightA").css("padding-left", "4px");
+                $(".searchDetailRightB").css("padding-left", "4px");
+
+                $(".searchDetailLeftA").css("padding-right", "0");
+                $(".searchDetailLeftB").css("padding-right", "0");
+
+
+
+
+                $(".searchDetailLeftA").css("border", "0");
+                $(".searchDetailLeftB").css("border", "0");
+                $(".searchDetailRightA").css("border", "0");
+                $(".searchDetailRightB").css("border", "0");
+
+                $("#searchDetailsTop").css("border-top", "none");
+
+                $("#mrnaList").css("width", "944px");
+                computeMrnaResultWidthL();
+
+                $("#RNAi-Process-Image").css("width", "944px");
 
                 //for home+search text version A
                 $(".pageSectionA").css("max-width", "924px");
@@ -376,6 +531,12 @@ $(document).ready(
                 $("#homeContainer").css("margin-top", "10px");
                 $("#psirbaseSummary").css("font-size", "14px");
             }
+
+            //displays results table with different formats, depending on window width
+            //displayResultsWithCorrectFormat();
+
+            //displays correct "download results" button on search results
+            //displayDownloadButtonWithCorrectFormat();
 
             //tile species circles vertically if species selection bar width too low
             if(windowsize < 735){
@@ -504,7 +665,7 @@ $(document).ready(
             }
 
             //adjust search input text box / mismatch options / submit button if window width gets too small
-			if (isMobileDevice) {
+            if (isMobileDevice) {
                 $("#searchInputText").css("width", "50%");
                 $("#searchInputText").css("display", "block");
                 $("#searchInputText").css("margin", "0 auto");
@@ -535,7 +696,7 @@ $(document).ready(
                 $("#searchGObutton").css("margin", "0 auto");
                 $("#searchGObutton").css("margin-top", "10px");
                 $("#searchGObutton").css("border", "solid 2px white");
-				$("#searchGObutton").css("background", "green");
+                $("#searchGObutton").css("background", "green");
 
                 justMadeWindowWider2 = true;
             }
@@ -657,7 +818,7 @@ $(document).ready(
         var $miniLogo = $("#logoMini");
         $expand.click(
             function(){
-				$miniButtons.css("visibility", "visible");
+                $miniButtons.css("visibility", "visible");
                 $miniButtons.delay(10).slideToggle();
                 $expand.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/menuExpand_icon_hover.png");
                 $miniLogo.attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/logoHover.png");
@@ -1452,6 +1613,32 @@ $(document).ready(
         if(isSafari && !isMobileDevice)
             $("#searchGObutton").css("background", "purple");
 
+        //gives download search results icon hover effect
+        $("#downloadIconS").hover(
+            function(){
+                $("#downloadIconS").attr("src", "images/downloadIconS-hover.png");
+            },
+            function(){
+                $("#downloadIconS").attr("src", "images/downloadIconS.png");
+            }
+        )
+        $("#downloadIconM").hover(
+            function(){
+                $("#downloadIconM").attr("src", "images/downloadIconM-hover.png");
+            },
+            function(){
+                $("#downloadIconM").attr("src", "images/downloadIconM.png");
+            }
+        )
+        $("#downloadIconL").hover(
+            function(){
+                $("#downloadIconL").attr("src", "images/downloadIconL-hover.png");
+            },
+            function(){
+                $("#downloadIconL").attr("src", "images/downloadIconL.png");
+            }
+        )
+
         //returns search result
         $("#searchGObutton").click(
             function(){
@@ -1459,35 +1646,42 @@ $(document).ready(
                 var searchT = $("#searchTypeBox").val();
                 var specVal = $("#speciesBox").val();
                 var mismatchVal;
-                
-				if($("#mismatch0").is(':checked'))
+
+                if($("#mismatch0").is(':checked'))
                     mismatchVal = 0;
                 else if($("#mismatch1").is(':checked'))
                     mismatchVal = 1;
                 else
                     mismatchVal = 2;
-				
-				//slides in search result screen after clicking "SEARCH" button
+
+                //slides in search result screen after clicking "SEARCH" button
                 $("#searchResults").show("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: 0});
-				
-				//makes rest of webpage darker
+
+                //makes rest of webpage darker
                 $("#resultGhost").show(0);
-				
-				if(seq == '' || searchT == 'no search type selected' || specVal == 'no species selected'){
-					$("#resultsTable").html("Error:<br /><br />");
-					if(specVal == 'no species selected')
-						$("#resultsTable").append("You must select a species.<br />");
-					if(searchT == 'no search type selected')
-						$("#resultsTable").append("You must select a search type.<br />");
-					if(seq == '' && searchT == 'by siRNA sequence')
-						$("#resultsTable").append("You must enter an siRNA sequence.<br />");
-					if(seq == '' && searchT == 'by MRNA name')
-						$("#resultsTable").append("You must enter an mRNA name.");
-					return;
-				}
-                
-				$("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;color:white;\">Now loading. Search may take a few seconds.</div>");
+                if($(window).width() < 735)
+                    computeGhostSideWidthSmall()
+                else if($(window).width() < 984)
+                    computeGhostSideWidthMedium();
+                else
+                    computeGhostSideWidthLarge();
+
+
+                if(seq == '' || searchT == 'no search type selected' || specVal == 'no species selected'){
+                    $("#resultsTable").html("Error:<br /><br />");
+                    if(specVal == 'no species selected')
+                        $("#resultsTable").append("You must select a species.<br />");
+                    if(searchT == 'no search type selected')
+                        $("#resultsTable").append("You must select a search type.<br />");
+                    if(seq == '' && searchT == 'by siRNA sequence')
+                        $("#resultsTable").append("You must enter an siRNA sequence.<br />");
+                    if(seq == '' && searchT == 'by MRNA name')
+                        $("#resultsTable").append("You must enter an mRNA name.");
+                    return;
+                }
+
+                $("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;margin-top:5px;\">Now loading. Search may take a few seconds.</div>");
 
                 $.ajax({
                     url: 'ajax/search1/',
@@ -1511,91 +1705,92 @@ $(document).ready(
                         else if(data.sirSeq == "EXISTS NOT" && searchT == 'by siRNA sequence'){
                             $("#resultsTable").html("The siRNA sequence " + data.sirnaResults + " does not exist for " + data.sirSpecVal);
                         }
-						else if(data.sirSeq == "EXISTS NOT" && searchT == 'by MRNA name'){
+                        else if(data.sirSeq == "EXISTS NOT" && searchT == 'by MRNA name'){
                             $("#resultsTable").html("The mRNA name " + data.sirnaResults + " does not exist for " + data.sirSpecVal);
                         }
-						//if mismatch limit exceeded for all sirnas that were returned
-						else if(data.resultsFound == "no" && searchT == 'by siRNA sequence'){
+                        //if mismatch limit exceeded for all sirnas that were returned
+                        else if(data.resultsFound == "no" && searchT == 'by siRNA sequence'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />Input Sequence: " +  data.sirSeq + "<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
-							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs)");
+                            $("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs)");
                         }
-						else if(data.resultsFound == "no" && searchT == 'by MRNA name'){
+                        else if(data.resultsFound == "no" && searchT == 'by MRNA name'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4] + "<br /><br />");
-							$("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs or simply no siRNAs affect this mRNA)");
+                            $("#resultsTable").append("No results (mismatch limit exceeded for all siRNAs or simply no siRNAs affect this mRNA)");
                         }
-						//only process non-empty result sets
+                        //only process non-empty result sets
                         else if(searchT == 'by siRNA sequence'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType);
-							if(data.dotsInSequence == 2 || data.dotsInSequence == '2'){
-								$("#resultsTable").append("<br />siRNA Sequence (Before Dots Removed): " + data.originalSeq);
-								$("#resultsTable").append("<br />siRNA Sequence (After Dots Removed): " +  data.sirSeq);
-							}
-							else
-								$("#resultsTable").append("<br />siRNA Sequence: " +  data.sirSeq);
-							$("#resultsTable").append("<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
-							
-							for(i=0; i <= data.bedFileResults.length - 1; i++){
-								if(i==0)
-									continue;
-								$("#resultsTable").append(data.bedFileResults[i][3] + "<br />" +
-									"Chromosome: " + data.bedFileResults[i][0] + "<br />" +
-									"Start: " + data.bedFileResults[i][1] + "<br />" +
-									"End: " + data.bedFileResults[i][2] + "<br />" +
-									"Strand: " + data.bedFileResults[i][4] + "<br />" +
-									"Stage: " + data.bedFileResults[i][5] + "<br />" +
-									"Source: " + data.bedFileResults[i][6] + "<br />" +
-									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
-									"Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
-									"Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
-									"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
-								);
-							}
-							
-							$("#resultsTable").append("<br /><hr /><br /><br />Genes<br /><br />");
-							
+                            if(data.dotsInSequence == 2 || data.dotsInSequence == '2'){
+                                $("#resultsTable").append("<br />siRNA Sequence (Before Dots Removed): " + data.originalSeq);
+                                $("#resultsTable").append("<br />siRNA Sequence (After Dots Removed): " +  data.sirSeq);
+                            }
+                            else
+                                $("#resultsTable").append("<br />siRNA Sequence: " +  data.sirSeq);
+                            $("#resultsTable").append("<br />Flipped & Reversed: " + data.sirSeqR + "<br />Mismatches Allowed: " + data.mismatchesAllowed + "<br /><br />");
+
+                            for(i=0; i <= data.bedFileResults.length - 1; i++){
+                                if(i==0)
+                                    continue;
+                                $("#resultsTable").append(data.bedFileResults[i][3] + "<br />" +
+                                    "Chromosome: " + data.bedFileResults[i][0] + "<br />" +
+                                    "Start: " + data.bedFileResults[i][1] + "<br />" +
+                                    "End: " + data.bedFileResults[i][2] + "<br />" +
+                                    "Strand: " + data.bedFileResults[i][4] + "<br />" +
+                                    "Stage: " + data.bedFileResults[i][5] + "<br />" +
+                                    "Source: " + data.bedFileResults[i][6] + "<br />" +
+                                    "Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
+                                    "Target mRNA: " + data.bedFileResults[i][8] + "<br />" +
+                                    "Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
+                                    "Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
+                                );
+                            }
+
+                            $("#resultsTable").append("<br /><hr /><br /><br />Genes<br /><br />");
+
                             for(i=0; i <= data.mrnaResults.length - 1; i++){
                                 if(i==0)
                                     continue;
                                 $("#resultsTable").append(data.mrnaResults[i][3] + "<br />" +
-									"Chromosome: " + data.mrnaResults[i][0] + "<br />" +
-									"Start: " + data.mrnaResults[i][1] + "<br />" +
-									"End: " + data.mrnaResults[i][2] + "<br />" +
-									"Strand: " + data.mrnaResults[i][4] + "<br /><br />"
-								);
-                            }	
+                                    "Chromosome: " + data.mrnaResults[i][0] + "<br />" +
+                                    "Start: " + data.mrnaResults[i][1] + "<br />" +
+                                    "End: " + data.mrnaResults[i][2] + "<br />" +
+                                    "Strand: " + data.mrnaResults[i][4] + "<br /><br />"
+                                );
+                            }
                         }
-						else if(searchT == 'by MRNA name'){
+                        else if(searchT == 'by MRNA name'){
                             $("#resultsTable").html("Species selected: " + data.sirSpecVal + "<br />Search type: " +  data.sirSrchType + "<br />mRNA: " +  data.sirSeq + "<br />Chromosome: " + data.mrnaResults[1][0] + "<br />Start: " + data.mrnaResults[1][1] + "<br />End: " + data.mrnaResults[1][2] + "<br />Strand: " + data.mrnaResults[1][4]);
-							
-							$("#resultsTable").append("<br /><br /><br /><hr /><br /><br />");
-							
-							for(i=0; i <= data.bedFileResults.length - 1; i++){
-								if(i==0)
-									continue;
-								$("#resultsTable").append(data.bedFileResults[i][3] + "<br />" +
-									"Chromosome: " + data.bedFileResults[i][0] + "<br />" +
-									"Start: " + data.bedFileResults[i][1] + "<br />" +
-									"End: " + data.bedFileResults[i][2] + "<br />" +
-									"Strand: " + data.bedFileResults[i][4] + "<br />" +
-									"Stage: " + data.bedFileResults[i][5] + "<br />" +
-									"Source: " + data.bedFileResults[i][6] + "<br />" +
-									"Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
-									"Target mRNA: " + data.bedFileResults[i][8] + "<br />"
-								);
-								if(data.bedFileResults[i][14] == 1 || data.bedFileResults[i][14] == '1')
-									$("#resultsTable").append("siRNA Sequence: " + data.bedFileResults[i][11] + "<br />");
-								else{
-									$("#resultsTable").append("siRNA Sequence (before removing dots): " + data.bedFileResults[i][13] + "<br />");
-									$("#resultsTable").append("siRNA Sequence (after): " + data.bedFileResults[i][11] + "<br />");
-								}
-								$("#resultsTable").append("Flipped & Reversed: " + data.bedFileResults[i][12] + "<br />" +
-									"Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
-									"Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
-								);
-							}
+
+                            $("#resultsTable").append("<br /><br /><br /><hr /><br /><br />");
+
+                            for(i=0; i <= data.bedFileResults.length - 1; i++){
+                                if(i==0)
+                                    continue;
+                                $("#resultsTable").append(data.bedFileResults[i][3] + "<br />" +
+                                    "Chromosome: " + data.bedFileResults[i][0] + "<br />" +
+                                    "Start: " + data.bedFileResults[i][1] + "<br />" +
+                                    "End: " + data.bedFileResults[i][2] + "<br />" +
+                                    "Strand: " + data.bedFileResults[i][4] + "<br />" +
+                                    "Stage: " + data.bedFileResults[i][5] + "<br />" +
+                                    "Source: " + data.bedFileResults[i][6] + "<br />" +
+                                    "Pubmed ID: " + data.bedFileResults[i][7] + "<br />" +
+                                    "Target mRNA: " + data.bedFileResults[i][8] + "<br />"
+                                );
+                                if(data.bedFileResults[i][14] == 1 || data.bedFileResults[i][14] == '1')
+                                    $("#resultsTable").append("siRNA Sequence: " + data.bedFileResults[i][11] + "<br />");
+                                else{
+                                    $("#resultsTable").append("siRNA Sequence (before removing dots): " + data.bedFileResults[i][13] + "<br />");
+                                    $("#resultsTable").append("siRNA Sequence (after): " + data.bedFileResults[i][11] + "<br />");
+                                }
+                                $("#resultsTable").append("Flipped & Reversed: " + data.bedFileResults[i][12] + "<br />" +
+                                    "Matched sequence: " + data.bedFileResults[i][9] + "<br />" +
+                                    "Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
+                                );
+                            }
                         }
                     }
                 });
+
             }
         );
 
@@ -1614,6 +1809,14 @@ $(document).ready(
                 $("#searchResults").hide("slide", { direction: "right" }, 1000);
                 $('body, html').animate({scrollTop: 0});
                 $("#resultGhost").hide(0);
+            }
+        );
+        $(".resultGhostSide").click(
+            function(){
+                $("#searchResults").hide("slide", { direction: "right" }, 1000);
+                $('body, html').animate({scrollTop: 0});
+                $("#resultGhost").hide(0);
+                $(".resultGhostSide").css("width", "0");
             }
         );
     }
@@ -1661,4 +1864,131 @@ function refreshSpeciesSelectionSet(species1, species2, currentFour){
 function refreshSearchInput(){
     $("#searchForm").hide(0);
     $("#searchForm").show(0);
+}
+
+function computeSearchDetailWidth(){
+    var sdWidth = $(window).width() - 46;
+    sdWidth = "" + sdWidth + "px";
+    $(".searchDetailLeftA").css("width", sdWidth);
+    $(".searchDetailLeftB").css("width", sdWidth);
+    $(".searchDetailRightA").css("width", sdWidth);
+    $(".searchDetailRightB").css("width", sdWidth);
+}
+
+function computeGhostSideWidthLarge(){
+    var sideGhostWidth = ($(window).width() - 944) / 2;
+    sideGhostWidth = sideGhostWidth.toString() + "px";
+    $(".resultGhostSide").css("width", sideGhostWidth);
+    //$(".resultGhostSide").css("background", "red");
+}
+
+function computeGhostSideWidthMedium(){
+    var sideGhostWidth = ($(window).width() - 694) / 2;
+    sideGhostWidth = sideGhostWidth.toString() + "px";
+    $(".resultGhostSide").css("width", sideGhostWidth);
+    //$(".resultGhostSide").css("background", "green");
+}
+
+function computeGhostSideWidthSmall(){
+    $(".resultGhostSide").css("width", "20px");
+}
+
+function displayResultsWithCorrectFormat(){
+    var windowsize = $(window).width();
+    if(windowsize >= 984){
+        $("#resultsTableXS").hide();
+        $("#resultsTableS").hide();
+        $("#resultsTableM").hide();
+        $("#resultsTableL").show();
+    }
+    else if(windowsize < 984 && windowsize >= 735){
+        $("#resultsTableXS").hide();
+        $("#resultsTableS").hide();
+        $("#resultsTableM").show();
+        $("#resultsTableL").hide();
+    }
+    else if(windowsize < 735 && windowsize >= 350){
+        computeResultWidthForSmall();
+        $("#resultsTableXS").hide();
+        $("#resultsTableS").show();
+        $("#resultsTableM").hide();
+        $("#resultsTableL").hide();
+        //$(".resultGhostSide").css("background", "blue");
+    }
+    else{
+        computeResultWidthForXtraSmall();
+        $("#resultsTableXS").show();
+        $("#resultsTableS").hide();
+        $("#resultsTableM").hide();
+        $("#resultsTableL").hide();
+        //$(".resultGhostSide").css("background", "yellow");
+    }
+}
+
+function computeResultWidthForSmall(){
+    var windowsize = $(window).width();
+    var resultWidthSmall = windowsize-(113+40+8);
+    resultWidthSmall = "" + resultWidthSmall + "px";
+    $(".bedResultColumn1S").css("width", resultWidthSmall);
+    $(".bedResultColumn2S").css("width", resultWidthSmall);
+}
+
+function computeResultWidthForXtraSmall(){
+    var windowsize = $(window).width();
+    var resultWidthXS = windowsize-(40+4);
+    resultWidthXS = "" + resultWidthXS + "px";
+    $(".bedResultHeaderXS").css("width", resultWidthXS);
+    $(".bedResultXS").css("width", resultWidthXS);
+    $(".bedResultXS2").css("width", resultWidthXS);
+}
+
+function computeMrnaResultWidthSandXS(){
+    var MrnaResultWidth = $(window).width() - 40;
+    MrnaResultWidth = MrnaResultWidth.toString() + "px";
+    $(".mrnaResultId").css("width", MrnaResultWidth);
+    $(".mrnaResultIdHeader").css("width", MrnaResultWidth);
+    $(".mrnaResultLoc").css("width", MrnaResultWidth);
+    $(".mrnaResultLocHeader").css("width", MrnaResultWidth);
+}
+
+function computeMrnaResultWidthM(){
+    var MrnaResultWidth = 695 - 40;
+    MrnaResultWidth = MrnaResultWidth.toString() + "px";
+    $(".mrnaResultId").css("width", MrnaResultWidth);
+    $(".mrnaResultIdHeader").css("width", MrnaResultWidth);
+    $(".mrnaResultLoc").css("width", MrnaResultWidth);
+    $(".mrnaResultLocHeader").css("width", MrnaResultWidth);
+}
+
+function computeMrnaResultWidthL(){
+    var MrnaResultWidth = 944 - 40;
+    MrnaResultWidth = MrnaResultWidth.toString() + "px";
+    $(".mrnaResultId").css("width", MrnaResultWidth);
+    $(".mrnaResultIdHeader").css("width", MrnaResultWidth);
+    $(".mrnaResultLoc").css("width", MrnaResultWidth);
+    $(".mrnaResultLocHeader").css("width", MrnaResultWidth);
+}
+
+function displayDownloadButtonWithCorrectFormat(){
+    var windowsize = $(window).width();
+    if(windowsize >= 984){
+        $("#downloadIconS").hide();
+        $("#downloadIconM").hide();
+        $("#downloadIconL").show();
+    }
+    else if(windowsize < 984 && windowsize >= 735){
+        $("#downloadIconS").hide();
+        $("#downloadIconM").show();
+        $("#downloadIconL").hide();
+    }
+    else if(windowsize < 735 && windowsize >= 350){
+        $("#downloadIconS").show();
+        $("#downloadIconM").hide();
+        $("#downloadIconL").hide();
+    }
+    else{
+        $("#downloadIconS").show();
+        $("#downloadIconM").hide();
+        $("#downloadIconL").hide();
+    }
 }
