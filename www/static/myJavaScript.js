@@ -25,6 +25,12 @@ $(document).ready(
 
         var justMadeWindowWider = false;
         var justMadeWindowWider2 = false;
+        var resultsGenerated = false;
+
+        var prevSeq = '';
+        var prevSearchT = '';
+        var prevSpecVal = '';
+        var prevMismatchVal = '';
 
         //hides results until ready to display
         $("#resultsTableM").hide();
@@ -442,7 +448,7 @@ $(document).ready(
                 $("#mrnaList").css("width", "695px");
                 computeMrnaResultWidthM();
 
-                $("#RNAi-Process-Image").css("width", "695px");
+                $("#RNAi-Process-Image").css("width", "693px");
 
                 //for home+search text version A
                 $(".pageSectionA").css("max-width", "675px");
@@ -512,7 +518,7 @@ $(document).ready(
                 $("#mrnaList").css("width", "944px");
                 computeMrnaResultWidthL();
 
-                $("#RNAi-Process-Image").css("width", "944px");
+                $("#RNAi-Process-Image").css("width", "942px");
 
                 //for home+search text version A
                 $(".pageSectionA").css("max-width", "924px");
@@ -533,10 +539,11 @@ $(document).ready(
             }
 
             //displays results table with different formats, depending on window width
-            //displayResultsWithCorrectFormat();
+            displayResultsWithCorrectFormat();
 
             //displays correct "download results" button on search results
-            //displayDownloadButtonWithCorrectFormat();
+            if(resultsGenerated)
+                displayDownloadButtonWithCorrectFormat();
 
             //tile species circles vertically if species selection bar width too low
             if(windowsize < 735){
@@ -1616,26 +1623,30 @@ $(document).ready(
         //gives download search results icon hover effect
         $("#downloadIconS").hover(
             function(){
-                $("#downloadIconS").attr("src", "images/downloadIconS-hover.png");
+                $("#downloadIconS").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconS-hover.png");
             },
             function(){
-                $("#downloadIconS").attr("src", "images/downloadIconS.png");
+                $("#downloadIconS").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconS.png");
             }
         )
+
         $("#downloadIconM").hover(
             function(){
-                $("#downloadIconM").attr("src", "images/downloadIconM-hover.png");
+                //document.getElementById("downloadIconM").src = "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconM-hover.png";
+                $("#downloadIconM").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconM-hover.png");
             },
             function(){
-                $("#downloadIconM").attr("src", "images/downloadIconM.png");
+                //document.getElementById("downloadIconM").src = "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconM.png";
+                $("#downloadIconM").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconM.png");
             }
         )
+
         $("#downloadIconL").hover(
             function(){
-                $("#downloadIconL").attr("src", "images/downloadIconL-hover.png");
+                $("#downloadIconL").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconL-hover.png");
             },
             function(){
-                $("#downloadIconL").attr("src", "images/downloadIconL.png");
+                $("#downloadIconL").attr("src", "http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/downloadIconL.png");
             }
         )
 
@@ -1667,19 +1678,104 @@ $(document).ready(
                 else
                     computeGhostSideWidthLarge();
 
+                if(prevSearchT == searchT && prevSeq == seq && prevSpecVal == specVal && prevMismatchVal == mismatchVal)
+                    return;
+
+                prevSeq = seq;
+                prevSearchT = searchT;
+                prevSpecVal = specVal;
+                prevMismatchVal = mismatchVal;
+
+                //variables for local DEBUGGING PURPOSES (actual ones will come from "data" - data.sirSpecVal for example will be used as a parameter below)
+                /*
+                var sirSpecVal = specVal;
+                var sirSrchType = searchT;
+                var sirSeq = 'TAAATATTATATTTATAATATTT';
+                var mismatchesAllowed = mismatchVal;
+                var sirSeqR = 'AATAAATATTATATTTATAATAT';
+                var resultsFound = 'yes';
+                var sirnaResults = 'ACGTTCGACCZX';
+                var bedFileResults = [
+                    [],
+                    ['MtDNA', 20908965, 20908987, 'magic', '+', 'Embryonic', 'Kelly (2018)', '985221', 'X54252.1', 'AATAAATATTATATTTATAATAT', 2],
+                    ['IV', 9097, 9112, 'cel-siR-295', '-', 'NS', 'Kamminga et al (2012)', '22829772', 'Y71A12B.3', 'AAAAAAAAAAATAATCGGGAGGAAGA', 0],
+                    ['X', 9097, 9112, 'cel-siR-442595', '-', 'NS', 'Kamminga et al (2012)', '22829772', 'Y71A12B.3', 'AAATTGAAA', 0],
+                    ['MtDNA', 3098965, 20908987, 'magic', '+', 'Embryonic', 'Kelly (2018)', '985221', 'X54252.1', 'AATAAATATTATATTTATAATAT', 1],
+                    ['III', 13502, 13525, 'cel-siR-26951', '+', 'Embryonic', 'Kelly (2018)', '985221', 'X54252.1', 'AATAAATATTATATTTATAATAT', 2]
+                ];
+                var mrnaResults = [
+                    [],
+                    ['IV', 4923, 4947, 'X54252.1', '-'],
+                    ['X', 777601, 777618, 'J4893.2b', '-'],
+                    ['MtDNA', 0, 80041, 'FO04BEH', '+']
+                ];
+                */
+
+                resultsGenerated = false;
+                $("#downloadIconS").hide();
+                $("#downloadIconM").hide();
+                $("#downloadIconL").hide();
+                $("#mrnaList").html("");
+                $("#resultsTableL").html("");
+                $("#resultsTableM").html("");
+                $("#resultsTableS").html("");
+                $("#resultsTableXS").html("");
+                $("#errorMessage").html("");
 
                 if(seq == '' || searchT == 'no search type selected' || specVal == 'no species selected'){
-                    $("#resultsTable").html("Error:<br /><br />");
-                    if(specVal == 'no species selected')
-                        $("#resultsTable").append("You must select a species.<br />");
-                    if(searchT == 'no search type selected')
-                        $("#resultsTable").append("You must select a search type.<br />");
-                    if(seq == '' && searchT == 'by siRNA sequence')
-                        $("#resultsTable").append("You must enter an siRNA sequence.<br />");
-                    if(seq == '' && searchT == 'by MRNA name')
-                        $("#resultsTable").append("You must enter an mRNA name.");
+                    $("#resultsTableL").html("<div style=\"text-align:center;\">Error:<br /><br /></div>");
+                    $("#resultsTableM").html("<div style=\"text-align:center;\">Error:<br /><br /></div>");
+                    $("#resultsTableS").html("<div style=\"text-align:center;\">Error:<br /><br /></div>");
+                    $("#resultsTableXS").html("<div style=\"text-align:center;\">Error:<br /><br /></div>");
+                    if(specVal == 'no species selected') {
+                        $("#resultsTableL").append("<div style=\"text-align:center;\">You must select a species.<br /></div>");
+                        $("#resultsTableM").append("<div style=\"text-align:center;\">You must select a species.<br /></div>");
+                        $("#resultsTableS").append("<div style=\"text-align:center;\">You must select a species.<br /></div>");
+                        $("#resultsTableXS").append("<div style=\"text-align:center;\">You must select a species.<br /></div>");
+                    }
+                    if(searchT == 'no search type selected') {
+                        $("#resultsTableL").append("<div style=\"text-align:center;\">You must select a search type.<br /></div>");
+                        $("#resultsTableM").append("<div style=\"text-align:center;\">You must select a search type.<br /></div>");
+                        $("#resultsTableS").append("<div style=\"text-align:center;\">You must select a search type.<br /></div>");
+                        $("#resultsTableXS").append("<div style=\"text-align:center;\">You must select a search type.<br /></div>");
+                    }
+                    if(seq == '' && searchT == 'by siRNA sequence') {
+                        $("#resultsTableL").append("<div style=\"text-align:center;\">You must enter an siRNA sequence.<br /></div>");
+                        $("#resultsTableM").append("<div style=\"text-align:center;\">You must enter an siRNA sequence.<br /></div>");
+                        $("#resultsTableS").append("<div style=\"text-align:center;\">You must enter an siRNA sequence.<br /></div>");
+                        $("#resultsTableXS").append("<div style=\"text-align:center;\">You must enter an siRNA sequence.<br /></div>");
+                    }
+                    if(seq == '' && searchT == 'by MRNA name') {
+                        $("#resultsTableL").append("<div style=\"text-align:center;\">You must enter an mRNA name.</div>");
+                        $("#resultsTableM").append("<div style=\"text-align:center;\">You must enter an mRNA name.</div>");
+                        $("#resultsTableS").append("<div style=\"text-align:center;\">You must enter an mRNA name.</div>");
+                        $("#resultsTableXS").append("<div style=\"text-align:center;\">You must enter an mRNA name.</div>");
+                    }
+
                     return;
                 }
+
+
+
+
+                $("#resultsTableL").html("");
+                $("#resultsTableM").html("");
+                $("#resultsTableS").html("");
+                $("#resultsTableXS").html("");
+                $("#errorMessage").html("");
+                $("#searchDetails").html("<div style=\"word-wrap:break-word;width:100%;\"><img src=\"images/loading.gif\" style=\"width:100px;height:100px;margin:0 auto;display:block;\" /><div style=\"display:block;color:white;text-align:center;\">Now loading. Search may take up to 5 minutes.</div></div>");
+
+
+
+
+                /*
+                //delay for DEBUGGING PURPOSES (simulates retrieving delay)
+                setTimeout(outputSR, 2000);
+                function outputSR(){
+                    outputSearchResults(sirSpecVal, sirSrchType, sirSeq, mismatchesAllowed, sirSeqR, bedFileResults, mrnaResults, resultsFound, sirnaResults);
+                }*/
+
+
 
                 $("#resultsTable").html("<img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height100px;margin:0 auto;\" /><div style=\"display:block;margin-top:5px;\">Now loading. Search may take a few seconds.</div>");
 
@@ -1693,6 +1789,8 @@ $(document).ready(
                     },
                     dataType: 'json',
                     success: function (data) {
+                        outputSearchResults(data.sirSpecVal, data.sirSrchType, data.sirSeq, data.mismatchesAllowed, data.sirSeqR, data.bedFileResults, data.mrnaResults, data.resultsFound, data.sirnaResults);
+                        /*
                         //if species not available yet
                         if(data.sirSrchType == "NOT READY"){
                             $("#resultsTable").html("Data for " + data.sirSpecVal + " is not available yet.");
@@ -1787,8 +1885,9 @@ $(document).ready(
                                     "Mismatches Counted: " + data.bedFileResults[i][10] + "<br /><br />"
                                 );
                             }
-                        }
+                        }*/
                     }
+
                 });
 
             }
@@ -1819,6 +1918,292 @@ $(document).ready(
                 $(".resultGhostSide").css("width", "0");
             }
         );
+
+        function outputSearchResults(sirSpecVal, sirSrchType, sirSeq, mismatchesAllowed, sirSeqR, bedFileResults, mrnaResults, resultsFound, sirnaResults){
+
+            $("#searchDetails").html("");
+            //if species not available yet
+            if(sirSrchType == "NOT READY"){
+                $("#errorMessage").html("Data for " + sirSpecVal + " is not available yet.");
+                return;
+            }
+            //if user input is invalid
+            else if(sirSpecVal == "INVALID INPUT"){
+                $("#errorMessage").html("The siRNA sequence " + sirSeq + " may consist of the following characters only: a, c, g, t, u, A, C, G, T, U <br /><br />(No spaces or special characters)");
+                return;
+            }
+            //if sirna sequence / mRNA name doesn't exist for the species
+            else if(sirSeq == "EXISTS NOT" && sirSrchType == 'by siRNA sequence'){
+                $("#errorMessage").html("The siRNA sequence " + sirnaResults + " does not exist for " + sirSpecVal);
+                return;
+            }
+            else if(sirSeq == "EXISTS NOT" && sirSrchType == 'by MRNA name'){
+                $("#errorMessage").html("The mRNA name " + sirnaResults + " does not exist for " + sirSpecVal);
+                return;
+            }
+            //if mismatch limit exceeded for all sirnas that were returned
+            else if(resultsFound == "no" && sirSrchType == 'by siRNA sequence'){
+                $("#errorMessage").html("Species selected: " + sirSpecVal + "<br />Search type: " +  sirSrchType + "<br />Input Sequence: " +  sirSeq + "<br />Flipped & Reversed: " + sirSeqR + "<br />Mismatches Allowed: " + mismatchesAllowed + "<br /><br />");
+                $("#errorMessage").append("No results (mismatch limit exceeded for all siRNAs)");
+                return;
+            }
+            else if(resultsFound == "no" && sirSrchType == 'by MRNA name'){
+                $("#errorMessage").html("Species selected: " + sirSpecVal + "<br />Search type: " +  sirSrchType + "<br />mRNA: " +  sirSeq + "<br />Chromosome: " + mrnaResults[1][0] + "<br />Start: " + mrnaResults[1][1] + "<br />End: " + mrnaResults[1][2] + "<br />Strand: " + mrnaResults[1][4] + "<br /><br />");
+                $("#errorMessage").append("No results (mismatch limit exceeded for all siRNAs or simply no siRNAs affect this mRNA)");
+                return;
+            }
+
+            //output search details first
+            $("#searchDetails").html("<div class=\"searchDetailLeftA\" id=\"searchDetailsTop\">Species</div>");
+            $("#searchDetails").append("<div class=\"searchDetailRightA\">" + sirSpecVal + "</div>");
+            $("#searchDetails").append("<div class=\"searchDetailLeftB\">Search Type</div>");
+            $("#searchDetails").append("<div class=\"searchDetailRightB\">" + sirSrchType + "</div>");
+            if(sirSrchType == 'by siRNA sequence') {
+                $("#searchDetails").append("<div class=\"searchDetailLeftA\">siRNA Sequence</div>");
+                $("#searchDetails").append("<div class=\"searchDetailRightA\">" + sirSeq + "</div>");
+                $("#searchDetails").append("<div class=\"searchDetailLeftB\">Rev. Complement</div>");
+                $("#searchDetails").append("<div class=\"searchDetailRightB\">" + sirSeqR + "</div>");
+            }
+            else{
+                $("#searchDetails").append("<div class=\"searchDetailLeftA\">mRNA Name</div>");
+                $("#searchDetails").append("<div class=\"searchDetailRightA\">" + mrnaResults[1][3] + "</div>");
+                $("#searchDetails").append("<div class=\"searchDetailLeftB\">Location</div>");
+                $("#searchDetails").append("<div class=\"searchDetailRightB\">chr-" + mrnaResults[1][0] + ":" + mrnaResults[1][1] + ":" + mrnaResults[1][2] + ":" + mrnaResults[1][4] + "</div>");
+            }
+            $("#searchDetails").append("<div class=\"searchDetailLeftA\">Max Mismatches</div>");
+            $("#searchDetails").append("<div class=\"searchDetailRightA\">" + mismatchesAllowed + "</div>");
+
+            //output search results for LARGE window width
+            $("#resultsTableL").html("<div class=\"bedLocation\" style=\"margin-top:20px;\">Location</div><div class=\"bedID\">ID</div><div class=\"bedStage\">Stage</div><div class=\"bedSource\">Source</div><div class=\"bedPubmed\">PubMed</div><div class=\"bedTargetMrna\">Target mRNA</div><div class=\"bedMatchedSeq\">Matched Sequence</div><div class=\"bedMismatches\">#</div>");
+            var resultCellBG = 1;
+            for(i=0; i <= bedFileResults.length - 1; i++) {
+                if (i == 0)
+                    continue;
+                var locationTextLength = 3 + bedFileResults[i][0].length + bedFileResults[i][1].toString().length + bedFileResults[i][2].toString().length + bedFileResults[i][4].length;
+                if(resultCellBG == 1){
+                    resultCellBG = 2;
+                    if(locationTextLength >= 23){
+                        $("#resultsTableL").append("<div class=\"bedLocation\" style=\"background:white;color:black;font-size:11px;vertical-align:bottom;\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    }
+                    else {
+                        $("#resultsTableL").append("<div class=\"bedLocation\" style=\"background:white;color:black;\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    }
+                    $("#resultsTableL").append("</div><div class=\"bedID\" style=\"background:white;color:black;\"><p>" + bedFileResults[i][3] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedStage\" style=\"background:white;color:black;\"><p>" + bedFileResults[i][5] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedSource\" style=\"background:white;color:black;\"><p>" + bedFileResults[i][6] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedPubmed\" style=\"background:white;color:black;\"><p>" + bedFileResults[i][7] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedTargetMrna\" style=\"background:white;color:black;\"><p>" + bedFileResults[i][8] + "</p>");
+                    if (bedFileResults[i][9].length > 15)
+                        $("#resultsTableL").append("</div><div class=\"bedMatchedSeq\" style=\"background:white;color:black;\"><p>"+ bedFileResults[i][9].substring(0, 15) + "...</p>");
+                    else
+                        $("#resultsTableL").append("</div><div class=\"bedMatchedSeq\" style=\"background:white;color:black;\"><p>"+ bedFileResults[i][9] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedMismatches\" style=\"background:white;color:black;\"><p>" + bedFileResults[i][10] + "</p></div>");
+                }
+                else{
+                    resultCellBG = 1;
+                    if(locationTextLength >= 23){
+                        $("#resultsTableL").append("<div class=\"bedLocation\" style=\"background:#b4b6eb;color:black;font-size:11px;vertical-align:bottom;\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    }
+                    else {
+                        $("#resultsTableL").append("<div class=\"bedLocation\" style=\"background:#b4b6eb;color:black;\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    }                    $("#resultsTableL").append("</div><div class=\"bedID\" style=\"background:#b4b6eb;color:black;\"><p>" + bedFileResults[i][3] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedStage\" style=\"background:#b4b6eb;color:black;\"><p>" + bedFileResults[i][5] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedSource\" style=\"background:#b4b6eb;color:black;\"><p>" + bedFileResults[i][6] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedPubmed\" style=\"background:#b4b6eb;color:black;\"><p>" + bedFileResults[i][7] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedTargetMrna\" style=\"background:#b4b6eb;color:black;\"><p>" + bedFileResults[i][8] + "</p>");
+                    if (bedFileResults[i][9].length > 15)
+                        $("#resultsTableL").append("</div><div class=\"bedMatchedSeq\" style=\"background:#b4b6eb;color:black;\"><p>"+ bedFileResults[i][9].substring(0, 15) + "...</p>");
+                    else
+                        $("#resultsTableL").append("</div><div class=\"bedMatchedSeq\" style=\"background:#b4b6eb;color:black;\"><p>"+ bedFileResults[i][9] + "</p>");
+                    $("#resultsTableL").append("</div><div class=\"bedMismatches\" style=\"background:#b4b6eb;color:black;\"><p>" + bedFileResults[i][10] + "</p></div>");
+                }
+            }
+
+            //output search results for MEDIUM window width
+            for(i=0; i <= bedFileResults.length - 1; i++) {
+                if (i == 0)
+                    continue;
+                //if only one column for this row (odd # of results, last result)
+                if (bedFileResults.length - i == 1){
+                    $("#resultsTableM").append("<div class=\"bedResultHeaderColumn\" style=\"background:#72613c; margin-top:20px;\">Location");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#723c3d;\">ID");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][3] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#6f3c72;\">Stage");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][5] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#423c72;\">Source");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][6] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c4f72;\">PubMed");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][7] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c6772;\">Target mRNA");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][8] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#40723c;\">Matched Sequence");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][9] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#575757;\"># of Mismatches");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\" style=\"margin-right:269px;\"><p>" + bedFileResults[i][10] + "</p></div>");
+                }
+                else{
+                    $("#resultsTableM").append("<div class=\"bedResultHeaderColumn\" style=\"background:#72613c; margin-top:20px;\">Location");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>chr-" + bedFileResults[i+1][0] + ":" + bedFileResults[i+1][1] + ":" + bedFileResults[i+1][2] + ":" + bedFileResults[i+1][4] + "</p>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#723c3d;\">ID");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][3] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][3] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#6f3c72;\">Stage");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][5] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][5] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#423c72;\">Source");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][6] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][6] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c4f72;\">PubMed");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][7] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][7] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c6772;\">Target mRNA");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][8] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][8] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#40723c;\">Matched Sequence");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][9] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][9] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#575757;\"># of Mismatches");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn1\"><p>" + bedFileResults[i][10] + "</p></div>");
+                    $("#resultsTableM").append("</div><div class=\"bedResultColumn2\"><p>" + bedFileResults[i+1][10] + "</p></div>");
+                }
+                ++i;
+            }
+
+            //output search results for SMALL window width
+            resultCellBG = 1;
+            for(i=0; i <= bedFileResults.length - 1; i++) {
+                if (i == 0)
+                    continue;
+                if(resultCellBG == 1){
+                    resultCellBG = 2;
+                    $("#resultsTableS").append("<div class=\"bedResultHeaderColumn\" style=\"background:#72613c; margin-top:20px;\">Location");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#723c3d;\">ID");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][3] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#6f3c72;\">Stage");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][5] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#423c72;\">Source");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][6] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c4f72;\">PubMed");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][7] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c6772;\">Target mRNA");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][8] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#40723c;\">Matched Sequence");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][9] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#575757;\"># of Mismatches");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn1S\"><p>" + bedFileResults[i][10] + "</p></div>");
+
+                }
+                else{
+                    resultCellBG = 1;
+                    $("#resultsTableS").append("<div class=\"bedResultHeaderColumn\" style=\"background:#72613c; margin-top:20px;\">Location");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#723c3d;\">ID");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][3] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#6f3c72;\">Stage");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][5] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#423c72;\">Source");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][6] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c4f72;\">PubMed");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][7] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#3c6772;\">Target mRNA");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][8] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#40723c;\">Matched Sequence");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][9] + "</p></div>");
+
+                    $("#resultsTableS").append("</div><div class=\"bedResultHeaderColumn\" style=\"background:#575757;\"># of Mismatches");
+                    $("#resultsTableS").append("</div><div class=\"bedResultColumn2S\"><p>" + bedFileResults[i][10] + "</p></div>");
+                }
+            }
+
+            //output search results for XTRA-SMALL window width
+            resultCellBG = 1;
+            for(i=0; i <= bedFileResults.length - 1; i++) {
+                if (i == 0)
+                    continue;
+                if(resultCellBG == 1){
+                    resultCellBG = 2;
+                    $("#resultsTableXS").append("<div class=\"bedResultHeaderXS\" style=\"background:#72613c; margin-top:20px;\">Location");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#723c3d;\">ID");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][3] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#6f3c72;\">Stage");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][5] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#423c72;\">Source");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][6] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#3c4f72;\">PubMed");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][7] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#3c6772;\">Target mRNA");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][8] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#40723c;\">Matched Sequence");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][9] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#575757;\"># of Mismatches");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS\"><p>" + bedFileResults[i][10] + "</p></div>");
+
+                }
+                else{
+                    resultCellBG = 1;
+                    $("#resultsTableXS").append("<div class=\"bedResultHeaderXS\" style=\"background:#72613c; margin-top:20px;\">Location");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>chr-" + bedFileResults[i][0] + ":" + bedFileResults[i][1] + ":" + bedFileResults[i][2] + ":" + bedFileResults[i][4] + "</p>");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#723c3d;\">ID");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][3] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#6f3c72;\">Stage");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][5] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#423c72;\">Source");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][6] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#3c4f72;\">PubMed");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][7] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#3c6772;\">Target mRNA");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][8] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#40723c;\">Matched Sequence");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][9] + "</p></div>");
+
+                    $("#resultsTableXS").append("</div><div class=\"bedResultHeaderXS\" style=\"background:#575757;\"># of Mismatches");
+                    $("#resultsTableXS").append("</div><div class=\"bedResultXS2\"><p>" + bedFileResults[i][10] + "</p></div>");
+                }
+            }
+
+            //output genes/mRNA results list
+            if(sirSrchType == 'by siRNA sequence') {
+                for (i = 0; i <= mrnaResults.length - 1; i++) {
+                    if (i == 0) {
+                        $("#mrnaList").html("");
+                        continue;
+                    }
+                    $("#mrnaList").append("<div class=\"mrnaResultIdHeader\">mRNA ID");
+                    $("#mrnaList").append("</div><div class=\"mrnaResultId\"><p>" + mrnaResults[i][3] + "</p>");
+                    $("#mrnaList").append("</div><div class=\"mrnaResultLocHeader\">mRNA Location");
+                    $("#mrnaList").append("</div><div class=\"mrnaResultLoc\"><p>chr-" + mrnaResults[i][0] + ":" + mrnaResults[i][1] + ":" + mrnaResults[i][2] + ":" + mrnaResults[i][4] + "</p></div>");
+                }
+            }
+
+            resultsGenerated = true;
+            checkWidth();
+        }
     }
 );
 
@@ -1992,3 +2377,4 @@ function displayDownloadButtonWithCorrectFormat(){
         $("#downloadIconL").hide();
     }
 }
+

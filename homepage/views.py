@@ -76,10 +76,12 @@ def search1(request):
                 "sirSpecVal": 'INVALID INPUT',
                 "sirSrchType": theSrchTyp,
                 "mismatchesAllowed": theMismatchCount,
-                "sirnaResults": theSeq,
-                "sirSeq": '',
+                "sirnaResults": '',
+                "sirSeq": theSeq,
                 "bedFileResults": '',
                 "mrnasResultSet": '',
+                "resultsFound": '',
+                "sirSeqR": '',
             }
             return JsonResponse(data)
 
@@ -154,6 +156,8 @@ def search1(request):
                     "sirSeq": 'EXISTS NOT',
                     "bedFileResults": '',
                     "mrnasResultSet": '',
+                    "resultsFound": '',
+                    "sirSeqR": '',
                 }
                 return JsonResponse(data)
             for mrna in currentMrna:
@@ -330,6 +334,8 @@ def search1(request):
                 "bedFileResults": bedFilesResultSet,
                 "mrnaResults": mrnasResultSet,
                 "resultsFound": resultsWereFound,
+                "sirnaResults": '',
+                "sirSeqR": '',
             }
             return JsonResponse(data)
 
@@ -345,6 +351,8 @@ def search1(request):
                 "sirSeq": 'EXISTS NOT',
                 "bedFileResults": '',
                 "mrnasResultSet": '',
+                "resultsFound": '',
+                "sirSeqR": '',
             }
             return JsonResponse(data)
 
@@ -509,6 +517,7 @@ def search1(request):
             "resultsFound": resultsWereFound,
             "dotsInSequence": dotsDetected,
             "originalSeq": originalSeq,
+            "sirnaResults": '',
         }
     else:
         data = {
@@ -519,6 +528,8 @@ def search1(request):
             "sirSeq": '',
             "bedFileResults": '',
             "mrnasResultSet": '',
+            "resultsFound": '',
+            "sirSeqR": '',
         }
         
     return JsonResponse(data)
@@ -654,6 +665,8 @@ def yesResults(sirnasResultSet, theSpecVal, theSrchTyp, bedFilesResultSet, theMi
         "sirSeq": sirnaSeq,
         "bedFileResults": bedFilesResultSet,
         "mrnasResultSet": rowList,
+        "resultsFound": '',
+        "sirSeqR": '',
     }
     return data
 

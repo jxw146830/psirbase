@@ -9,23 +9,36 @@
 </head>
 <body>
 <div id="resultGhost"></div>
-<div id="searchResults">
+<div id="searchResults2">
     <div class="pageSection" style="padding-top:40px;word-wrap:break-word;" id="resultsTable">
         <img src="{% static 'images/loading.gif' %}" style="width:100px;height:100px;margin:0 auto;" />
         <div style="display:block;color:white;">
-            Now loading. Search may take up to 5 minutes.
+            Now loading. Search may take up to ~30 seconds.
         </div>
-        <br />Hey hey
     </div>
-    <div id="returnGObutton">
+    <div id="returnGObutton2">
         Return to Search
     </div>
 </div>
-<div id="searchResults2">
+<div id="searchResults">
     <div class="resultGhostSide"></div>
     <div id="searchResultsContent">
-        <!--
+        <img src="{% static 'images/downloadIconS.png' %}" id="downloadIconS"/>
+        <img src="{% static 'images/downloadIconM.png' %}" id="downloadIconM"/>
+        <img src="{% static 'images/downloadIconL.png' %}" id="downloadIconL"/>
+        <div id="errorMessage">
+            <!-- error goes here -->
+        </div>
         <div id="searchDetails">
+            <!--
+            <div style="word-wrap:break-word;width:100%;">
+                <img src="{% static 'images/loading.gif' %}" style="width:100px;height:100px;margin:0 auto;display:block;" />
+                <div style="display:block;color:white;text-align:center;">
+                    Now loading. Search may take up to 5 minutes.
+                </div>
+            </div>
+            -->
+            <!--
             <div class="searchDetailLeftA" id="searchDetailsTop">
                 Species
             </div><div class="searchDetailRightA">
@@ -47,179 +60,178 @@
             </div><div class="searchDetailRightA">
                 2
             </div>
-            <img src="{% static 'images/downloadIconS.png' %}" id="downloadIconS"/>
-            <img src="{% static 'images/downloadIconM.png' %}" id="downloadIconM"/>
-            <img src="{% static 'images/downloadIconL.png' %}" id="downloadIconL"/>
+
+            -->
         </div>
-        -->
+
         <div id="resultsTableL">
-            <div id="tableHeaders">
-                <div class="bedLocation" style="margin-top:20px;">
-                    Location
-                </div><div class="bedID">
-                    ID
-                </div><div class="bedStage">
-                    Stage
-                </div><div class="bedSource">
-                    Source
-                </div><div class="bedPubmed">
-                    Pubmed
-                </div><div class="bedTargetMrna">
-                    Target mRNA
-                </div><div class="bedMatchedSeq">
-                    Matched Sequence
-                </div><div class="bedMismatches">
-                    #
-                </div>
+            <!--
+            <div class="bedLocation" style="margin-top:20px;">
+                Location
+            </div><div class="bedID">
+                ID
+            </div><div class="bedStage">
+                Stage
+            </div><div class="bedSource">
+                Source
+            </div><div class="bedPubmed">
+                Pubmed
+            </div><div class="bedTargetMrna">
+                Target mRNA
+            </div><div class="bedMatchedSeq">
+                Matched Sequence
+            </div><div class="bedMismatches">
+                #
             </div>
-            <div id="resultsReturned">
-                <div class="bedLocation" style="background:white;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:white;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:white;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:white;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:white;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:white;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:white;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:white;color:black;">
-                    <p>1</p>
-                </div>
 
-                <div class="bedLocation" style="background:#b4b6eb;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:#b4b6eb;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:#b4b6eb;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:#b4b6eb;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
-                    <p>1</p>
-                </div>
 
-                <div class="bedLocation" style="background:white;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:white;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:white;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:white;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:white;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:white;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:white;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:white;color:black;">
-                    <p>1</p>
-                </div>
-
-                <div class="bedLocation" style="background:#b4b6eb;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:#b4b6eb;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:#b4b6eb;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:#b4b6eb;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
-                    <p>1</p>
-                </div>
-
-                <div class="bedLocation" style="background:white;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:white;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:white;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:white;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:white;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:white;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:white;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:white;color:black;">
-                    <p>1</p>
-                </div>
-
-                <div class="bedLocation" style="background:#b4b6eb;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:#b4b6eb;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:#b4b6eb;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:#b4b6eb;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
-                    <p>1</p>
-                </div>
-
-                <div class="bedLocation" style="background:white;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:white;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:white;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:white;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:white;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:white;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:white;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:white;color:black;">
-                    <p>1</p>
-                </div>
-
-                <div class="bedLocation" style="background:#b4b6eb;color:black;">
-                    <p>chrMtDNA:20908965:20908987:+</p>
-                </div><div class="bedID" style="background:#b4b6eb;color:black;">
-                    <p>cel-siR-341275</p>
-                </div><div class="bedStage" style="background:#b4b6eb;color:black;">
-                    <p>Sperm,Oocyte,Embryo</p>
-                </div><div class="bedSource" style="background:#b4b6eb;color:black;">
-                    <p>Kamminga et al (2012)</p>
-                </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
-                    <p>22738724</p>
-                </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
-                    <p>Y116F11B.12a.1</p>
-                </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
-                    <p>AAAGATGGAACTA...</p>
-                </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
-                    <p>1</p>
-                </div>
+            <div class="bedLocation" style="background:white;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:white;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:white;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:white;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:white;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:white;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:white;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:white;color:black;">
+                <p>1</p>
             </div>
+
+            <div class="bedLocation" style="background:#b4b6eb;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:#b4b6eb;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:#b4b6eb;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:#b4b6eb;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
+                <p>1</p>
+            </div>
+
+            <div class="bedLocation" style="background:white;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:white;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:white;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:white;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:white;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:white;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:white;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:white;color:black;">
+                <p>1</p>
+            </div>
+
+            <div class="bedLocation" style="background:#b4b6eb;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:#b4b6eb;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:#b4b6eb;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:#b4b6eb;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
+                <p>1</p>
+            </div>
+
+            <div class="bedLocation" style="background:white;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:white;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:white;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:white;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:white;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:white;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:white;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:white;color:black;">
+                <p>1</p>
+            </div>
+
+            <div class="bedLocation" style="background:#b4b6eb;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:#b4b6eb;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:#b4b6eb;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:#b4b6eb;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
+                <p>1</p>
+            </div>
+
+            <div class="bedLocation" style="background:white;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:white;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:white;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:white;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:white;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:white;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:white;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:white;color:black;">
+                <p>1</p>
+            </div>
+
+            <div class="bedLocation" style="background:#b4b6eb;color:black;">
+                <p>chrMtDNA:20908965:20908987:+</p>
+            </div><div class="bedID" style="background:#b4b6eb;color:black;">
+                <p>cel-siR-341275</p>
+            </div><div class="bedStage" style="background:#b4b6eb;color:black;">
+                <p>Sperm,Oocyte,Embryo</p>
+            </div><div class="bedSource" style="background:#b4b6eb;color:black;">
+                <p>Kamminga et al (2012)</p>
+            </div><div class="bedPubmed" style="background:#b4b6eb;color:black;">
+                <p>22738724</p>
+            </div><div class="bedTargetMrna" style="background:#b4b6eb;color:black;">
+                <p>Y116F11B.12a.1</p>
+            </div><div class="bedMatchedSeq" style="background:#b4b6eb;color:black;">
+                <p>AAAGATGGAACTA...</p>
+            </div><div class="bedMismatches" style="background:#b4b6eb;color:black;">
+                <p>1</p>
+            </div>
+            -->
         </div>
         <div id="resultsTableM">
-            <!-- search results generated here -->
+            <!--
             <div class="bedResultHeaderColumn" style="background:#72613c; margin-top:20px;">
                 Location
             </div><div class="bedResultColumn1">
@@ -331,9 +343,10 @@
             </div><div class="bedResultColumn2">
                 <p>cel-siR-341275</p>
             </div>
+            -->
         </div>
         <div id="resultsTableS">
-            <!-- search results generated here -->
+            <!--
             <div class="bedResultHeaderColumn" style="background:#72613c; margin-top:20px;">
                 Location
             </div><div class="bedResultColumn1S">
@@ -413,10 +426,10 @@
                     # of Mismatches
                 </div><div class="bedResultColumn2S">
                 <p>cel-siR-341275</p>
-            </div>
+            </div>-->
         </div>
         <div id="resultsTableXS">
-            <!-- search results generated here -->
+            <!--
             <div class="bedResultHeaderXS" style="background:#72613c; margin-top:20px;">
                 Location
             </div><div class="bedResultXS">
@@ -497,8 +510,10 @@
                 </div><div class="bedResultXS2">
                 <p>cel-siR-341275</p>
             </div>
+            -->
         </div>
         <div id="mrnaList">
+            <!--
             <div class="mrnaResultIdHeader">
                 mRNA ID
             </div><div class="mrnaResultId">
@@ -507,7 +522,7 @@
             <div class="mrnaResultLocHeader">
                 mRNA Location
             </div><div class="mrnaResultLoc">
-                <p>III:33933743418644:-</p>
+                <p>III:3393374:3418644:-</p>
             </div>
 
             <div class="mrnaResultIdHeader">
@@ -518,10 +533,11 @@
             <div class="mrnaResultLocHeader">
                 mRNA Location
             </div><div class="mrnaResultLoc">
-                <p>III:33933743418644:-</p>
+                <p>III:3393374:3418644:-</p>
             </div>
+            -->
         </div>
-        <div id="returnGObutton2">
+        <div id="returnGObutton">
             Exit Results
         </div>
     </div>
