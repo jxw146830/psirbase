@@ -1763,7 +1763,7 @@ $(document).ready(
                 $("#resultsTableS").html("");
                 $("#resultsTableXS").html("");
                 $("#errorMessage").html("");
-                $("#searchDetails").html("<div style=\"word-wrap:break-word;width:100%;\"><img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height:100px;margin:0 auto;display:block;\" /><div style=\"display:block;color:white;text-align:center;\">Now loading. Search may take up to 5 minutes.</div></div>");
+                $("#searchDetails").html("<div style=\"word-wrap:break-word;width:100%;\"><img src=\"http://psirbase-dev.us-west-2.elasticbeanstalk.com/static/images/loading.gif\" style=\"width:100px;height:100px;margin:0 auto;display:block;\" /><div style=\"display:block;color:white;text-align:center;\">Now loading. (May take up to ~30 seconds to return results.)</div></div>");
 
 
 
